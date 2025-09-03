@@ -9,6 +9,8 @@ import { Hero } from "@/components/Hero"
 import { About } from "@/components/About"
 import { Contact } from "@/components/Contact"
 import { ChatBot } from "@/components/ChatBot"
+import { NetworkBackground } from "@/components/NetworkBackground"
+import { FloatingElements } from "@/components/FloatingElements"
 
 const queryClient = new QueryClient()
 
@@ -52,11 +54,15 @@ export default function Home() {
       <TooltipProvider>
         <Toaster />
         <Sonner />
-        <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
-          <SuspendedHero />
-          <SuspendedAbout />
-          <SuspendedContact />
-          <SuspendedChatBot />
+        <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-cyan-950 relative overflow-hidden">
+          <NetworkBackground />
+          <FloatingElements />
+          <div className="relative z-20">
+            <SuspendedHero />
+            <SuspendedAbout />
+            <SuspendedContact />
+            <SuspendedChatBot />
+          </div>
         </div>
       </TooltipProvider>
     </QueryClientProvider>
