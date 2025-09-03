@@ -15,16 +15,17 @@ interface Message {
 }
 
 interface ChatBotProps {
-  isOpen: boolean
-  onToggle: () => void
+  isOpen?: boolean
+  onToggle?: () => void
 }
 
-export const ChatBot = ({ isOpen, onToggle }: ChatBotProps) => {
+export const ChatBot = ({ isOpen = false, onToggle }: ChatBotProps) => {
+  const [internalOpen, setInternalOpen] = useState(false)
   const [messages, setMessages] = useState<Message[]>([
     {
       id: "1",
       content:
-        "Hi! I'm an AI assistant trained on the owner's CV and experience. Ask me anything about their background, skills, projects, or experience!",
+        "Hi! I'm an AI assistant trained on Muhammad Umair Farooq's CV and experience. Ask me anything about his background, skills, projects, or experience!",
       isUser: false,
       timestamp: new Date(),
     },
@@ -32,6 +33,9 @@ export const ChatBot = ({ isOpen, onToggle }: ChatBotProps) => {
   const [inputValue, setInputValue] = useState("")
   const [isTyping, setIsTyping] = useState(false)
   const messagesEndRef = useRef<HTMLDivElement>(null)
+
+  const isOpen_ = onToggle ? isOpen : internalOpen
+  const toggle = onToggle || (() => setInternalOpen(!internalOpen))
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
@@ -90,11 +94,11 @@ export const ChatBot = ({ isOpen, onToggle }: ChatBotProps) => {
     }
   }
 
-  if (!isOpen) {
+  if (!isOpen_) {
     return (
       <Button
-        onClick={onToggle}
-        className="fixed bottom-6 right-6 h-14 w-14 rounded-full bg-amber-500 hover:bg-amber-600 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 z-50 border border-amber-400/50 animate-pulse"
+        onClick={toggle}
+        className="fixed bottom-6 right-6 h-14 w-14 rounded-full bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-400 hover:to-blue-400 shadow-2xl hover:shadow-cyan-500/25 transition-all duration-300 hover:scale-110 z-50 border border-cyan-400/50 backdrop-blur-sm"
       >
         <MessageCircle className="h-6 w-6 text-white" />
       </Button>
@@ -102,20 +106,22 @@ export const ChatBot = ({ isOpen, onToggle }: ChatBotProps) => {
   }
 
   return (
-    <Card className="fixed bottom-6 right-6 w-96 h-[500px] bg-white/95 dark:bg-gray-800/95 backdrop-blur-xl border-2 border-amber-200/50 dark:border-amber-500/30 shadow-2xl z-50 flex flex-col overflow-hidden">
-      <CardHeader className="pb-3 border-b border-gray-200 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-700/50">
+    <Card className="fixed bottom-6 right-6 w-96 h-[500px] backdrop-blur-2xl bg-white/5 border-2 border-cyan-400/30 shadow-2xl z-50 flex flex-col overflow-hidden rounded-2xl hover:border-cyan-400/40 transition-all duration-500 hover:shadow-cyan-500/20">
+      <CardHeader className="pb-3 border-b border-cyan-400/20 bg-white/5 backdrop-blur-sm">
         <div className="flex items-center justify-between">
-          <CardTitle className="flex items-center gap-2 text-gray-900 dark:text-white">
-            <div className="p-2 bg-amber-500/20 rounded-full border border-amber-300/50">
-              <Bot className="h-4 w-4 text-amber-600" />
+          <CardTitle className="flex items-center gap-2 text-gray-200">
+            <div className="p-2 bg-gradient-to-br from-cyan-500/30 to-blue-500/30 rounded-full border border-cyan-400/40 shadow-lg shadow-cyan-500/20">
+              <Bot className="h-4 w-4 text-cyan-300" />
             </div>
-            AI Assistant
+            <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent font-bold">
+              AI Assistant
+            </span>
           </CardTitle>
           <Button
             variant="ghost"
             size="sm"
-            onClick={onToggle}
-            className="h-8 w-8 p-0 hover:bg-red-100 dark:hover:bg-red-900/30 hover:text-red-600 transition-colors"
+            onClick={toggle}
+            className="h-8 w-8 p-0 hover:bg-red-500/20 hover:text-red-400 transition-all duration-300 rounded-lg border border-transparent hover:border-red-400/30"
           >
             <X className="h-4 w-4" />
           </Button>
@@ -125,7 +131,7 @@ export const ChatBot = ({ isOpen, onToggle }: ChatBotProps) => {
       <CardContent className="flex-1 flex flex-col p-0 overflow-hidden">
         {/* Messages */}
         <div
-          className="flex-1 overflow-y-auto p-4 space-y-4 scrollbar-thin scrollbar-thumb-amber-300/50 scrollbar-track-transparent"
+          className="flex-1 overflow-y-auto p-4 space-y-4 scrollbar-thin scrollbar-thumb-cyan-400/30 scrollbar-track-transparent"
           onWheel={(e) => e.stopPropagation()}
           onTouchMove={(e) => e.stopPropagation()}
         >
@@ -133,19 +139,23 @@ export const ChatBot = ({ isOpen, onToggle }: ChatBotProps) => {
             <div key={message.id} className={`flex ${message.isUser ? "justify-end" : "justify-start"}`}>
               <div className={`flex items-start gap-2 max-w-[80%] ${message.isUser ? "flex-row-reverse" : "flex-row"}`}>
                 <div
-                  className={`p-2 rounded-full ${message.isUser ? "bg-amber-500/20 border border-amber-300/50" : "bg-pink-500/20 border border-pink-300/50"}`}
+                  className={`p-2 rounded-full backdrop-blur-sm ${
+                    message.isUser
+                      ? "bg-gradient-to-br from-cyan-500/30 to-blue-500/30 border border-cyan-400/40"
+                      : "bg-gradient-to-br from-purple-500/30 to-pink-500/30 border border-purple-400/40"
+                  } shadow-lg`}
                 >
                   {message.isUser ? (
-                    <User className="h-4 w-4 text-amber-600" />
+                    <User className="h-4 w-4 text-cyan-300" />
                   ) : (
-                    <Bot className="h-4 w-4 text-pink-600" />
+                    <Bot className="h-4 w-4 text-purple-300" />
                   )}
                 </div>
                 <div
-                  className={`p-3 rounded-xl transition-all duration-200 hover:scale-[1.02] ${
+                  className={`p-3 rounded-xl transition-all duration-200 hover:scale-[1.02] backdrop-blur-sm ${
                     message.isUser
-                      ? "bg-amber-500 text-white shadow-lg border border-amber-400/50"
-                      : "bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white border border-gray-200/50 dark:border-gray-600/50"
+                      ? "bg-gradient-to-r from-cyan-500/80 to-blue-500/80 text-white shadow-lg border border-cyan-400/50 hover:shadow-cyan-500/25"
+                      : "bg-white/10 text-gray-200 border border-white/20 shadow-lg hover:bg-white/15"
                   }`}
                 >
                   <p className="text-sm whitespace-pre-wrap">{message.content}</p>
@@ -157,14 +167,14 @@ export const ChatBot = ({ isOpen, onToggle }: ChatBotProps) => {
           {isTyping && (
             <div className="flex justify-start">
               <div className="flex items-start gap-2">
-                <div className="p-2 bg-pink-500/20 rounded-full border border-pink-300/50">
-                  <Bot className="h-4 w-4 text-pink-600" />
+                <div className="p-2 bg-gradient-to-br from-purple-500/30 to-pink-500/30 rounded-full border border-purple-400/40 backdrop-blur-sm shadow-lg">
+                  <Bot className="h-4 w-4 text-purple-300" />
                 </div>
-                <div className="bg-gray-100 dark:bg-gray-700 p-3 rounded-xl border border-gray-200/50 dark:border-gray-600/50">
+                <div className="bg-white/10 p-3 rounded-xl border border-white/20 backdrop-blur-sm shadow-lg">
                   <div className="flex space-x-1">
-                    <div className="w-2 h-2 bg-amber-500 rounded-full animate-bounce" />
-                    <div className="w-2 h-2 bg-amber-500 rounded-full animate-bounce delay-100" />
-                    <div className="w-2 h-2 bg-amber-500 rounded-full animate-bounce delay-200" />
+                    <div className="w-2 h-2 bg-cyan-400 rounded-full animate-bounce" />
+                    <div className="w-2 h-2 bg-cyan-400 rounded-full animate-bounce delay-100" />
+                    <div className="w-2 h-2 bg-cyan-400 rounded-full animate-bounce delay-200" />
                   </div>
                 </div>
               </div>
@@ -173,15 +183,14 @@ export const ChatBot = ({ isOpen, onToggle }: ChatBotProps) => {
           <div ref={messagesEndRef} />
         </div>
 
-        {/* Input */}
-        <div className="p-4 border-t border-gray-200 dark:border-gray-700 bg-gray-50/30 dark:bg-gray-700/30 backdrop-blur-sm">
+        <div className="p-4 border-t border-cyan-400/20 bg-white/5 backdrop-blur-sm">
           <div className="flex gap-2">
             <textarea
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
               onKeyPress={handleKeyPress}
               placeholder="Ask me about experience, skills, projects..."
-              className="flex-1 p-3 bg-white/50 dark:bg-gray-800/50 border border-gray-300 dark:border-gray-600 rounded-xl focus:border-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-500/20 transition-all duration-300 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 resize-none text-sm backdrop-blur-sm"
+              className="flex-1 p-3 backdrop-blur-sm bg-white/10 border border-cyan-400/30 rounded-xl focus:border-cyan-400/60 focus:outline-none focus:ring-2 focus:ring-cyan-400/20 transition-all duration-300 text-gray-200 placeholder-gray-400 resize-none text-sm hover:bg-white/15"
               rows={1}
               style={{ minHeight: "44px", maxHeight: "88px" }}
             />
@@ -189,7 +198,7 @@ export const ChatBot = ({ isOpen, onToggle }: ChatBotProps) => {
               onClick={handleSendMessage}
               disabled={!inputValue.trim() || isTyping}
               size="sm"
-              className="bg-amber-500 hover:bg-amber-600 text-white transition-all duration-300 hover:scale-105 border border-amber-400/50 rounded-xl px-4"
+              className="bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-400 hover:to-blue-400 text-white transition-all duration-300 hover:scale-105 border border-cyan-400/50 rounded-xl px-4 shadow-lg hover:shadow-cyan-500/25"
             >
               <Send className="h-4 w-4" />
             </Button>
