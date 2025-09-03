@@ -1,12 +1,11 @@
 "use client"
 
 import type React from "react"
-
+import { RAGService } from "@/lib/rag-service"
 import { useState, useRef, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { MessageCircle, X, Send, Bot, User } from "lucide-react"
-import { ragService } from "@/services/ragService"
 
 interface Message {
   id: string
@@ -53,14 +52,15 @@ export const ChatBot = ({ isOpen, onToggle }: ChatBotProps) => {
     }
 
     setMessages((prev) => [...prev, userMessage])
+    const currentQuery = inputValue
     setInputValue("")
     setIsTyping(true)
 
     try {
-      // Simulate typing delay
-      await new Promise((resolve) => setTimeout(resolve, 1000))
+      await new Promise((resolve) => setTimeout(resolve, 800 + Math.random() * 1200))
 
-      const response = await ragService.query(inputValue)
+      const ragService = RAGService.getInstance()
+      const response = ragService.generateResponse(currentQuery)
 
       const botMessage: Message = {
         id: (Date.now() + 1).toString(),
@@ -94,20 +94,20 @@ export const ChatBot = ({ isOpen, onToggle }: ChatBotProps) => {
     return (
       <Button
         onClick={onToggle}
-        className="fixed bottom-6 right-6 h-14 w-14 rounded-full bg-primary hover:bg-primary/90 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 z-50 pulse-glow"
+        className="fixed bottom-6 right-6 h-14 w-14 rounded-full bg-amber-500 hover:bg-amber-600 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 z-50 border border-amber-400/50 animate-pulse"
       >
-        <MessageCircle className="h-6 w-6 text-primary-foreground" />
+        <MessageCircle className="h-6 w-6 text-white" />
       </Button>
     )
   }
 
   return (
-    <Card className="fixed bottom-6 right-6 w-96 h-[500px] bg-card/95 backdrop-blur-xl border-2 tech-border shadow-2xl z-50 flex flex-col overflow-hidden">
-      <CardHeader className="pb-3 border-b border-border bg-card/50">
+    <Card className="fixed bottom-6 right-6 w-96 h-[500px] bg-white/95 dark:bg-gray-800/95 backdrop-blur-xl border-2 border-amber-200/50 dark:border-amber-500/30 shadow-2xl z-50 flex flex-col overflow-hidden">
+      <CardHeader className="pb-3 border-b border-gray-200 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-700/50">
         <div className="flex items-center justify-between">
-          <CardTitle className="flex items-center gap-2 text-foreground">
-            <div className="p-2 bg-primary/20 rounded-full tech-glow">
-              <Bot className="h-4 w-4 text-primary" />
+          <CardTitle className="flex items-center gap-2 text-gray-900 dark:text-white">
+            <div className="p-2 bg-amber-500/20 rounded-full border border-amber-300/50">
+              <Bot className="h-4 w-4 text-amber-600" />
             </div>
             AI Assistant
           </CardTitle>
@@ -115,7 +115,7 @@ export const ChatBot = ({ isOpen, onToggle }: ChatBotProps) => {
             variant="ghost"
             size="sm"
             onClick={onToggle}
-            className="h-8 w-8 p-0 hover:bg-destructive/20 hover:text-destructive transition-colors"
+            className="h-8 w-8 p-0 hover:bg-red-100 dark:hover:bg-red-900/30 hover:text-red-600 transition-colors"
           >
             <X className="h-4 w-4" />
           </Button>
@@ -125,21 +125,27 @@ export const ChatBot = ({ isOpen, onToggle }: ChatBotProps) => {
       <CardContent className="flex-1 flex flex-col p-0 overflow-hidden">
         {/* Messages */}
         <div
-          className="flex-1 overflow-y-auto p-4 space-y-4 scrollbar-thin scrollbar-thumb-primary/20 scrollbar-track-transparent"
+          className="flex-1 overflow-y-auto p-4 space-y-4 scrollbar-thin scrollbar-thumb-amber-300/50 scrollbar-track-transparent"
           onWheel={(e) => e.stopPropagation()}
           onTouchMove={(e) => e.stopPropagation()}
         >
           {messages.map((message) => (
             <div key={message.id} className={`flex ${message.isUser ? "justify-end" : "justify-start"}`}>
               <div className={`flex items-start gap-2 max-w-[80%] ${message.isUser ? "flex-row-reverse" : "flex-row"}`}>
-                <div className={`p-2 rounded-full ${message.isUser ? "bg-primary/20 tech-glow" : "bg-accent/20"}`}>
-                  {message.isUser ? <User className="h-4 w-4 text-primary" /> : <Bot className="h-4 w-4 text-accent" />}
+                <div
+                  className={`p-2 rounded-full ${message.isUser ? "bg-amber-500/20 border border-amber-300/50" : "bg-pink-500/20 border border-pink-300/50"}`}
+                >
+                  {message.isUser ? (
+                    <User className="h-4 w-4 text-amber-600" />
+                  ) : (
+                    <Bot className="h-4 w-4 text-pink-600" />
+                  )}
                 </div>
                 <div
                   className={`p-3 rounded-xl transition-all duration-200 hover:scale-[1.02] ${
                     message.isUser
-                      ? "bg-primary text-primary-foreground shadow-lg"
-                      : "bg-secondary/10 text-foreground border border-border/50"
+                      ? "bg-amber-500 text-white shadow-lg border border-amber-400/50"
+                      : "bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white border border-gray-200/50 dark:border-gray-600/50"
                   }`}
                 >
                   <p className="text-sm whitespace-pre-wrap">{message.content}</p>
@@ -151,14 +157,14 @@ export const ChatBot = ({ isOpen, onToggle }: ChatBotProps) => {
           {isTyping && (
             <div className="flex justify-start">
               <div className="flex items-start gap-2">
-                <div className="p-2 bg-accent/20 rounded-full">
-                  <Bot className="h-4 w-4 text-accent" />
+                <div className="p-2 bg-pink-500/20 rounded-full border border-pink-300/50">
+                  <Bot className="h-4 w-4 text-pink-600" />
                 </div>
-                <div className="bg-secondary/10 p-3 rounded-xl border border-border/50">
+                <div className="bg-gray-100 dark:bg-gray-700 p-3 rounded-xl border border-gray-200/50 dark:border-gray-600/50">
                   <div className="flex space-x-1">
-                    <div className="w-2 h-2 bg-primary rounded-full animate-bounce" />
-                    <div className="w-2 h-2 bg-primary rounded-full animate-bounce delay-100" />
-                    <div className="w-2 h-2 bg-primary rounded-full animate-bounce delay-200" />
+                    <div className="w-2 h-2 bg-amber-500 rounded-full animate-bounce" />
+                    <div className="w-2 h-2 bg-amber-500 rounded-full animate-bounce delay-100" />
+                    <div className="w-2 h-2 bg-amber-500 rounded-full animate-bounce delay-200" />
                   </div>
                 </div>
               </div>
@@ -168,14 +174,14 @@ export const ChatBot = ({ isOpen, onToggle }: ChatBotProps) => {
         </div>
 
         {/* Input */}
-        <div className="p-4 border-t border-border bg-card/30 backdrop-blur-sm">
+        <div className="p-4 border-t border-gray-200 dark:border-gray-700 bg-gray-50/30 dark:bg-gray-700/30 backdrop-blur-sm">
           <div className="flex gap-2">
             <textarea
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
               onKeyPress={handleKeyPress}
               placeholder="Ask me about experience, skills, projects..."
-              className="flex-1 p-3 bg-input/50 border border-border rounded-xl focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all duration-300 text-foreground placeholder-muted-foreground resize-none text-sm backdrop-blur-sm"
+              className="flex-1 p-3 bg-white/50 dark:bg-gray-800/50 border border-gray-300 dark:border-gray-600 rounded-xl focus:border-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-500/20 transition-all duration-300 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 resize-none text-sm backdrop-blur-sm"
               rows={1}
               style={{ minHeight: "44px", maxHeight: "88px" }}
             />
@@ -183,7 +189,7 @@ export const ChatBot = ({ isOpen, onToggle }: ChatBotProps) => {
               onClick={handleSendMessage}
               disabled={!inputValue.trim() || isTyping}
               size="sm"
-              className="bg-primary hover:bg-primary/90 text-primary-foreground transition-all duration-300 hover:scale-105 tech-glow rounded-xl px-4"
+              className="bg-amber-500 hover:bg-amber-600 text-white transition-all duration-300 hover:scale-105 border border-amber-400/50 rounded-xl px-4"
             >
               <Send className="h-4 w-4" />
             </Button>
