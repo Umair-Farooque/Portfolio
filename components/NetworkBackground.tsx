@@ -98,7 +98,7 @@ export function NetworkBackground() {
             ctx.beginPath()
             ctx.moveTo(node.x, node.y)
             ctx.lineTo(connectedNode.x, connectedNode.y)
-            ctx.strokeStyle = `rgba(6, 182, 212, ${opacity * 0.3})`
+            ctx.strokeStyle = `rgba(255, 255, 255, ${opacity * 0.3})`
             ctx.lineWidth = 1
             ctx.stroke()
           }
@@ -108,13 +108,13 @@ export function NetworkBackground() {
         const nodeOpacity = mouseDistance < 100 ? 1 : 0.6
         ctx.beginPath()
         ctx.arc(node.x, node.y, 2, 0, Math.PI * 2)
-        ctx.fillStyle = `rgba(6, 182, 212, ${nodeOpacity})`
+        ctx.fillStyle = `rgba(255, 255, 255, ${nodeOpacity})`
         ctx.fill()
 
         // Glow effect
         ctx.beginPath()
         ctx.arc(node.x, node.y, 4, 0, Math.PI * 2)
-        ctx.fillStyle = `rgba(6, 182, 212, ${nodeOpacity * 0.2})`
+        ctx.fillStyle = `rgba(255, 255, 255, ${nodeOpacity * 0.2})`
         ctx.fill()
       })
 

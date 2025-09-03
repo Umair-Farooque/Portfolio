@@ -45,16 +45,15 @@ export function FloatingElements() {
             animationDelay: `${shape.id * 2}s`,
           }}
         >
-          {/* Triangular shapes */}
           <div
-            className="border border-cyan-400/20"
+            className="border border-white/20"
             style={{
               width: `${shape.size}px`,
               height: `${shape.size}px`,
               transform: `rotate(${shape.rotation}deg)`,
               opacity: shape.opacity,
               clipPath: "polygon(50% 0%, 0% 100%, 100% 100%)",
-              background: "linear-gradient(45deg, rgba(6, 182, 212, 0.1), rgba(168, 85, 247, 0.1))",
+              background: "linear-gradient(45deg, rgba(255, 255, 255, 0.1), rgba(128, 128, 128, 0.1))",
             }}
           />
         </div>

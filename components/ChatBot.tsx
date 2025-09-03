@@ -98,7 +98,7 @@ export const ChatBot = ({ isOpen = false, onToggle }: ChatBotProps) => {
     return (
       <Button
         onClick={toggle}
-        className="fixed bottom-6 right-6 h-14 w-14 rounded-full bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-400 hover:to-blue-400 shadow-2xl hover:shadow-cyan-500/25 transition-all duration-300 hover:scale-110 z-50 border border-cyan-400/50 backdrop-blur-sm"
+        className="fixed bottom-6 right-6 h-14 w-14 rounded-full bg-white/20 hover:bg-white/30 shadow-2xl hover:shadow-white/25 transition-all duration-300 hover:scale-110 z-50 border border-white/50 backdrop-blur-sm"
       >
         <MessageCircle className="h-6 w-6 text-white" />
       </Button>
@@ -106,16 +106,14 @@ export const ChatBot = ({ isOpen = false, onToggle }: ChatBotProps) => {
   }
 
   return (
-    <Card className="fixed bottom-6 right-6 w-96 h-[500px] backdrop-blur-2xl bg-white/5 border-2 border-cyan-400/30 shadow-2xl z-50 flex flex-col overflow-hidden rounded-2xl hover:border-cyan-400/40 transition-all duration-500 hover:shadow-cyan-500/20">
-      <CardHeader className="pb-3 border-b border-cyan-400/20 bg-white/5 backdrop-blur-sm">
+    <Card className="fixed bottom-6 right-6 w-96 h-[500px] backdrop-blur-2xl bg-white/5 border-2 border-white/30 shadow-2xl z-50 flex flex-col overflow-hidden rounded-2xl hover:border-white/40 transition-all duration-500 hover:shadow-white/20">
+      <CardHeader className="pb-3 border-b border-white/20 bg-white/5 backdrop-blur-sm">
         <div className="flex items-center justify-between">
           <CardTitle className="flex items-center gap-2 text-gray-200">
-            <div className="p-2 bg-gradient-to-br from-cyan-500/30 to-blue-500/30 rounded-full border border-cyan-400/40 shadow-lg shadow-cyan-500/20">
-              <Bot className="h-4 w-4 text-cyan-300" />
+            <div className="p-2 bg-white/20 rounded-full border border-white/40 shadow-lg shadow-white/20">
+              <Bot className="h-4 w-4 text-white" />
             </div>
-            <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent font-bold">
-              AI Assistant
-            </span>
+            <span className="text-white font-bold">AI Assistant</span>
           </CardTitle>
           <Button
             variant="ghost"
@@ -131,7 +129,7 @@ export const ChatBot = ({ isOpen = false, onToggle }: ChatBotProps) => {
       <CardContent className="flex-1 flex flex-col p-0 overflow-hidden">
         {/* Messages */}
         <div
-          className="flex-1 overflow-y-auto p-4 space-y-4 scrollbar-thin scrollbar-thumb-cyan-400/30 scrollbar-track-transparent"
+          className="flex-1 overflow-y-auto p-4 space-y-4 scrollbar-thin scrollbar-thumb-white/30 scrollbar-track-transparent"
           onWheel={(e) => e.stopPropagation()}
           onTouchMove={(e) => e.stopPropagation()}
         >
@@ -140,21 +138,15 @@ export const ChatBot = ({ isOpen = false, onToggle }: ChatBotProps) => {
               <div className={`flex items-start gap-2 max-w-[80%] ${message.isUser ? "flex-row-reverse" : "flex-row"}`}>
                 <div
                   className={`p-2 rounded-full backdrop-blur-sm ${
-                    message.isUser
-                      ? "bg-gradient-to-br from-cyan-500/30 to-blue-500/30 border border-cyan-400/40"
-                      : "bg-gradient-to-br from-purple-500/30 to-pink-500/30 border border-purple-400/40"
+                    message.isUser ? "bg-white/20 border border-white/40" : "bg-gray-500/30 border border-gray-400/40"
                   } shadow-lg`}
                 >
-                  {message.isUser ? (
-                    <User className="h-4 w-4 text-cyan-300" />
-                  ) : (
-                    <Bot className="h-4 w-4 text-purple-300" />
-                  )}
+                  {message.isUser ? <User className="h-4 w-4 text-white" /> : <Bot className="h-4 w-4 text-gray-300" />}
                 </div>
                 <div
                   className={`p-3 rounded-xl transition-all duration-200 hover:scale-[1.02] backdrop-blur-sm ${
                     message.isUser
-                      ? "bg-gradient-to-r from-cyan-500/80 to-blue-500/80 text-white shadow-lg border border-cyan-400/50 hover:shadow-cyan-500/25"
+                      ? "bg-white/80 text-black shadow-lg border border-white/50 hover:shadow-white/25"
                       : "bg-white/10 text-gray-200 border border-white/20 shadow-lg hover:bg-white/15"
                   }`}
                 >
@@ -167,14 +159,14 @@ export const ChatBot = ({ isOpen = false, onToggle }: ChatBotProps) => {
           {isTyping && (
             <div className="flex justify-start">
               <div className="flex items-start gap-2">
-                <div className="p-2 bg-gradient-to-br from-purple-500/30 to-pink-500/30 rounded-full border border-purple-400/40 backdrop-blur-sm shadow-lg">
-                  <Bot className="h-4 w-4 text-purple-300" />
+                <div className="p-2 bg-gray-500/30 rounded-full border border-gray-400/40 backdrop-blur-sm shadow-lg">
+                  <Bot className="h-4 w-4 text-gray-300" />
                 </div>
                 <div className="bg-white/10 p-3 rounded-xl border border-white/20 backdrop-blur-sm shadow-lg">
                   <div className="flex space-x-1">
-                    <div className="w-2 h-2 bg-cyan-400 rounded-full animate-bounce" />
-                    <div className="w-2 h-2 bg-cyan-400 rounded-full animate-bounce delay-100" />
-                    <div className="w-2 h-2 bg-cyan-400 rounded-full animate-bounce delay-200" />
+                    <div className="w-2 h-2 bg-white rounded-full animate-bounce" />
+                    <div className="w-2 h-2 bg-white rounded-full animate-bounce delay-100" />
+                    <div className="w-2 h-2 bg-white rounded-full animate-bounce delay-200" />
                   </div>
                 </div>
               </div>
@@ -183,14 +175,14 @@ export const ChatBot = ({ isOpen = false, onToggle }: ChatBotProps) => {
           <div ref={messagesEndRef} />
         </div>
 
-        <div className="p-4 border-t border-cyan-400/20 bg-white/5 backdrop-blur-sm">
+        <div className="p-4 border-t border-white/20 bg-white/5 backdrop-blur-sm">
           <div className="flex gap-2">
             <textarea
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
               onKeyPress={handleKeyPress}
               placeholder="Ask me about experience, skills, projects..."
-              className="flex-1 p-3 backdrop-blur-sm bg-white/10 border border-cyan-400/30 rounded-xl focus:border-cyan-400/60 focus:outline-none focus:ring-2 focus:ring-cyan-400/20 transition-all duration-300 text-gray-200 placeholder-gray-400 resize-none text-sm hover:bg-white/15"
+              className="flex-1 p-3 backdrop-blur-sm bg-white/10 border border-white/30 rounded-xl focus:border-white/60 focus:outline-none focus:ring-2 focus:ring-white/20 transition-all duration-300 text-gray-200 placeholder-gray-400 resize-none text-sm hover:bg-white/15"
               rows={1}
               style={{ minHeight: "44px", maxHeight: "88px" }}
             />
@@ -198,7 +190,7 @@ export const ChatBot = ({ isOpen = false, onToggle }: ChatBotProps) => {
               onClick={handleSendMessage}
               disabled={!inputValue.trim() || isTyping}
               size="sm"
-              className="bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-400 hover:to-blue-400 text-white transition-all duration-300 hover:scale-105 border border-cyan-400/50 rounded-xl px-4 shadow-lg hover:shadow-cyan-500/25"
+              className="bg-white/20 hover:bg-white/30 text-white transition-all duration-300 hover:scale-105 border border-white/50 rounded-xl px-4 shadow-lg hover:shadow-white/25"
             >
               <Send className="h-4 w-4" />
             </Button>
