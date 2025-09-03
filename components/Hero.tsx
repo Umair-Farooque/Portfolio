@@ -1,13 +1,36 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { ArrowDown, MessageCircle, Download } from "lucide-react"
+import { Download } from "lucide-react"
+import { RAGService } from "@/lib/rag-service"
 
 interface HeroProps {
   onOpenChat?: () => void
 }
 
 export const Hero = ({ onOpenChat }: HeroProps) => {
+  const handleDownloadCV = () => {
+    const ragService = RAGService.getInstance()
+    const cvContent = ragService.generateCVContent()
+
+    const blob = new Blob([cvContent], { type: "text/plain" })
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement("a")
+    a.href = url
+    a.download = "Muhammad_Umair_Farooq_CV.txt"
+    document.body.appendChild(a)
+    a.click()
+    document.body.removeChild(a)
+    URL.revokeObjectURL(url)
+  }
+
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId)
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" })
+    }
+  }
+
   return (
     <section className="min-h-screen flex flex-col justify-center items-center relative overflow-hidden">
       <div className="container px-4 mx-auto text-center relative z-10">
@@ -27,20 +50,8 @@ export const Hero = ({ onOpenChat }: HeroProps) => {
               innovative systems that leverage cutting-edge AI technology.
             </p>
 
-            <div className="mb-8">
-              <div
-                className="max-w-md mx-auto backdrop-blur-sm bg-white/5 border border-cyan-400/30 rounded-full p-4 cursor-pointer hover:border-cyan-400/50 transition-all duration-300 hover:bg-white/10"
-                onClick={onOpenChat}
-              >
-                <div className="flex items-center justify-center text-cyan-300 hover:text-cyan-200 transition-colors">
-                  <MessageCircle className="mr-3 h-5 w-5" />
-                  <span className="text-lg">Talk to my AI</span>
-                </div>
-              </div>
-            </div>
-
             <div className="flex flex-wrap justify-center gap-3 mb-8">
-              {["Experience", "Projects", "Skills", "Certs", "AboutMe"].map((item) => (
+              {["Experience", "Projects", "Certs"].map((item) => (
                 <button
                   key={item}
                   className="px-6 py-2 backdrop-blur-sm bg-white/5 border border-cyan-400/30 rounded-full text-cyan-300 hover:text-white hover:border-cyan-400/60 hover:bg-white/10 transition-all duration-300 text-sm font-medium"
@@ -48,6 +59,12 @@ export const Hero = ({ onOpenChat }: HeroProps) => {
                   {item}
                 </button>
               ))}
+              <button
+                onClick={() => scrollToSection("contact")}
+                className="px-6 py-2 backdrop-blur-sm bg-white/5 border border-cyan-400/30 rounded-full text-cyan-300 hover:text-white hover:border-cyan-400/60 hover:bg-white/10 transition-all duration-300 text-sm font-medium"
+              >
+                Skills
+              </button>
             </div>
           </div>
 
@@ -72,17 +89,9 @@ export const Hero = ({ onOpenChat }: HeroProps) => {
             ))}
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
+          <div className="flex justify-center items-center gap-4">
             <Button
-              onClick={onOpenChat}
-              size="lg"
-              className="bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-400 hover:to-blue-400 text-white px-8 py-6 text-lg shadow-lg hover:shadow-cyan-500/25 transition-all duration-300 hover:scale-105 border border-cyan-400/50 rounded-xl backdrop-blur-sm"
-            >
-              <MessageCircle className="mr-2 h-5 w-5" />
-              Chat with AI Me
-            </Button>
-
-            <Button
+              onClick={handleDownloadCV}
               variant="outline"
               size="lg"
               className="border-2 border-cyan-400/50 text-gray-200 hover:bg-cyan-500/20 hover:text-white px-8 py-6 text-lg transition-all duration-300 hover:scale-105 bg-white/5 backdrop-blur-sm rounded-xl hover:border-cyan-400/70"
@@ -91,12 +100,6 @@ export const Hero = ({ onOpenChat }: HeroProps) => {
               Download CV
             </Button>
           </div>
-        </div>
-      </div>
-
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-        <div className="p-2 backdrop-blur-sm bg-white/5 border border-cyan-400/30 rounded-full">
-          <ArrowDown className="h-6 w-6 text-cyan-400" />
         </div>
       </div>
     </section>

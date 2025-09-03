@@ -133,7 +133,7 @@ export class RAGService {
     const searchResults = this.searchCV(query)
 
     if (searchResults.length === 0) {
-      return "I couldn't find specific information about that in the CV. Could you try asking about skills, projects, experience, or education? For example: 'What programming languages does he know?' or 'Tell me about his AI projects.'"
+      return "I'd be happy to help you learn more about Muhammad Umair's background! You can ask me about his technical skills, exciting projects he's worked on, professional experience, or educational background. Feel free to ask questions like 'What AI technologies does he work with?' or 'Tell me about his machine learning projects.'"
     }
 
     // Generate contextual response based on query type
@@ -141,30 +141,86 @@ export class RAGService {
     let response = ""
 
     if (this.matchesQuery(queryLower, ["skill", "technology", "programming", "know", "experience with"])) {
-      response = "Based on the CV, here are the relevant skills and technologies:\n\n"
+      response = "Great question! Here are Muhammad Umair's technical skills and expertise:\n\n"
     } else if (this.matchesQuery(queryLower, ["project", "built", "developed", "work"])) {
-      response = "Here are the relevant projects from the portfolio:\n\n"
+      response = "Excellent! Let me tell you about some of the impressive projects Muhammad Umair has worked on:\n\n"
     } else if (this.matchesQuery(queryLower, ["experience", "job", "work", "career"])) {
-      response = "Here's the professional experience:\n\n"
+      response = "Here's an overview of Muhammad Umair's professional journey:\n\n"
     } else if (this.matchesQuery(queryLower, ["education", "study", "degree", "university"])) {
-      response = "Educational background:\n\n"
+      response = "Here's information about Muhammad Umair's educational background:\n\n"
+    } else if (this.matchesQuery(queryLower, ["contact", "reach", "email", "phone"])) {
+      response = "Here's how you can get in touch with Muhammad Umair:\n\n"
     } else {
-      response = "Here's what I found relevant to your question:\n\n"
+      response = "Here's what I found that might interest you:\n\n"
     }
 
     searchResults.forEach((result, index) => {
       response += `${result.content}\n\n`
     })
 
-    // Add contextual suggestions
     if (this.matchesQuery(queryLower, ["skill", "technology"])) {
       response +=
-        "💡 You can also ask about specific technologies like 'RAG systems', 'LangChain', or 'PyTorch' for more details!"
+        "💡 Want to dive deeper? Feel free to ask about specific technologies like 'What's his experience with RAG systems?', 'Tell me about his LangChain work', or 'What deep learning frameworks does he use?'"
     } else if (this.matchesQuery(queryLower, ["project"])) {
       response +=
-        "💡 Want to know more? Ask about specific projects like 'Neuro-Flex', 'AI Learning Assistant', or 'Credit Enrich System'!"
+        "💡 Interested in learning more? Ask me about specific projects like 'Tell me about Neuro-Flex', 'What's the AI Learning Assistant?', or 'How does the Credit Enrich System work?'"
+    } else if (this.matchesQuery(queryLower, ["experience"])) {
+      response +=
+        "💡 Want to know more about his work? Ask about his role as a 'Machine Learning Engineer' or his experience with 'Generative AI applications'!"
     }
 
     return response
+  }
+
+  generateCVContent(): string {
+    return `MUHAMMAD UMAIR FAROOQ
+
+${cvData.personalInfo.location} ♦ ${cvData.personalInfo.phone} ♦ ${cvData.personalInfo.email}
+
+PROFILES
+LinkedIn: ${cvData.personalInfo.linkedin}
+GitHub: ${cvData.personalInfo.github}
+
+EDUCATION
+${cvData.education.degree}, ${cvData.education.year}
+${cvData.education.institution}
+
+KEY SKILLS
+• Programming Languages: ${cvData.skills.programmingLanguages.join(", ")}
+• Deep Learning Frameworks: ${cvData.skills.deepLearning.join(", ")}
+• MLOps & Deployment: ${cvData.skills.mlops.join(", ")}
+• LLM Tools: ${cvData.skills.llmTools.join(", ")}
+• Programming Libraries: ${cvData.skills.libraries.join(", ")}
+• Databases: ${cvData.skills.databases.join(", ")}
+• Vector Databases: ${cvData.skills.vectorDatabases.join(", ")}
+• Web Frameworks and UI Tools: ${cvData.skills.webFrameworks.join(", ")}
+• Cloud & DevOps Platforms: ${cvData.skills.cloud.join(", ")}
+• Configuration Management: ${cvData.skills.tools.filter((tool) => tool.includes("Git")).join(", ")}
+• Data Visualization: ${cvData.skills.visualization.join(", ")}
+• Other Relevant Tools: ${cvData.skills.tools.join(", ")}
+
+WORK HISTORY
+${cvData.experience
+  .map(
+    (exp) => `
+${exp.title} ${exp.period}
+${exp.company}
+${exp.responsibilities.map((resp) => `• ${resp}`).join("\n")}
+`,
+  )
+  .join("\n")}
+
+PROJECTS
+${cvData.projects
+  .map(
+    (project) => `
+${project.name}
+${project.type ? `${project.type} | ` : ""}${project.description}
+${project.achievements ? project.achievements.map((ach) => `• ${ach}`).join("\n") : ""}
+${project.features ? project.features.map((feat) => `• ${feat}`).join("\n") : ""}
+Tech Stack: ${project.techStack?.join(", ") || "N/A"}
+`,
+  )
+  .join("\n")}`
   }
 }
