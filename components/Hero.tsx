@@ -2,7 +2,6 @@
 
 import { Button } from "@/components/ui/button"
 import { Download } from "lucide-react"
-import { RAGService } from "@/lib/rag-service"
 
 interface HeroProps {
   onOpenChat?: () => void
@@ -10,18 +9,13 @@ interface HeroProps {
 
 export const Hero = ({ onOpenChat }: HeroProps) => {
   const handleDownloadCV = () => {
-    const ragService = RAGService.getInstance()
-    const cvContent = ragService.generateCVContent()
-
-    const blob = new Blob([cvContent], { type: "text/plain" })
-    const url = URL.createObjectURL(blob)
+    // ✅ Serve static cv.pdf from /public
     const a = document.createElement("a")
-    a.href = url
+    a.href = "/cv.pdf"
     a.download = "Muhammad_Umair_Farooq_CV.pdf"
     document.body.appendChild(a)
     a.click()
     document.body.removeChild(a)
-    URL.revokeObjectURL(url)
   }
 
   const scrollToSection = (sectionId: string) => {
@@ -87,6 +81,7 @@ export const Hero = ({ onOpenChat }: HeroProps) => {
         ))}
       </div>
 
+      {/* Main content */}
       <div className="container px-4 mx-auto text-center relative z-10 text-white font-mono bg-transparent">
         <div className="max-w-4xl mx-auto">
           <div className="backdrop-blur-xl bg-white/5 border border-white/20 rounded-3xl p-8 md:p-12 mb-8 shadow-2xl hover:shadow-white/10 transition-all duration-500 hover:border-white/40">
@@ -103,16 +98,17 @@ export const Hero = ({ onOpenChat }: HeroProps) => {
               innovative systems that leverage cutting-edge AI technology.
             </p>
 
-          <div className="flex justify-center items-center gap-4 font-mono">
-            <Button
-              onClick={handleDownloadCV}
-              variant="outline"
-              size="lg"
-              className="border-2 border-white/50 text-gray-200 hover:bg-white/20 hover:text-white px-8 py-6 text-lg transition-all duration-300 hover:scale-105 bg-white/5 backdrop-blur-sm rounded-xl hover:border-white/70"
-            >
-              <Download className="mr-2 h-5 w-5" />
-              Download CV
-            </Button>
+            <div className="flex justify-center items-center gap-4 font-mono">
+              <Button
+                onClick={handleDownloadCV}
+                variant="outline"
+                size="lg"
+                className="border-2 border-white/50 text-gray-200 hover:bg-white/20 hover:text-white px-8 py-6 text-lg transition-all duration-300 hover:scale-105 bg-white/5 backdrop-blur-sm rounded-xl hover:border-white/70"
+              >
+                <Download className="mr-2 h-5 w-5" />
+                Download CV
+              </Button>
+            </div>
           </div>
         </div>
       </div>
