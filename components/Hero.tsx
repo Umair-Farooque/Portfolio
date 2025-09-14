@@ -17,7 +17,7 @@ export const Hero = ({ onOpenChat }: HeroProps) => {
     const url = URL.createObjectURL(blob)
     const a = document.createElement("a")
     a.href = url
-    a.download = "Muhammad_Umair_Farooq_CV.txt"
+    a.download = "Muhammad_Umair_Farooq_CV.pdf"
     document.body.appendChild(a)
     a.click()
     document.body.removeChild(a)
@@ -102,24 +102,6 @@ export const Hero = ({ onOpenChat }: HeroProps) => {
               Building intelligent AI solutions with deep learning, LLMs, and MLOps. Passionate about creating
               innovative systems that leverage cutting-edge AI technology.
             </p>
-
-            <div className="flex flex-wrap justify-center gap-3 mb-8">
-              {["Experience", "Projects", "Certs"].map((item) => (
-                <button
-                  key={item}
-                  className="px-6 py-2 backdrop-blur-sm bg-white/5 border border-white/30 rounded-full text-gray-300 hover:text-white hover:border-white/60 hover:bg-white/10 transition-all duration-300 text-sm font-medium"
-                >
-                  {item}
-                </button>
-              ))}
-              <button
-                onClick={() => scrollToSection("contact")}
-                className="px-6 py-2 backdrop-blur-sm bg-white/5 border border-white/30 rounded-full text-gray-300 hover:text-white hover:border-white/60 hover:bg-white/10 transition-all duration-300 text-sm font-medium"
-              >
-                Skills
-              </button>
-            </div>
-          </div>
 
           <div className="flex justify-center items-center gap-4 font-mono">
             <Button
