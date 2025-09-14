@@ -31,8 +31,63 @@ export const About = () => {
   ]
 
   return (
-    <section className="py-20 relative bg-black">
-      <div className="container px-4 mx-auto font-mono">
+    <section className="py-20 relative bg-black overflow-hidden">
+      {/* Floating geometric shapes */}
+      <div className="absolute inset-0 z-0">
+        <div className="absolute top-20 left-10 w-32 h-32 border border-white/10 rotate-45 animate-pulse"></div>
+        <div
+          className="absolute top-40 right-20 w-24 h-24 border border-white/20 rounded-full animate-bounce"
+          style={{ animationDuration: "3s" }}
+        ></div>
+        <div
+          className="absolute bottom-32 left-1/4 w-16 h-16 bg-white/5 rotate-12 animate-spin"
+          style={{ animationDuration: "8s" }}
+        ></div>
+        <div
+          className="absolute top-1/3 right-1/3 w-20 h-20 border-2 border-white/15 transform rotate-45 animate-pulse"
+          style={{ animationDelay: "1s" }}
+        ></div>
+        <div
+          className="absolute bottom-20 right-10 w-28 h-28 border border-white/10 rounded-full animate-ping"
+          style={{ animationDuration: "4s" }}
+        ></div>
+      </div>
+
+      {/* Animated grid lines */}
+      <div className="absolute inset-0 z-0 opacity-20">
+        <div className="absolute top-0 left-1/4 w-px h-full bg-gradient-to-b from-transparent via-white/30 to-transparent animate-pulse"></div>
+        <div
+          className="absolute top-0 right-1/4 w-px h-full bg-gradient-to-b from-transparent via-white/20 to-transparent animate-pulse"
+          style={{ animationDelay: "2s" }}
+        ></div>
+        <div
+          className="absolute top-1/4 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/20 to-transparent animate-pulse"
+          style={{ animationDelay: "1s" }}
+        ></div>
+        <div
+          className="absolute bottom-1/4 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/30 to-transparent animate-pulse"
+          style={{ animationDelay: "3s" }}
+        ></div>
+      </div>
+
+      {/* Floating particles */}
+      <div className="absolute inset-0 z-0">
+        {[...Array(12)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute w-2 h-2 bg-white/20 rounded-full animate-ping"
+            style={{
+              top: `${Math.random() * 100}%`,
+              left: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 4}s`,
+              animationDuration: `${3 + Math.random() * 2}s`,
+            }}
+          ></div>
+        ))}
+      </div>
+
+      {/* Actual content */}
+      <div className="container px-4 mx-auto font-mono relative z-10">
         <div className="text-center mb-16 font-mono">
           <div className="backdrop-blur-xl bg-white/5 border border-white/20 rounded-3xl p-8 mb-8 max-w-4xl mx-auto">
             <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">About Me</h2>
