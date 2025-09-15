@@ -12,7 +12,7 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: "Muhammad Umair Farooq - AI Engineer",
+  title: "Umair Farooq - AI Engineer",
   description:
     "Portfolio of Muhammad Umair Farooq - AI/ML Engineer specializing in Deep Learning, LLMs, and RAG systems",
   generator: "v0.app",

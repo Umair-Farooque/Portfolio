@@ -7,6 +7,8 @@ import { TooltipProvider } from "@/components/ui/tooltip"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import { Hero } from "@/components/Hero"
 import { About } from "@/components/About"
+import Projects from "@/components/Projects"
+import { ProjectsBackground } from "@/components/ProjectsBackground"
 import { Contact } from "@/components/Contact"
 import { ChatBot } from "@/components/ChatBot"
 import { NetworkBackground } from "@/components/NetworkBackground"
@@ -16,9 +18,7 @@ const queryClient = new QueryClient()
 
 function SuspendedHero() {
   return (
-    <Suspense
-      fallback={<div className="h-screen flex items-center justify-center text-amber-400">Loading Hero...</div>}
-    >
+    <Suspense fallback={<div className="h-screen flex items-center justify-center text-amber-400">Loading Hero...</div>}>
       <Hero />
     </Suspense>
   )
@@ -28,6 +28,17 @@ function SuspendedAbout() {
   return (
     <Suspense fallback={<div className="h-64 flex items-center justify-center text-amber-400">Loading About...</div>}>
       <About />
+    </Suspense>
+  )
+}
+
+function SuspendedProjects() {
+  return (
+    <Suspense fallback={<div className="h-64 flex items-center justify-center text-amber-400">Loading Projects...</div>}>
+      <div className="relative">
+        <ProjectsBackground /> {/* 3D background */}
+        <Projects />
+      </div>
     </Suspense>
   )
 }
@@ -60,6 +71,7 @@ export default function Home() {
           <div className="relative z-20">
             <SuspendedHero />
             <SuspendedAbout />
+            <SuspendedProjects /> {/* Projects added here */}
             <SuspendedContact />
             <SuspendedChatBot />
           </div>
