@@ -9,7 +9,6 @@
     "start": "next start"
   },
   "dependencies": {
-    "@emailjs/browser": "^4.4.1",
     "@eslint/js": "latest",
     "@hookform/resolvers": "^3.9.1",
     "@radix-ui/react-accordion": "latest",
