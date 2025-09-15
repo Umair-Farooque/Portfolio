@@ -137,7 +137,10 @@ export default function Projects() {
               rel="noopener noreferrer"
               className="group p-6 border border-white/20 rounded-3xl shadow-2xl backdrop-blur-xl bg-white/5 hover:shadow-white/20 transition transform hover:-translate-y-1 hover:scale-105"
             >
-              <h3 className="text-xl md:text-2xl font-semibold mb-2 group-hover:text-blue-400 transition">
+              <h3 className="text-xl md:text-2xl font-semibold mb-2 
+               bg-gradient-to-r from-white via-gray-300 to-gray-500 
+               bg-clip-text text-transparent group-hover:from-blue-400 group-hover:via-cyan-400 group-hover:to-purple-400 
+               transition">
                 {project.title}
               </h3>
               <p className="text-gray-300 mb-4 text-sm md:text-base">{project.description}</p>
