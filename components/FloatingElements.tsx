@@ -46,14 +46,16 @@ export function FloatingElements() {
           }}
         >
           <div
-            className="border border-white/20"
+            className="border border-white/20 shadow-glow animate-glow rounded-full"
             style={{
               width: `${shape.size}px`,
               height: `${shape.size}px`,
               transform: `rotate(${shape.rotation}deg)`,
               opacity: shape.opacity,
-              clipPath: "polygon(50% 0%, 0% 100%, 100% 100%)",
-              background: "linear-gradient(45deg, rgba(255, 255, 255, 0.1), rgba(128, 128, 128, 0.1))",
+              background:
+                "linear-gradient(45deg, rgba(255,255,255,0.15), rgba(128,128,128,0.15))",
+              clipPath:
+                "polygon(50% 0%, 0% 100%, 100% 100%)", // triangle shape
             }}
           />
         </div>
