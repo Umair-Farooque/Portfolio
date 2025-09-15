@@ -138,8 +138,9 @@ export const Contact = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="p-4 backdrop-blur-sm bg-white/10 border border-white/30 rounded-xl 
-                               hover:border-white/50 hover:bg-white/15 transition-all duration-300 hover:scale-110 
-                               group shadow-lg hover:shadow-[0_0_20px_rgba(255,255,255,0.7)]"
+                    hover:border-white/50 hover:bg-white/15 transition-all duration-300 hover:scale-110 
+                    group shadow-glow hover:animate-glow"
+
                     aria-label={social.label}
                   >
                     <social.icon className="h-6 w-6 text-white" />
