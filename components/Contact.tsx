@@ -57,14 +57,18 @@ export const Contact = () => {
     <section className="py-20 relative bg-black text-white">
       <div className="container px-4 mx-auto font-mono">
         {/* Header */}
-        <div className="text-center mb-16 font-mono">
-          <div className="backdrop-blur-xl bg-white/5 border border-white/20 rounded-3xl p-8 mb-8 max-w-4xl mx-auto hover:border-white/30 transition-all duration-500">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">Get In Touch</h2>
-            <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-              Interested in AI solutions or want to collaborate on machine learning projects? I'd love to discuss how we
-              can work together.
-            </p>
-          </div>
+        <div className="text-center mb-16">
+          <h2
+            className="text-4xl md:text-5xl font-bold mb-6 
+                       bg-gradient-to-r from-white via-gray-300 to-gray-500 
+                       bg-clip-text text-transparent"
+          >
+            Get In Touch
+          </h2>
+          <p className="text-xl text-gray-300 max-w-2xl mx-auto">
+            Interested in AI solutions or want to collaborate on machine learning projects? I'd love to
+            discuss how we can work together.
+          </p>
         </div>
 
         <div className="max-w-4xl mx-auto">
@@ -77,21 +81,24 @@ export const Contact = () => {
                   <a
                     key={index}
                     href={info.href}
-                    className="flex items-center p-4 backdrop-blur-xl bg-white/5 border border-white/20 rounded-xl 
-                               hover:border-white/40 hover:bg-white/10 transition-all duration-500 hover:scale-105 
-                               group shadow-glow hover:animate-glow transform perspective-1000 hover:rotate-x-3 hover:rotate-y-3"
+                    className="flex items-center p-4 border border-white/20 rounded-2xl 
+                               backdrop-blur-xl bg-white/5 hover:shadow-white/20 
+                               transition transform hover:-translate-y-1 hover:scale-105"
                   >
                     <div
                       className="p-3 bg-white/10 rounded-lg mr-4 border border-white/30 
-                                 transition-all duration-300 group-hover:shadow-glow"
+                                 transition group-hover:shadow-glow"
                     >
                       <info.icon className="h-5 w-5 text-white" />
                     </div>
                     <div>
-                      <div className="text-sm text-gray-400 group-hover:text-gray-300 transition-colors duration-300">
-                        {info.label}
-                      </div>
-                      <div className="font-medium text-gray-200 group-hover:text-white transition-colors duration-300">
+                      <div className="text-sm text-gray-400">{info.label}</div>
+                      <div
+                        className="font-medium text-gray-200 
+                                   group-hover:bg-gradient-to-r 
+                                   group-hover:from-blue-400 group-hover:via-cyan-400 group-hover:to-purple-400 
+                                   group-hover:bg-clip-text group-hover:text-transparent transition"
+                      >
                         {info.value}
                       </div>
                     </div>
@@ -101,32 +108,35 @@ export const Contact = () => {
             </div>
 
             {/* Quick Message */}
-            <Card className="backdrop-blur-xl bg-white/5 border border-white/20 hover:border-white/30 transition-all duration-500 shadow-glow hover:animate-glow rounded-2xl transform perspective-1000 hover:rotate-x-3 hover:rotate-y-3">
+            <Card className="border border-white/20 backdrop-blur-xl bg-white/5 rounded-2xl 
+                             hover:shadow-white/20 transition transform hover:-translate-y-1 hover:scale-105">
               <CardContent className="p-6">
                 <h3 className="text-2xl font-bold mb-6 text-gray-200">Send a Quick Message</h3>
                 <div className="space-y-4">
                   <input
                     type="text"
                     placeholder="Your Name"
-                    className="w-full p-3 backdrop-blur-sm bg-white/10 border border-white/30 rounded-lg 
+                    className="w-full p-3 bg-white/10 border border-white/30 rounded-lg 
                                focus:border-white/60 focus:outline-none focus:ring-2 focus:ring-white/20 
-                               transition-all duration-300 text-gray-200 placeholder-gray-400 hover:bg-white/15"
+                               transition text-gray-200 placeholder-gray-400"
                   />
                   <input
                     type="email"
                     placeholder="Your Email"
-                    className="w-full p-3 backdrop-blur-sm bg-white/10 border border-white/30 rounded-lg 
+                    className="w-full p-3 bg-white/10 border border-white/30 rounded-lg 
                                focus:border-white/60 focus:outline-none focus:ring-2 focus:ring-white/20 
-                               transition-all duration-300 text-gray-200 placeholder-gray-400 hover:bg-white/15"
+                               transition text-gray-200 placeholder-gray-400"
                   />
                   <textarea
                     placeholder="Your Message"
                     rows={4}
-                    className="w-full p-3 backdrop-blur-sm bg-white/10 border border-white/30 rounded-lg 
+                    className="w-full p-3 bg-white/10 border border-white/30 rounded-lg 
                                focus:border-white/60 focus:outline-none focus:ring-2 focus:ring-white/20 
-                               transition-all duration-300 text-gray-200 placeholder-gray-400 resize-none hover:bg-white/15"
+                               transition text-gray-200 placeholder-gray-400 resize-none"
                   />
-                  <Button className="w-full bg-white/20 hover:bg-white/30 text-white py-3 transition-all duration-300 hover:scale-105 border border-white/50 rounded-xl shadow-glow hover:animate-glow transform perspective-1000 hover:rotate-x-3 hover:rotate-y-3">
+                  <Button className="w-full bg-white/20 hover:bg-white/30 text-white py-3 
+                                     transition transform hover:-translate-y-1 hover:scale-105 
+                                     border border-white/50 rounded-xl hover:shadow-white/20">
                     Send Message
                   </Button>
                 </div>
@@ -136,24 +146,22 @@ export const Contact = () => {
 
           {/* Social Links */}
           <div className="text-center">
-            <div className="backdrop-blur-xl bg-white/5 border border-white/20 rounded-2xl p-8 hover:border-white/30 transition-all duration-500 shadow-glow hover:animate-glow transform perspective-1000 hover:rotate-x-3 hover:rotate-y-3">
-              <h3 className="text-xl font-bold mb-6 text-gray-200">Connect With Me</h3>
-              <div className="flex justify-center space-x-6">
-                {socialLinks.map((social, index) => (
-                  <a
-                    key={index}
-                    href={social.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-4 backdrop-blur-sm bg-white/10 border border-white/30 rounded-xl 
-                               hover:border-white/50 hover:bg-white/15 transition-all duration-500 hover:scale-110 
-                               group shadow-glow hover:animate-glow transform perspective-1000 hover:rotate-x-6 hover:rotate-y-6"
-                    aria-label={social.label}
-                  >
-                    <social.icon className="h-6 w-6 text-white" />
-                  </a>
-                ))}
-              </div>
+            <h3 className="text-xl font-bold mb-6 text-gray-200">Connect With Me</h3>
+            <div className="flex justify-center space-x-6">
+              {socialLinks.map((social, index) => (
+                <a
+                  key={index}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-4 border border-white/20 rounded-xl bg-white/5 backdrop-blur-sm
+                             hover:shadow-white/20 transition transform hover:-translate-y-1 hover:scale-110"
+                  aria-label={social.label}
+                >
+                  <social.icon className="h-6 w-6 text-white transition 
+                                          group-hover:from-blue-400 group-hover:via-cyan-400 group-hover:to-purple-400" />
+                </a>
+              ))}
             </div>
           </div>
         </div>
