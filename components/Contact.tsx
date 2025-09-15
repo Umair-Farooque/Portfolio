@@ -104,20 +104,20 @@ export const Contact = () => {
                 <form ref={formRef} onSubmit={handleSubmit} className="space-y-4">
                   <input
                     type="text"
-                    name="user_name"
+                    name="name"
                     placeholder="Your Name"
                     className="w-full p-3 backdrop-blur-sm bg-white/10 border border-white/30 rounded-lg focus:border-white/60 focus:outline-none focus:ring-2 focus:ring-white/20 transition-all duration-300 text-gray-200 placeholder-gray-400 hover:bg-white/15"
                     required
                   />
                   <input
                     type="email"
-                    name="user_email"
+                    name="email"
                     placeholder="Your Email"
                     className="w-full p-3 backdrop-blur-sm bg-white/10 border border-white/30 rounded-lg focus:border-white/60 focus:outline-none focus:ring-2 focus:ring-white/20 transition-all duration-300 text-gray-200 placeholder-gray-400 hover:bg-white/15"
                     required
                   />
                   <textarea
-                    name="message"
+                    name="title"
                     placeholder="Your Message"
                     rows={4}
                     className="w-full p-3 backdrop-blur-sm bg-white/10 border border-white/30 rounded-lg focus:border-white/60 focus:outline-none focus:ring-2 focus:ring-white/20 transition-all duration-300 text-gray-200 placeholder-gray-400 resize-none hover:bg-white/15"
