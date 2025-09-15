@@ -49,7 +49,7 @@ export function NetworkBackground() {
 
         nodesRef.current.forEach((otherNode, j) => {
           if (i !== j && connectionCount < maxConnections) {
-            const distance = Math.sqrt(Math.pow(node.x - otherNode.x, 2) + Math.pow(node.y - otherNode.y, 2))
+            const distance = Math.sqrt((node.x - otherNode.x) ** 2 + (node.y - otherNode.y) ** 2)
             if (distance < 150) {
               node.connections.push(j)
               connectionCount++
@@ -62,11 +62,10 @@ export function NetworkBackground() {
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height)
 
-      // Update and draw nodes
       nodesRef.current.forEach((node, i) => {
         // Mouse interaction
         const mouseDistance = Math.sqrt(
-          Math.pow(node.x - mouseRef.current.x, 2) + Math.pow(node.y - mouseRef.current.y, 2),
+          (node.x - mouseRef.current.x) ** 2 + (node.y - mouseRef.current.y) ** 2,
         )
 
         if (mouseDistance < 100) {
@@ -84,7 +83,6 @@ export function NetworkBackground() {
         if (node.x < 0 || node.x > canvas.width) node.vx *= -1
         if (node.y < 0 || node.y > canvas.height) node.vy *= -1
 
-        // Keep nodes in bounds
         node.x = Math.max(0, Math.min(canvas.width, node.x))
         node.y = Math.max(0, Math.min(canvas.height, node.y))
 
@@ -92,7 +90,7 @@ export function NetworkBackground() {
         node.connections.forEach((connectionIndex) => {
           const connectedNode = nodesRef.current[connectionIndex]
           if (connectedNode) {
-            const distance = Math.sqrt(Math.pow(node.x - connectedNode.x, 2) + Math.pow(node.y - connectedNode.y, 2))
+            const distance = Math.sqrt((node.x - connectedNode.x) ** 2 + (node.y - connectedNode.y) ** 2)
             const opacity = Math.max(0, 1 - distance / 150)
 
             ctx.beginPath()
@@ -104,17 +102,22 @@ export function NetworkBackground() {
           }
         })
 
-        // Draw node
+        // Glow node
         const nodeOpacity = mouseDistance < 100 ? 1 : 0.6
-        ctx.beginPath()
-        ctx.arc(node.x, node.y, 2, 0, Math.PI * 2)
-        ctx.fillStyle = `rgba(255, 255, 255, ${nodeOpacity})`
-        ctx.fill()
 
-        // Glow effect
+        ctx.save()
         ctx.beginPath()
-        ctx.arc(node.x, node.y, 4, 0, Math.PI * 2)
-        ctx.fillStyle = `rgba(255, 255, 255, ${nodeOpacity * 0.2})`
+        ctx.arc(node.x, node.y, 3, 0, Math.PI * 2)
+        ctx.fillStyle = `rgba(255, 255, 255, ${nodeOpacity})`
+        ctx.shadowBlur = 15 // strong glow
+        ctx.shadowColor = "rgba(255,255,255,0.9)"
+        ctx.fill()
+        ctx.restore()
+
+        // Outer soft glow
+        ctx.beginPath()
+        ctx.arc(node.x, node.y, 8, 0, Math.PI * 2)
+        ctx.fillStyle = `rgba(255, 255, 255, ${nodeOpacity * 0.15})`
         ctx.fill()
       })
 
@@ -138,9 +141,7 @@ export function NetworkBackground() {
     window.addEventListener("mousemove", handleMouseMove)
 
     return () => {
-      if (animationRef.current) {
-        cancelAnimationFrame(animationRef.current)
-      }
+      if (animationRef.current) cancelAnimationFrame(animationRef.current)
       window.removeEventListener("resize", handleResize)
       window.removeEventListener("mousemove", handleMouseMove)
     }
