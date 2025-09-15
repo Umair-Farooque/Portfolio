@@ -125,7 +125,7 @@ export default function Projects() {
       <canvas ref={canvasRef} className="absolute top-0 left-0 w-full h-full -z-10" />
 
       <div className="max-w-5xl w-full text-center relative z-10">
-        <h2 className="text-4xl md:text-5xl font-bold mb-12 bg-gradient-to-r from-white via-gray-300 to-gray-500 bg-clip-text text-transparent font-mono">
+        <h2 className="text-4xl md:text-5xl font-bold mb-16 bg-gradient-to-r from-white via-gray-300 to-gray-500 bg-clip-text text-transparent font-mono">
           Projects
         </h2>
         <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
