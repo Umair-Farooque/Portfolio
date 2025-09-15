@@ -8,7 +8,6 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import { Hero } from "@/components/Hero"
 import { About } from "@/components/About"
 import Projects from "@/components/Projects"
-import { ProjectsBackground } from "@/components/ProjectsBackground"
 import { Contact } from "@/components/Contact"
 import { ChatBot } from "@/components/ChatBot"
 import { NetworkBackground } from "@/components/NetworkBackground"
@@ -36,7 +35,6 @@ function SuspendedProjects() {
   return (
     <Suspense fallback={<div className="h-64 flex items-center justify-center text-amber-400">Loading Projects...</div>}>
       <div className="relative">
-        <ProjectsBackground /> {/* 3D background */}
         <Projects />
       </div>
     </Suspense>
