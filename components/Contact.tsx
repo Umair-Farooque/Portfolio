@@ -1,10 +1,9 @@
-"use client"
+"use client";
 
 import { useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Mail, Phone, MapPin, Github, Linkedin } from "lucide-react";
-import emailjs from "@emailjs/browser";
 
 // Upwork icon
 const UpworkIcon = ({ className }: { className?: string }) => (
@@ -29,31 +28,34 @@ export const Contact = () => {
     { icon: UpworkIcon, label: "Upwork", href: "https://www.upwork.com/freelancers/~01e690f969b307e342" },
   ];
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formRef.current) return;
 
     setLoading(true);
 
-    emailjs
-      .sendForm(
-        "service_57un0kq", // replace with EmailJS Service ID
-        "template_pcpfz4k", // replace with EmailJS Template ID
-        formRef.current,
-        "r9918WdxzMAInbl7U" // replace with EmailJS Public Key
-      )
-      .then(
-        () => {
-          alert("Message sent successfully!");
-          formRef.current?.reset();
-          setLoading(false);
-        },
-        (error) => {
-          console.error(error);
-          alert("Failed to send message. Please try again.");
-          setLoading(false);
-        }
-      );
+    const formData = new FormData(formRef.current);
+    const data = Object.fromEntries(formData.entries());
+
+    try {
+      const res = await fetch("/api/send-email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+
+      if (res.ok) {
+        alert("Message sent successfully!");
+        formRef.current.reset();
+      } else {
+        alert("Failed to send message.");
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Something went wrong.");
+    }
+
+    setLoading(false);
   };
 
   return (
