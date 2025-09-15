@@ -88,36 +88,32 @@ export default {
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
-      keyframes: {
-        "accordion-down": {
-          from: { height: "0" },
-          to: { height: "var(--radix-accordion-content-height)" },
+	  keyframes: {
+        'accordion-down': {
+          from: { height: '0' },
+          to: { height: 'var(--radix-accordion-content-height)' },
         },
-        "accordion-up": {
-          from: { height: "var(--radix-accordion-content-height)" },
-          to: { height: "0" },
+        'accordion-up': {
+          from: { height: 'var(--radix-accordion-content-height)' },
+          to: { height: '0' },
         },
-        // 🔥 Added animations
-        "gradient-x": {
-          "0%, 100%": { backgroundPosition: "0% 50%" },
-          "50%": { backgroundPosition: "100% 50%" },
-        },
+        // ✨ Added subtle glow keyframe
         glow: {
-          "0%, 100%": {
-            filter: "drop-shadow(0 0 8px rgba(255,255,255,0.3))",
+          '0%, 100%': {
+            textShadow: '0 0 10px rgba(255,255,255,0.8), 0 0 20px rgba(255,255,255,0.6)',
           },
-          "50%": {
-            filter: "drop-shadow(0 0 20px rgba(255,255,255,0.8))",
+          '50%': {
+            textShadow: '0 0 20px rgba(255,255,255,1), 0 0 40px rgba(255,255,255,0.8)',
           },
         },
       },
       animation: {
-        "accordion-down": "accordion-down 0.2s ease-out",
-        "accordion-up": "accordion-up 0.2s ease-out",
-        // 🔥 New animations
-        "gradient-x": "gradient-x 6s ease infinite",
-        glow: "glow 3s ease-in-out infinite",
+        'accordion-down': 'accordion-down 0.2s ease-out',
+        'accordion-up': 'accordion-up 0.2s ease-out',
+        // ✨ Added glow animation
+        glow: 'glow 3s ease-in-out infinite',
       },
+
     },
   },
   plugins: [require("tailwindcss-animate")],
