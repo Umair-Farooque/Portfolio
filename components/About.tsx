@@ -130,3 +130,37 @@ export const About = () => {
             </Card>
           ))}
         </div>
+
+        <div className="text-center">
+          <div className="backdrop-blur-xl bg-white/5 border border-white/20 rounded-3xl p-8 max-w-4xl mx-auto shadow-2xl hover:border-white/30 transition-all duration-500 hover:shadow-white/10">
+            <h3 className="text-2xl font-bold mb-6 text-white">Experience Highlights</h3>
+            <div className="grid md:grid-cols-3 gap-8 text-center">
+              <div className="group">
+                <div className="text-4xl font-bold text-white mb-2 group-hover:scale-110 transition-transform duration-300">
+                  2+
+                </div>
+                <div className="text-gray-300 group-hover:text-white transition-colors duration-300">
+                  Years Experience
+                </div>
+              </div>
+              <div className="group border-l border-r border-white/20 px-6">
+                <div className="text-4xl font-bold text-white mb-2 group-hover:scale-110 transition-transform duration-300">
+                  10+
+                </div>
+                <div className="text-gray-300 group-hover:text-white transition-colors duration-300">AI Projects</div>
+              </div>
+              <div className="group">
+                <div className="text-4xl font-bold text-white mb-2 group-hover:scale-110 transition-transform duration-300">
+                  100+
+                </div>
+                <div className="text-gray-300 group-hover:text-white transition-colors duration-300">
+                  Models Trained
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
