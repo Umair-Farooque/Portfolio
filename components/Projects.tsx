@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { ExternalLink } from "lucide-react";
 
+// --- Project Data ---
 const projects = [
   {
     title: "Neuro-Flex",
@@ -26,9 +27,11 @@ const projects = [
 
 export default function Projects() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [floatingShapes, setFloatingShapes] = useState<{ x: number; y: number; size: number; dx: number; dy: number; type: "circle" | "square" }[]>([]);
+  const [floatingShapes, setFloatingShapes] = useState<
+    { x: number; y: number; size: number; dx: number; dy: number; type: "circle" | "square" }[]
+  >([]);
 
-  // 3D subtle background animation
+  // 3D subtle + glowing background animation
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -77,7 +80,7 @@ export default function Projects() {
       if (!ctx) return;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // draw particles
+      // --- Small glowing particles ---
       particles.forEach((p) => {
         p.x += p.dx;
         p.y += p.dy;
@@ -87,11 +90,16 @@ export default function Projects() {
 
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = "rgba(59, 130, 246, 0.3)";
+
+        // Glow effect
+        ctx.shadowBlur = 12;
+        ctx.shadowColor = "rgba(59, 130, 246, 0.8)"; // strong blue glow
+        ctx.fillStyle = "rgba(59, 130, 246, 0.4)";
         ctx.fill();
+        ctx.shadowBlur = 0;
       });
 
-      // draw floating shapes
+      // --- Floating Shapes with glow ---
       floatingShapes.forEach((s) => {
         s.x += s.dx;
         s.y += s.dy;
@@ -105,8 +113,13 @@ export default function Projects() {
         } else {
           ctx.rect(s.x - s.size / 2, s.y - s.size / 2, s.size, s.size);
         }
-        ctx.fillStyle = "rgba(255, 255, 255, 0.05)";
+
+        // Apply glow
+        ctx.shadowBlur = 25;
+        ctx.shadowColor = "rgba(255, 255, 255, 0.6)";
+        ctx.fillStyle = "rgba(255, 255, 255, 0.08)";
         ctx.fill();
+        ctx.shadowBlur = 0;
       });
 
       requestAnimationFrame(animate);
@@ -120,12 +133,17 @@ export default function Projects() {
   }, [floatingShapes]);
 
   return (
-    <section id="projects" className="relative min-h-screen flex flex-col items-center justify-center px-6 py-20 bg-black overflow-hidden">
-      {/* 3D background canvas */}
+    <section
+      id="projects"
+      className="relative min-h-screen flex flex-col items-center justify-center px-6 py-20 bg-black overflow-hidden"
+    >
+      {/* 3D glowing background canvas */}
       <canvas ref={canvasRef} className="absolute top-0 left-0 w-full h-full -z-10" />
 
       <div className="max-w-5xl w-full text-center relative z-10">
-        <h2 className="text-4xl md:text-5xl font-bold mb-16 bg-gradient-to-r from-white via-gray-300 to-gray-500 bg-clip-text text-transparent font-mono">
+        <h2 className="text-4xl md:text-5xl font-bold mb-16 
+        bg-gradient-to-r from-white via-gray-300 to-gray-500 
+        bg-clip-text text-transparent font-mono">
           Projects
         </h2>
         <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -135,15 +153,22 @@ export default function Projects() {
               href={project.link}
               target="_blank"
               rel="noopener noreferrer"
-              className="group p-6 border border-white/20 rounded-3xl shadow-2xl backdrop-blur-xl bg-white/5 hover:shadow-white/20 transition transform hover:-translate-y-1 hover:scale-105"
+              className="group p-6 border border-white/20 rounded-3xl shadow-2xl 
+              backdrop-blur-xl bg-white/5 hover:shadow-white/20 
+              transition transform hover:-translate-y-1 hover:scale-105"
             >
-              <h3 className="text-xl md:text-2xl font-semibold mb-2 
-               bg-gradient-to-r from-white via-gray-300 to-gray-500 
-               bg-clip-text text-transparent group-hover:from-blue-400 group-hover:via-cyan-400 group-hover:to-purple-400 
-               transition">
+              <h3
+                className="text-xl md:text-2xl font-semibold mb-2 
+                bg-gradient-to-r from-white via-gray-300 to-gray-500 
+                bg-clip-text text-transparent 
+                group-hover:from-blue-400 group-hover:via-cyan-400 group-hover:to-purple-400 
+                transition"
+              >
                 {project.title}
               </h3>
-              <p className="text-gray-300 mb-4 text-sm md:text-base">{project.description}</p>
+              <p className="text-gray-300 mb-4 text-sm md:text-base">
+                {project.description}
+              </p>
               <span className="text-blue-400 font-medium group-hover:underline flex items-center justify-center gap-1">
                 View Project <ExternalLink className="w-4 h-4" />
               </span>
