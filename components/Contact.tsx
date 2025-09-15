@@ -48,14 +48,15 @@ export const Contact = () => {
         alert("Message sent successfully!");
         formRef.current.reset();
       } else {
-        alert("Failed to send message.");
+        const result = await res.json();
+        alert(result.error || "Failed to send message.");
       }
     } catch (err) {
       console.error(err);
       alert("Something went wrong.");
+    } finally {
+      setLoading(false);
     }
-
-    setLoading(false);
   };
 
   return (
