@@ -71,10 +71,13 @@ export const Contact = () => {
                   <a
                     key={index}
                     href={info.href}
-                    className="flex items-center p-4 backdrop-blur-xl bg-white/5 border border-white/20 rounded-xl hover:border-white/40 hover:bg-white/10 transition-all duration-300 hover:scale-105 group shadow-lg hover:shadow-white/10"
+                    className="flex items-center p-4 backdrop-blur-xl bg-white/5 border border-white/20 rounded-xl 
+                               hover:border-white/40 hover:bg-white/10 transition-all duration-300 hover:scale-105 
+                               group shadow-lg hover:shadow-[0_0_20px_rgba(255,255,255,0.6)]"
                   >
-                    <div className="p-3 bg-white/10 rounded-lg mr-4 group-hover:bg-white/20 transition-all duration-300 border border-white/30 group-hover:shadow-lg group-hover:shadow-white/25">
-                      <info.icon className="h-5 w-5 text-white group-hover:text-gray-200 transition-colors duration-300" />
+                    <div className="p-3 bg-white/10 rounded-lg mr-4 border border-white/30 
+                                    group-hover:shadow-[0_0_15px_rgba(255,255,255,0.8)] transition-all duration-300">
+                      <info.icon className="h-5 w-5 text-white" />
                     </div>
                     <div>
                       <div className="text-sm text-gray-400 group-hover:text-gray-300 transition-colors duration-300">
@@ -90,26 +93,32 @@ export const Contact = () => {
             </div>
 
             {/* Quick Message */}
-            <Card className="backdrop-blur-xl bg-white/5 border border-white/20 hover:border-white/30 transition-all duration-500 shadow-2xl hover:shadow-white/10 rounded-2xl">
+            <Card className="backdrop-blur-xl bg-white/5 border border-white/20 hover:border-white/30 transition-all duration-500 shadow-2xl hover:shadow-[0_0_25px_rgba(255,255,255,0.5)] rounded-2xl">
               <CardContent className="p-6">
                 <h3 className="text-2xl font-bold mb-6 text-gray-200">Send a Quick Message</h3>
                 <div className="space-y-4">
                   <input
                     type="text"
                     placeholder="Your Name"
-                    className="w-full p-3 backdrop-blur-sm bg-white/10 border border-white/30 rounded-lg focus:border-white/60 focus:outline-none focus:ring-2 focus:ring-white/20 transition-all duration-300 text-gray-200 placeholder-gray-400 hover:bg-white/15"
+                    className="w-full p-3 backdrop-blur-sm bg-white/10 border border-white/30 rounded-lg 
+                               focus:border-white/60 focus:outline-none focus:ring-2 focus:ring-white/20 
+                               transition-all duration-300 text-gray-200 placeholder-gray-400 hover:bg-white/15"
                   />
                   <input
                     type="email"
                     placeholder="Your Email"
-                    className="w-full p-3 backdrop-blur-sm bg-white/10 border border-white/30 rounded-lg focus:border-white/60 focus:outline-none focus:ring-2 focus:ring-white/20 transition-all duration-300 text-gray-200 placeholder-gray-400 hover:bg-white/15"
+                    className="w-full p-3 backdrop-blur-sm bg-white/10 border border-white/30 rounded-lg 
+                               focus:border-white/60 focus:outline-none focus:ring-2 focus:ring-white/20 
+                               transition-all duration-300 text-gray-200 placeholder-gray-400 hover:bg-white/15"
                   />
                   <textarea
                     placeholder="Your Message"
                     rows={4}
-                    className="w-full p-3 backdrop-blur-sm bg-white/10 border border-white/30 rounded-lg focus:border-white/60 focus:outline-none focus:ring-2 focus:ring-white/20 transition-all duration-300 text-gray-200 placeholder-gray-400 resize-none hover:bg-white/15"
+                    className="w-full p-3 backdrop-blur-sm bg-white/10 border border-white/30 rounded-lg 
+                               focus:border-white/60 focus:outline-none focus:ring-2 focus:ring-white/20 
+                               transition-all duration-300 text-gray-200 placeholder-gray-400 resize-none hover:bg-white/15"
                   />
-                  <Button className="w-full bg-white/20 hover:bg-white/30 text-white py-3 transition-all duration-300 hover:scale-105 border border-white/50 rounded-xl shadow-lg hover:shadow-white/25">
+                  <Button className="w-full bg-white/20 hover:bg-white/30 text-white py-3 transition-all duration-300 hover:scale-105 border border-white/50 rounded-xl shadow-lg hover:shadow-[0_0_20px_rgba(255,255,255,0.6)]">
                     Send Message
                   </Button>
                 </div>
@@ -119,7 +128,7 @@ export const Contact = () => {
 
           {/* Social Links */}
           <div className="text-center">
-            <div className="backdrop-blur-xl bg-white/5 border border-white/20 rounded-2xl p-8 hover:border-white/30 transition-all duration-500 shadow-lg hover:shadow-white/10">
+            <div className="backdrop-blur-xl bg-white/5 border border-white/20 rounded-2xl p-8 hover:border-white/30 transition-all duration-500 shadow-lg hover:shadow-[0_0_25px_rgba(255,255,255,0.6)]">
               <h3 className="text-xl font-bold mb-6 text-gray-200">Connect With Me</h3>
               <div className="flex justify-center space-x-6">
                 {socialLinks.map((social, index) => (
@@ -128,10 +137,12 @@ export const Contact = () => {
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-4 backdrop-blur-sm bg-white/10 border border-white/30 rounded-xl hover:border-white/50 hover:bg-white/15 transition-all duration-300 hover:scale-110 group shadow-lg hover:shadow-white/20"
+                    className="p-4 backdrop-blur-sm bg-white/10 border border-white/30 rounded-xl 
+                               hover:border-white/50 hover:bg-white/15 transition-all duration-300 hover:scale-110 
+                               group shadow-lg hover:shadow-[0_0_20px_rgba(255,255,255,0.7)]"
                     aria-label={social.label}
                   >
-                    <social.icon className="h-6 w-6 text-white group-hover:text-gray-200 transition-colors duration-300" />
+                    <social.icon className="h-6 w-6 text-white" />
                   </a>
                 ))}
               </div>
