@@ -1,0 +1,5 @@
+{
+  "scripts": {
+    "build:embeddings": "ts-node --project tsconfig.json scripts/build_embedding.ts"
+  }
+}

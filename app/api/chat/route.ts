@@ -1,22 +1,27 @@
 import { NextResponse } from "next/server";
-import { cvData } from "@/lib/cv-data";
+import { RAGService } from "@/lib/rag-service"; // ← uses prebuilt index
 
-// Utility: get embeddings from OpenAI
-async function getEmbedding(text: string): Promise<number[]> {
-  const res = await fetch("https://api.openai.com/v1/embeddings", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
-    },
-    body: JSON.stringify({
-      model: "text-embedding-3-small", // cheap + good enough
-      input: text,
-    }),
-  });
-  const data = await res.json();
-  return data.data[0].embedding;
+export async function POST(req: Request) {
+  try {
+    const { messages } = await req.json();
+    const userMessage = messages[messages.length - 1]?.content || "";
+
+    // ask RAG service
+    const result = await RAGService.answer(userMessage);
+
+    return NextResponse.json({
+      reply: result.answer,
+      sources: result.retrieved, // optional for frontend
+    });
+  } catch (error: any) {
+    console.error("Chat API error:", error);
+    return NextResponse.json(
+      { error: error.message || "Internal Server Error" },
+      { status: 500 }
+    );
+  }
 }
+
 
 // Utility: cosine similarity
 function cosineSim(a: number[], b: number[]): number {
