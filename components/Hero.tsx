@@ -10,7 +10,7 @@ interface HeroProps {
 export const Hero = ({ onOpenChat }: HeroProps) => {
   const handleDownloadCV = () => {
     const a = document.createElement("a")
-    a.href = "/cv.pdf" // serve static CV from /public
+    a.href = "/Resume_Umair.pdf" // serve static CV from /public
     a.download = "Muhammad_Umair_Farooq_CV.pdf"
     document.body.appendChild(a)
     a.click()
