@@ -22,6 +22,12 @@ const projects = [
       "Detects lane lines on the road using computer vision techniques. Processes video frames to identify and highlight lane markings for safe navigation.",
     link: "https://github.com/Umair-Farooque/Finding_Lane_Lines_on_the_Road",
   },
+  {
+    title: "Mednix-AI Powered Drugs Information Bank",
+    description:
+      "Mednix is a RAG-based medical assistant that retrieves drug information from curated datasets and provides accurate, conversational answers. It uses embeddings, vector search (FAISS/Pinecone), and LLM reasoning to deliver trustworthy, context-aware medical guidance.",
+    link: "https://mednix.onrender.com/",
+  },
 ];
 
 export default function Projects() {
