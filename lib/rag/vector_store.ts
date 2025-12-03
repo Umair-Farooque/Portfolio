@@ -14,8 +14,8 @@ let CACHE: EmbeddingItem[] | null = null
 
 export function loadEmbeddings(): EmbeddingItem[] {
   if (CACHE) return CACHE
-  const rel = process.env.EMBEDDINGS_DIR || "public/embeddings"
-  const p = path.resolve(process.cwd(), rel, "embeddings.json")
+  const rel = process.env.EMBEDDINGS_DIR || "embeddings";
+  const p = path.resolve(process.cwd(), rel, "cv_embeddings.json");
   if (!fs.existsSync(p)) {
     throw new Error(`Embeddings file not found. Run build script. Expected: ${p}`)
   }
