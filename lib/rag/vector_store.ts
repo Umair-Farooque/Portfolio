@@ -20,7 +20,7 @@ export function loadEmbeddings(): EmbeddingItem[] {
     throw new Error(`Embeddings file not found. Run build script. Expected: ${p}`)
   }
   const raw = JSON.parse(fs.readFileSync(p, "utf-8"))
-  CACHE = raw.items as EmbeddingItem[]
+  CACHE = raw as EmbeddingItem[]  // direct array
   return CACHE
 }
 
