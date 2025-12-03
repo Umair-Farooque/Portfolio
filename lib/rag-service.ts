@@ -1,5 +1,4 @@
 // lib/rag-service.ts
-console.log("OPENAI_API_KEY:", process.env.OPENAI_API_KEY);
 import { loadEmbeddings, semanticSearch, EmbeddingItem } from "./rag/vector_store"
 
 const OPENAI_KEY = process.env.OPENAI_API_KEY
