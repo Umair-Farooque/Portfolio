@@ -9,16 +9,20 @@ const TOP_K = Number(process.env.TOP_K || 4)
 
 if (!OPENAI_KEY) throw new Error("OPENAI_API_KEY missing")
 
-async function getEmbedding(text: string) {
-  const res = await fetch("https://api.openai.com/v1/embeddings", {
-    method: "POST",
-    headers: { Authorization: `Bearer ${OPENAI_KEY}`, "Content-Type": "application/json" },
-    body: JSON.stringify({ model: EMBEDDING_MODEL, input: text }),
-  })
-  if (!res.ok) throw new Error("Failed to generate embedding")
-  const data = await res.json()
-  return data.data[0].embedding as number[]
-}
+  async function getEmbedding(text: string) {
+    const res = await fetch("https://api.openai.com/v1/embeddings", {
+      method: "POST",
+      headers: { Authorization: `Bearer ${OPENAI_KEY}`, "Content-Type": "application/json" },
+      body: JSON.stringify({ model: EMBEDDING_MODEL, input: text }),
+    });
+    if (!res.ok) {
+      const errorText = await res.text();
+      console.error("OpenAI embedding error:", errorText); // <-- add this line
+      throw new Error("Failed to generate embedding");
+    }
+    const data = await res.json();
+    return data.data[0].embedding as number[];
+  }
 
 function buildContextSnippets(results: (EmbeddingItem & { score?: number })[]) {
   return results
