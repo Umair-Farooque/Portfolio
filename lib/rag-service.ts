@@ -1,6 +1,5 @@
 // lib/rag-service.ts
 import { loadEmbeddings, semanticSearch, EmbeddingItem } from "./rag/vector-store"
-import fetch from "node-fetch"
 
 const OPENAI_KEY = process.env.OPENAI_API_KEY
 const COMPLETION_MODEL = process.env.OPENAI_COMPLETION_MODEL || "gpt-4o-mini"
