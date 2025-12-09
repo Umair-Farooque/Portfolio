@@ -180,7 +180,7 @@ export default function Projects() {
             onClick={() => scrollByCard("left")}
             variant="ghost"
             size="icon"
-            className={`absolute left-0 z-20 m-2 bg-black/50 text-white shadow-lg rounded-full hover:bg-cyan-800/80 transition ${atStart ? "opacity-30 pointer-events-none" : "opacity-100"}`}
+            className={`absolute left-[-52px] z-20 top-1/2 -translate-y-1/2 bg-black/50 text-white shadow-lg rounded-full hover:bg-cyan-800/80 transition ${atStart ? "opacity-30 pointer-events-none" : "opacity-100"}`}
             aria-label="Scroll left"
           >
             <ChevronLeft className="w-7 h-7" />
@@ -188,8 +188,8 @@ export default function Projects() {
           {/* Scrollable project cards row */}
           <div
             ref={scrollRef}
-            className="flex overflow-x-auto space-x-8 pb-4 px-1 snap-x snap-mandatory scrollbar-hide w-full justify-start"
-            style={{ WebkitOverflowScrolling: "touch", scrollBehavior: "smooth" }}
+            className="flex overflow-x-auto space-x-8 pb-4 px-1 snap-x snap-mandatory w-full justify-start scrollbar-hide"
+            style={{ WebkitOverflowScrolling: "touch", scrollBehavior: "smooth", scrollbarWidth: "none" }}
             tabIndex={0}
           >
             {projects.map((project, idx) => (
@@ -218,7 +218,7 @@ export default function Projects() {
             onClick={() => scrollByCard("right")}
             variant="ghost"
             size="icon"
-            className={`absolute right-0 z-20 m-2 bg-black/50 text-white shadow-lg rounded-full hover:bg-cyan-800/80 transition ${atEnd ? "opacity-30 pointer-events-none" : "opacity-100"}`}
+            className={`absolute right-[-52px] z-20 top-1/2 -translate-y-1/2 bg-black/50 text-white shadow-lg rounded-full hover:bg-cyan-800/80 transition ${atEnd ? "opacity-30 pointer-events-none" : "opacity-100"}`}
             aria-label="Scroll right"
           >
             <ChevronRight className="w-7 h-7" />
