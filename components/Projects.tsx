@@ -140,14 +140,17 @@ export default function Projects() {
         <h2 className="text-4xl md:text-5xl font-bold mb-16 bg-gradient-to-r from-white via-gray-300 to-gray-500 bg-clip-text text-transparent font-mono">
           Projects
         </h2>
-        <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div
+          className="flex overflow-x-auto space-x-8 pb-4 px-1 snap-x snap-mandatory"
+          style={{ WebkitOverflowScrolling: "touch" }}
+        >
           {projects.map((project, idx) => (
             <a
               key={idx}
               href={project.link}
               target="_blank"
               rel="noopener noreferrer"
-              className="group p-6 border border-white/20 rounded-3xl shadow-2xl backdrop-blur-xl bg-white/5 hover:shadow-white/20 transition transform hover:-translate-y-1 hover:scale-105"
+              className="group min-w-[340px] max-w-xs flex-shrink-0 p-6 border border-white/20 rounded-3xl shadow-2xl backdrop-blur-xl bg-white/5 hover:shadow-white/20 transition transform hover:-translate-y-1 hover:scale-105 snap-start"
             >
               <h3 className="text-xl md:text-2xl font-semibold mb-2 
                bg-gradient-to-r from-white via-gray-300 to-gray-500 
