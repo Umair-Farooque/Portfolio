@@ -218,7 +218,7 @@ export default function Projects() {
             onClick={() => scrollByCard("right")}
             variant="ghost"
             size="icon"
-            className={`absolute right-[-72px] z-20 top-1/2 -translate-y-1/2 bg-black/50 text-white shadow-lg rounded-full hover:bg-cyan-800/80 transition ${atEnd ? "opacity-30 pointer-events-none" : "opacity-100"}`}
+            className={`absolute right-[-92px] z-20 top-1/2 -translate-y-1/2 bg-black/50 text-white shadow-lg rounded-full hover:bg-cyan-800/80 transition ${atEnd ? "opacity-30 pointer-events-none" : "opacity-100"}`}
             aria-label="Scroll right"
           >
             <ChevronRight className="w-7 h-7" />
