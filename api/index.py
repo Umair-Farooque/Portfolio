@@ -2,15 +2,7 @@ from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import os
-from langchain_community.document_loaders import TextLoader
-from langchain_openai import OpenAIEmbeddings, ChatOpenAI
-from langchain_community.vectorstores import FAISS
-from langchain_text_splitters import CharacterTextSplitter
-from langchain.chains import RetrievalQA
-from dotenv import load_dotenv
-
-# Load environment variables
-load_dotenv()
+import openai
 
 app = FastAPI()
 
@@ -29,59 +21,77 @@ class QueryRequest(BaseModel):
 class QueryResponse(BaseModel):
     answer: str
 
-# RAG System Class
-class RAGSystem:
-    def __init__(self, cv_path=None):
-        if cv_path is None:
-            base_path = os.path.dirname(os.path.abspath(__file__))
-            self.cv_path = os.path.join(base_path, "cv_data.txt")
-        else:
-            self.cv_path = cv_path
-        self.vector_store = None
-        self.qa_chain = None
-        self.initialize_rag()
+# CV Data embedded directly
+CV_DATA = """
+Muhammad Umair Farooq
+Machine Learning Engineer
++923084624629 ◇ farooq.intellecta@gmail.com ◇ LinkedIn ◇GitHub
 
-    def initialize_rag(self):
-        if not os.path.exists(self.cv_path):
-            print(f"Warning: {self.cv_path} not found.")
-            return
+SUMMARY
+Engineer with hands-on experience in building and deploying intelligent systems using LLMs, RAG pipelines, and deep learning. Skilled in Python, PyTorch, LangChain, and FastAPI, with a strong focus on developing practical AI solutions such as educational chatbots, legal assistants, and EMG-based prosthetic control systems. Experienced in end-to-end model deployment, vector search (FAISS, Pinecone), and cloud-based MLOps using AWS. Passionate about creating scalable, explainable, and production-ready AI applications.
 
-        if not os.getenv("OPENAI_API_KEY"):
-            print("Warning: OPENAI_API_KEY not found in environment variables.")
-            return
+EXPERIENCE
+Machine Learning Intern | ZAA Soft, Islamabad June 2024 – August 2024
+Built LLM-powered applications using OpenAI and Hugging Face models. Implemented FAISS and Pinecone databases for efficient retrieval and search. Contributed to end-to-end deployment of internal AI prototypes.
 
-        try:
-            loader = TextLoader(self.cv_path)
-            documents = loader.load()
+Air University, Islamabad — Machine Learning Intern Jul 2023 – Sept 2023
+Completed an enriching internship in the Department of Creative Technologies at Air University, where I honed my skills of Machine Learning from July to September 2023.
 
-            text_splitter = CharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
-            texts = text_splitter.split_documents(documents)
+128 Technologies, Islamabad — Backend Developer Jul 2023 – Aug 2023
+Created a management system for hospitals to keep track of their doctors' schedules and to provide appointments to patients relative to their emergencies. And gained hands-on experience in coding with python, problemsolving, and project management.
 
-            embeddings = OpenAIEmbeddings()
-            self.vector_store = FAISS.from_documents(texts, embeddings)
+SKILLS
+ML Frameworks: PyTorch, TensorFlow, Keras, Scikit-learn
+LLM & RAG Tools: LangChain, OpenAI API, Transformers (Hugging Face), FAISS, Pinecone
+Data Science & Analysis: Data Analysis, Data Preprocessing, pandas, NumPy, Feature Engineering, Model Evaluation
+Deployment & MLOps: FastAPI, Docker.
+Data & Databases: MySQL, SQLite, ChromaDB
+Programming: Python, C++, C
 
-            llm = ChatOpenAI(temperature=0, model_name="gpt-3.5-turbo")
-            self.qa_chain = RetrievalQA.from_chain_type(
-                llm=llm,
-                chain_type="stuff",
-                retriever=self.vector_store.as_retriever()
-            )
-            print("RAG System initialized successfully.")
-        except Exception as e:
-            print(f"Error initializing RAG: {e}")
+PROJECTS
+Agentic Healthcare Workflow Automation System – Built and deployed an agentic AI system that processes unstructured healthcare data (text, PDFs, scanned documents) using LLMs and OCR, validates information completeness, and executes decision-based workflows with full audit logging.
 
-    def query(self, question: str):
-        if not self.qa_chain:
-            return "System not initialized or API key missing."
-        
-        try:
-            response = self.qa_chain.invoke(question)
-            return response.get("result", "No answer found.")
-        except Exception as e:
-            return f"Error processing query: {str(e)}"
+Mednix – AI-Powered Drugs Information Assistant – Built a FastAPI-based RAG system integrating OpenAI and medical databases to deliver accurate, context-aware drug information.
 
-# Initialize RAG system
-rag_system = RAGSystem()
+Legal AI Assistant – Law Retrieval & Analysis System— developed a hybrid BM25 + FAISS retrieval engine with LLM summarization for intelligent legal document search and reasoning.
+
+FYP – Neuro-Flex – EMG-Based Hand Movement Classification— Designed a deep learning pipeline using LSTM models to classify EMG signals and control a 3D prosthetic hand in real-time
+
+Credit Enrich System – Creditworthiness Automation: — Automated financial document parsing and data enrichment using OCR, regex, and AI-driven validation pipelines.
+
+Auto-Complete: — A small scaled NLP based generative model to auto complete sentences.
+
+EDUCATION
+Air University, Islamabad — BS Artificial Intelligence — CGPA: 2.71 Sep 2021 - July 2025
+"""
+
+SYSTEM_PROMPT = f"""You are a helpful assistant for Umair Farooq's portfolio website. 
+Answer questions about Umair based on his CV information below. Be concise and helpful.
+If asked something not related to Umair or not in the CV, politely say you can only answer questions about Umair.
+
+CV Information:
+{CV_DATA}
+"""
+
+def query_openai(question: str) -> str:
+    api_key = os.getenv("OPENAI_API_KEY")
+    if not api_key:
+        return "System not initialized or API key missing."
+    
+    try:
+        client = openai.OpenAI(api_key=api_key)
+        response = client.chat.completions.create(
+            model="gpt-3.5-turbo",
+            messages=[
+                {"role": "system", "content": SYSTEM_PROMPT},
+                {"role": "user", "content": question}
+            ],
+            temperature=0,
+            max_tokens=500
+        )
+        return response.choices[0].message.content
+    except Exception as e:
+        return f"Error processing query: {str(e)}"
 
 @app.get("/api/health")
 async def health_check():
@@ -92,7 +102,7 @@ async def chat(request: QueryRequest):
     if not request.query:
         raise HTTPException(status_code=400, detail="Query cannot be empty")
     
-    answer = rag_system.query(request.query)
+    answer = query_openai(request.query)
     return {"answer": answer}
 
 # Vercel serverless handler
