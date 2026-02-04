@@ -2,12 +2,12 @@ from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import os
+import sys
 
-# Import RAG system - handle both local and Vercel environments
-try:
-    from api.rag import rag_system
-except ImportError:
-    from rag import rag_system
+# Add api directory to path for Vercel
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+
+from rag import rag_system
 
 app = FastAPI()
 
