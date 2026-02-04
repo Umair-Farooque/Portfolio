@@ -1,10 +1,10 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-from .rag import rag_system
-from fastapi.staticfiles import StaticFiles
-from fastapi.responses import FileResponse
 import os
+
+# Import RAG system - use absolute import for Vercel serverless
+from api.rag import rag_system
 
 app = FastAPI()
 
