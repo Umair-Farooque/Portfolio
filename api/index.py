@@ -1,10 +1,13 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import os
 
-# Import RAG system - use absolute import for Vercel serverless
-from api.rag import rag_system
+# Import RAG system - handle both local and Vercel environments
+try:
+    from api.rag import rag_system
+except ImportError:
+    from rag import rag_system
 
 app = FastAPI()
 
@@ -34,3 +37,6 @@ async def chat(request: QueryRequest):
     
     answer = rag_system.query(request.query)
     return {"answer": answer}
+
+# Vercel serverless handler
+handler = app

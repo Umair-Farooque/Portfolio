@@ -6,7 +6,17 @@ from langchain_text_splitters import CharacterTextSplitter
 from langchain.chains import RetrievalQA
 from dotenv import load_dotenv
 
-load_dotenv()
+# Load .env from parent directory (project root) or current directory
+base_path = os.path.dirname(os.path.abspath(__file__))
+root_env = os.path.join(os.path.dirname(base_path), ".env")
+api_env = os.path.join(base_path, ".env")
+
+if os.path.exists(root_env):
+    load_dotenv(root_env)
+elif os.path.exists(api_env):
+    load_dotenv(api_env)
+else:
+    load_dotenv()
 
 class RAGSystem:
     def __init__(self, cv_path=None):
