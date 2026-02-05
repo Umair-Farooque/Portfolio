@@ -5,15 +5,7 @@
     "rewrites": [
         {
             "source": "/api/(.*)",
-            "destination": "https://portfolio-backend-teqm.onrender.com"
-        },
-        {
-            "source": "/resume_umair.pdf",
-            "destination": "/resume_umair.pdf"
-        },
-        {
-            "source": "/((?!.*\\.).*)",
-            "destination": "/index.html"
+            "destination": "https://portfolio-backend-teqm.onrender.com/$1"
         }
     ],
     "headers": [
