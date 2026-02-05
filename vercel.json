@@ -1,25 +1,34 @@
 {
     "buildCommand": "npm run build",
     "outputDirectory": "dist",
-    "routes": [
+    "framework": "vite",
+    "rewrites": [
         {
-            "src": "/api/(.*)",
-            "dest": "https://portfolio-backend-teqm.onrender.com"
+            "source": "/api/(.*)",
+            "destination": "https://portfolio-backend-teqm.onrender.com"
         },
         {
-            "src": "/resume_umair.pdf",
-            "headers": {
-                "Content-Type": "application/pdf",
-                "Content-Disposition": "attachment; filename=\"resume_umair.pdf\""
-            },
-            "dest": "/resume_umair.pdf"
+            "source": "/resume_umair.pdf",
+            "destination": "/resume_umair.pdf"
         },
         {
-            "handle": "filesystem"
-        },
+            "source": "/((?!api|assets|resume_umair.pdf|ArcSirius).*)",
+            "destination": "/index.html"
+        }
+    ],
+    "headers": [
         {
-            "src": "/.*",
-            "dest": "/index.html"
+            "source": "/resume_umair.pdf",
+            "headers": [
+                {
+                    "key": "Content-Type",
+                    "value": "application/pdf"
+                },
+                {
+                    "key": "Content-Disposition",
+                    "value": "attachment; filename=\"resume_umair.pdf\""
+                }
+            ]
         }
     ]
 }
