@@ -5,7 +5,7 @@
     "rewrites": [
         {
             "source": "/api/(.*)",
-            "destination": "https://portfolio-backend-teqm.onrender.com/"
+            "destination": "https://portfolio-backend-teqm.onrender.com/$1"
         },
         {
             "source": "/((?!.*\\.).*)",
