@@ -218,7 +218,7 @@ const Hero = () => {
             {/* Content Container - React Managed */}
             <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20 w-full px-4 text-center">
                 <h1 ref={titleRef} className="text-white text-4xl md:text-6xl font-bold tracking-wider justify-center inline-block" style={{ fontFamily: 'monospace' }}>
-                    RAINING LETTERS
+                    ML ENGINEER
                 </h1>
                 <div className="flex flex-col md:flex-row items-center justify-center gap-6 mt-10">
                     <a
