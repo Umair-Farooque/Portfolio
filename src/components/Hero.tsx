@@ -222,7 +222,7 @@ const Hero = () => {
                 </h1>
                 <div className="flex flex-col md:flex-row items-center justify-center gap-6 mt-10">
                     <a
-                        href="/resume_umair.pdf"
+                        href="/resume.pdf"
                         download
                         className="flex items-center gap-2 bg-gradient-to-br from-emerald-500/25 via-emerald-500/10 to-green-500/25 backdrop-blur-md border border-emerald-500/30 text-emerald-300 px-8 py-4 rounded-xl font-bold transition-all transform hover:scale-105 hover:from-emerald-500/40 hover:to-green-500/40 hover:border-emerald-500/50 hover:shadow-[0_0_30px_rgba(16,185,129,0.3)] active:scale-95 group focus:outline-none"
                     >
