@@ -6,21 +6,10 @@
         {
             "source": "/api/(.*)",
             "destination": "https://portfolio-backend-teqm.onrender.com/$1"
-        }
-    ],
-    "headers": [
+        },
         {
-            "source": "/resume_umair.pdf",
-            "headers": [
-                {
-                    "key": "Content-Type",
-                    "value": "application/pdf"
-                },
-                {
-                    "key": "Content-Disposition",
-                    "value": "attachment; filename=\"resume_umair.pdf\""
-                }
-            ]
+            "source": "/((?!.*\\.).*)",
+            "destination": "/index.html"
         }
     ]
 }
