@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import RainingLetters from './RainingLetters';
 
+import emailjs from '@emailjs/browser';
+
 const CV = () => {
     const [formData, setFormData] = useState({
         name: '',
@@ -18,12 +20,37 @@ const CV = () => {
         e.preventDefault();
         setStatus('submitting');
 
-        // Simulating email submission
-        setTimeout(() => {
+        try {
+            // Basic validation to ensure keys are loaded
+            if (!import.meta.env.VITE_EMAILJS_SERVICE_ID || !import.meta.env.VITE_EMAILJS_PUBLIC_KEY) {
+                console.error('EmailJS keys are missing from environment variables!');
+                throw new Error('Configuration error');
+            }
+
+            await emailjs.send(
+                import.meta.env.VITE_EMAILJS_SERVICE_ID,
+                import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+                {
+                    from_name: formData.name,
+                    from_email: formData.email,
+                    subject: formData.subject,
+                    message: formData.message,
+                },
+                import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+            );
+
             setStatus('success');
             setFormData({ name: '', email: '', subject: '', message: '' });
             setTimeout(() => setStatus('idle'), 5000);
-        }, 1500);
+        } catch (error: any) {
+            console.error('EmailJS Error Details:', error);
+            // Provide more specific feedback if possible
+            const errorMsg = error?.text || error?.message || 'Unknown error';
+            console.error('EmailJS Error Message:', errorMsg);
+
+            setStatus('error');
+            setTimeout(() => setStatus('idle'), 5000);
+        }
     };
 
     return (
@@ -202,6 +229,12 @@ const CV = () => {
                                     {status === 'success' && (
                                         <p className="text-emerald-400 text-center text-sm font-medium animate-bounce">
                                             Thanks! I'll get back to you as soon as possible.
+                                        </p>
+                                    )}
+
+                                    {status === 'error' && (
+                                        <p className="text-red-400 text-center text-sm font-medium">
+                                            Oops! Something went wrong. Please try again or contact me directly via email.
                                         </p>
                                     )}
                                 </form>
