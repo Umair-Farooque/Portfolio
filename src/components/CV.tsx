@@ -110,7 +110,7 @@ const CV = () => {
 
                                 {/* GitHub */}
                                 <a
-                                    href="https://github.com/Muhammad-Umair-Farooq"
+                                    href="https://github.com/Umair-Farooque"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="flex items-center gap-4 p-4 bg-black/40 rounded-xl border border-slate-800/50 hover:border-emerald-500/50 hover:bg-black/60 transition-all group"
