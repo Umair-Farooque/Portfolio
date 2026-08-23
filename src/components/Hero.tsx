@@ -111,6 +111,7 @@ const Hero = () => {
                             src="/profile.jpg"
                             alt="Muhammad Umair Farooq"
                             className="h-full w-full object-cover object-center"
+                            style={{ objectPosition: 'center 20%', transform: 'scale(1.15)' }}
                             loading="eager"
                         />
                     </div>
