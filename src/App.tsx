@@ -17,7 +17,7 @@ function App() {
                 <Skills />
                 <CV />
             </main>
-            <footer className="border-t border-zinc-200">
+            <footer className="border-t border-zinc-800">
                 <div className="mx-auto flex max-w-3xl flex-col items-center justify-between gap-2 px-6 py-8 sm:flex-row">
                     <p className="font-mono text-xs text-zinc-400">© 2026 Muhammad Umair Farooq</p>
                     <p className="font-mono text-xs text-zinc-400">

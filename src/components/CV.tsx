@@ -58,7 +58,7 @@ const CV = () => {
     };
 
     const inputClass =
-        'w-full rounded-lg border border-zinc-200 bg-white px-3.5 py-2.5 text-sm text-zinc-900 placeholder:text-zinc-400 transition-colors focus:border-zinc-400 focus:outline-none focus:ring-2 focus:ring-zinc-900/5';
+        'w-full rounded-lg border border-zinc-800 bg-zinc-900/60 px-3.5 py-2.5 text-sm text-zinc-100 placeholder:text-zinc-600 transition-colors focus:border-zinc-600 focus:outline-none focus:ring-2 focus:ring-white/5';
 
     return (
         <section id="cv-section" className="scroll-mt-20 py-24">
@@ -68,12 +68,12 @@ const CV = () => {
                 <div className="grid grid-cols-1 gap-12 lg:grid-cols-2">
                     {/* Info column */}
                     <div>
-                        <p className="text-sm leading-relaxed text-zinc-600">
+                        <p className="text-sm leading-relaxed text-zinc-400">
                             Have a project in mind or just want to say hi? My inbox is always open —
                             whether it's about RAG systems, LLM applications, or a full-time opportunity.
                         </p>
 
-                        <dl className="mt-8 divide-y divide-zinc-100 border-y border-zinc-100">
+                        <dl className="mt-8 divide-y divide-zinc-800/70 border-y border-zinc-800/70">
                             {contactInfo.map((info) => (
                                 <div key={info.label} className="flex items-center justify-between py-3.5 text-sm">
                                     <dt className="text-zinc-500">{info.label}</dt>
@@ -85,7 +85,7 @@ const CV = () => {
                         <a
                             href="/resume.pdf"
                             download
-                            className="mt-8 inline-flex items-center gap-1.5 rounded-full border border-zinc-200 bg-white px-4 py-1.5 text-[13px] font-medium transition-colors hover:border-zinc-400"
+                            className="mt-8 inline-flex items-center gap-1.5 rounded-full border border-zinc-800 px-4 py-1.5 text-[13px] font-medium text-zinc-200 transition-colors hover:border-zinc-600"
                         >
                             Download Resume ↓
                         </a>
@@ -137,8 +137,8 @@ const CV = () => {
                             disabled={status === 'submitting'}
                             className={`w-full rounded-full py-3 text-sm font-medium transition-all ${
                                 status === 'submitting'
-                                    ? 'cursor-not-allowed bg-zinc-300 text-zinc-500'
-                                    : 'bg-zinc-900 text-white hover:bg-zinc-700 active:scale-[0.99]'
+                                    ? 'cursor-not-allowed bg-zinc-800 text-zinc-500'
+                                    : 'bg-zinc-100 text-zinc-900 hover:bg-white active:scale-[0.99]'
                             }`}
                         >
                             {status === 'submitting' ? (
@@ -161,13 +161,13 @@ const CV = () => {
                         </button>
 
                         {status === 'success' && (
-                            <p className="text-center font-mono text-xs text-emerald-600">
+                            <p className="text-center font-mono text-xs text-emerald-400">
                                 Thanks! I'll get back to you as soon as possible.
                             </p>
                         )}
 
                         {status === 'error' && (
-                            <p className="text-center font-mono text-xs text-red-500">
+                            <p className="text-center font-mono text-xs text-red-400">
                                 Something went wrong. Please try again later.
                             </p>
                         )}

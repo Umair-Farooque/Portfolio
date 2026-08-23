@@ -35,7 +35,7 @@ const Navbar = () => {
     };
 
     return (
-        <header className="fixed inset-x-0 top-0 z-50 border-b border-zinc-200/70 bg-[#fcfcfc]/80 backdrop-blur-md">
+        <header className="fixed inset-x-0 top-0 z-50 border-b border-zinc-800/80 bg-[#0a0a0b]/80 backdrop-blur-md">
             <nav className="mx-auto flex h-14 max-w-3xl items-center justify-between px-6">
                 <button
                     onClick={() => scrollToSection('hero')}
@@ -51,8 +51,8 @@ const Navbar = () => {
                             onClick={() => scrollToSection(link.id)}
                             className={`text-[13px] transition-colors ${
                                 activeSection === link.id
-                                    ? 'font-medium text-zinc-900'
-                                    : 'text-zinc-500 hover:text-zinc-900'
+                                    ? 'font-medium text-zinc-50'
+                                    : 'text-zinc-500 hover:text-zinc-200'
                             }`}
                         >
                             {link.label}
@@ -64,7 +64,7 @@ const Navbar = () => {
                 <button
                     onClick={() => setMobileOpen(!mobileOpen)}
                     aria-label="Toggle menu"
-                    className="flex h-8 w-8 items-center justify-center rounded-md text-zinc-500 hover:text-zinc-900 md:hidden"
+                    className="flex h-8 w-8 items-center justify-center rounded-md text-zinc-500 hover:text-zinc-200 md:hidden"
                 >
                     <svg
                         className="h-5 w-5"
@@ -84,13 +84,13 @@ const Navbar = () => {
 
             {/* Mobile menu */}
             {mobileOpen && (
-                <div className="border-t border-zinc-200/70 bg-[#fcfcfc] px-6 py-2 md:hidden">
+                <div className="border-t border-zinc-800/80 bg-[#0a0a0b] px-6 py-2 md:hidden">
                     {links.map((link) => (
                         <button
                             key={link.id}
                             onClick={() => scrollToSection(link.id)}
                             className={`block w-full py-2.5 text-left text-sm ${
-                                activeSection === link.id ? 'font-medium text-zinc-900' : 'text-zinc-500'
+                                activeSection === link.id ? 'font-medium text-zinc-50' : 'text-zinc-500'
                             }`}
                         >
                             {link.label}

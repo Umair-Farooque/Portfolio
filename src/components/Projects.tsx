@@ -33,31 +33,31 @@ const Projects = () => {
     return (
         <section id="projects-section" className="py-24 scroll-mt-20">
             <div className="max-w-3xl mx-auto px-6">
-                <h2 className="text-2xl font-semibold tracking-tight mb-10">Projects</h2>
+                <h2 className="text-2xl font-semibold tracking-tight text-zinc-50 mb-10">Projects</h2>
 
-                <div className="border-b border-zinc-200">
+                <div className="border-b border-zinc-800">
                     {projects.map((project) => (
                         <a
                             key={project.title}
                             href={project.link}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="group block border-t border-zinc-200 py-7"
+                            className="group block border-t border-zinc-800 py-7"
                         >
                             <div className="flex items-start justify-between gap-4">
-                                <h3 className="font-medium transition-colors group-hover:text-zinc-600">
+                                <h3 className="font-medium text-zinc-50 transition-colors group-hover:text-zinc-300">
                                     {project.title}
                                 </h3>
-                                <span className="shrink-0 font-mono text-sm text-zinc-400 transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-zinc-900">
+                                <span className="shrink-0 font-mono text-sm text-zinc-600 transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-zinc-50">
                                     ↗
                                 </span>
                             </div>
 
-                            <p className="mt-2 max-w-2xl text-sm leading-relaxed text-zinc-600">
+                            <p className="mt-2 max-w-2xl text-sm leading-relaxed text-zinc-400">
                                 {project.description}
                             </p>
 
-                            <p className="mt-3 font-mono text-[11px] text-zinc-400">
+                            <p className="mt-3 font-mono text-[11px] text-zinc-500">
                                 {project.tech.join('  ·  ')}
                             </p>
                         </a>

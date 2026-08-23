@@ -54,25 +54,25 @@ const Experience = () => {
     return (
         <section id="experience-section" className="py-24 scroll-mt-20">
             <div className="max-w-3xl mx-auto px-6">
-                <h2 className="text-2xl font-semibold tracking-tight mb-10">Experience</h2>
+                <h2 className="text-2xl font-semibold tracking-tight text-zinc-50 mb-10">Experience</h2>
 
-                <div className="border-b border-zinc-200">
+                <div className="border-b border-zinc-800">
                     {experiences.map((exp, index) => (
-                        <article key={index} className="border-t border-zinc-200 py-8">
+                        <article key={index} className="border-t border-zinc-800 py-8">
                             <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
                                 <div>
-                                    <h3 className="font-medium">{exp.title}</h3>
+                                    <h3 className="font-medium text-zinc-50">{exp.title}</h3>
                                     <p className="mt-0.5 text-sm text-zinc-500">
                                         {exp.company} · {exp.location}
                                     </p>
                                 </div>
-                                <span className="font-mono text-xs text-zinc-400">{exp.period}</span>
+                                <span className="font-mono text-xs text-zinc-500">{exp.period}</span>
                             </div>
 
                             <ul className="mt-5 space-y-2.5">
                                 {exp.highlights.map((highlight, hIndex) => (
-                                    <li key={hIndex} className="flex gap-3 text-sm leading-relaxed text-zinc-600">
-                                        <span className="mt-[7px] h-1 w-1 shrink-0 rounded-full bg-zinc-300" />
+                                    <li key={hIndex} className="flex gap-3 text-sm leading-relaxed text-zinc-400">
+                                        <span className="mt-[7px] h-1 w-1 shrink-0 rounded-full bg-zinc-600" />
                                         <span>{highlight}</span>
                                     </li>
                                 ))}
@@ -82,7 +82,7 @@ const Experience = () => {
                                 {exp.tech.map((t) => (
                                     <span
                                         key={t}
-                                        className="rounded-md border border-zinc-200 px-1.5 py-0.5 font-mono text-[11px] text-zinc-500"
+                                        className="rounded-md border border-zinc-800 px-1.5 py-0.5 font-mono text-[11px] text-zinc-400"
                                     >
                                         {t}
                                     </span>

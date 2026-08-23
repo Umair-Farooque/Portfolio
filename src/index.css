@@ -11,21 +11,21 @@ html {
 
 body {
   margin: 0;
-  background-color: #fcfcfc;
-  color: #18181b;
+  background-color: #0a0a0b;
+  color: #f4f4f5;
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 ::selection {
-  background-color: #18181b;
-  color: #ffffff;
+  background-color: #f4f4f5;
+  color: #0a0a0b;
 }
 
 /* Scrambled characters during text animation */
 .dud {
-  color: #a1a1aa;
+  color: #52525b;
 }
 
 /* Thin, subtle scrollbar */
@@ -39,10 +39,10 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #e4e4e7;
+  background: #27272a;
   border-radius: 999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #d4d4d8;
+  background: #3f3f46;
 }
