@@ -1,79 +1,57 @@
-import { useEffect, useRef, useState } from 'react';
-import RainingLetters from './RainingLetters';
-
-const skills = [
-    { name: "Python & ML Frameworks", level: 95 },
-    { name: "LLMs & RAG Systems", level: 90 },
-    { name: "FastAPI & Backend Dev", level: 85 },
-    { name: "Deep Learning (PyTorch)", level: 88 },
-    { name: "Vector Databases (FAISS, Pinecone)", level: 87 },
-    { name: "LangChain & Transformers", level: 90 },
-    { name: "Data Science (Pandas, NumPy)", level: 85 },
-    { name: "Docker & Deployment", level: 80 },
-    { name: "Natural Language Processing", level: 92 }
+const stackGroups = [
+    {
+        num: '01',
+        category: 'Languages & Core ML',
+        items: ['Python', 'PyTorch', 'Pandas', 'NumPy']
+    },
+    {
+        num: '02',
+        category: 'AI Engineering',
+        items: ['LLMs', 'RAG Systems', 'LangChain', 'Transformers', 'NLP']
+    },
+    {
+        num: '03',
+        category: 'Vector Search',
+        items: ['FAISS', 'Pinecone', 'Embeddings', 'BM25']
+    },
+    {
+        num: '04',
+        category: 'Backend & Deployment',
+        items: ['FastAPI', 'Docker', 'OCR Pipelines', 'Workflow Automation']
+    }
 ];
 
 const Skills = () => {
-    const [isVisible, setIsVisible] = useState(false);
-    const sectionRef = useRef<HTMLDivElement>(null);
-
-    useEffect(() => {
-        const observer = new IntersectionObserver(
-            ([entry]) => {
-                if (entry.isIntersecting) {
-                    setIsVisible(true);
-                }
-            },
-            { threshold: 0.2 }
-        );
-
-        if (sectionRef.current) {
-            observer.observe(sectionRef.current);
-        }
-
-        return () => {
-            if (sectionRef.current) {
-                observer.unobserve(sectionRef.current);
-            }
-        };
-    }, []);
-
     return (
-        <div ref={sectionRef} className="bg-black py-20 relative min-h-screen flex items-center" id="skills-section" style={{ scrollSnapAlign: 'center' }}>
-            <RainingLetters />
-            <div className="max-w-6xl mx-auto px-4 relative z-10 w-full">
-                <div className="mb-16 text-center">
-                    <h2 className="text-4xl md:text-5xl font-bold text-white mb-4" style={{ fontFamily: 'monospace' }}>
-                        SKILLS
-                    </h2>
-                    <p className="text-gray-400 text-lg">Technical proficiency</p>
-                </div>
+        <section id="skills-section" className="py-24 scroll-mt-20">
+            <div className="mx-auto max-w-3xl px-6">
+                <h2 className="mb-10 text-2xl font-semibold tracking-tight">Stack</h2>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    {skills.map((skill, index) => (
-                        <div key={index} className="border border-slate-800/50 p-5 hover:border-emerald-500/30 transition-colors">
-                            <div className="mb-3">
-                                <h3 className="text-base text-white font-light tracking-wide mb-1">
-                                    {skill.name}
-                                </h3>
-                                <span className="text-sm text-emerald-400 font-mono">{skill.level}%</span>
-                            </div>
-
-                            {/* Progress Bar */}
-                            <div className="w-full bg-slate-900 h-2 rounded-full overflow-hidden">
-                                <div
-                                    className="h-full bg-gradient-to-r from-emerald-500 to-emerald-400 transition-all duration-1000 ease-out"
-                                    style={{
-                                        width: isVisible ? `${skill.level}%` : '0%',
-                                        transitionDelay: `${index * 100}ms`
-                                    }}
-                                ></div>
+                <div className="border-b border-zinc-200">
+                    {stackGroups.map((group) => (
+                        <div
+                            key={group.num}
+                            className="grid grid-cols-1 gap-2 border-t border-zinc-200 py-5 sm:grid-cols-[80px_1fr] sm:gap-6"
+                        >
+                            <span className="pt-1 font-mono text-xs text-zinc-400">{group.num}</span>
+                            <div>
+                                <p className="mb-2.5 text-sm font-medium">{group.category}</p>
+                                <div className="flex flex-wrap gap-1.5">
+                                    {group.items.map((item) => (
+                                        <span
+                                            key={item}
+                                            className="rounded-md border border-zinc-200 px-2 py-1 font-mono text-[11px] text-zinc-500 transition-colors hover:border-zinc-400 hover:text-zinc-800"
+                                        >
+                                            {item}
+                                        </span>
+                                    ))}
+                                </div>
                             </div>
                         </div>
                     ))}
                 </div>
             </div>
-        </div>
+        </section>
     );
 };
 

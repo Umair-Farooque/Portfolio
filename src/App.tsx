@@ -8,13 +8,23 @@ import Experience from './components/Experience';
 
 function App() {
     return (
-        <div className="bg-black min-h-screen">
+        <div className="min-h-screen">
             <Navbar />
-            <Hero />
-            <Experience />
-            <Projects />
-            <Skills />
-            <CV />
+            <main>
+                <Hero />
+                <Experience />
+                <Projects />
+                <Skills />
+                <CV />
+            </main>
+            <footer className="border-t border-zinc-200">
+                <div className="mx-auto flex max-w-3xl flex-col items-center justify-between gap-2 px-6 py-8 sm:flex-row">
+                    <p className="font-mono text-xs text-zinc-400">© 2026 Muhammad Umair Farooq</p>
+                    <p className="font-mono text-xs text-zinc-400">
+                        Built with React &amp; Tailwind CSS · Style inspired by chanhdai.com
+                    </p>
+                </div>
+            </footer>
             <ChatBot />
         </div>
     );
