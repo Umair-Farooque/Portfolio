@@ -106,8 +106,13 @@ const Hero = () => {
             <div className="mx-auto max-w-3xl px-6">
                 {/* Identity */}
                 <div className="flex items-center gap-4">
-                    <div className="flex h-14 w-14 select-none items-center justify-center rounded-full border border-zinc-700 bg-zinc-900 text-lg font-semibold tracking-tight text-zinc-100">
-                        UF
+                    <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-full border border-zinc-700">
+                        <img
+                            src="/profile.jpg"
+                            alt="Muhammad Umair Farooq"
+                            className="h-full w-full object-cover object-center"
+                            loading="eager"
+                        />
                     </div>
                     <div>
                         <p className="font-medium text-zinc-50">Muhammad Umair Farooq</p>
