@@ -3,6 +3,13 @@
 @theme {
   --font-sans: "Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-mono: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* shadcn-compatible tokens */
+  --color-background: #0a0a0b;
+  --color-foreground: #f4f4f5;
+  --color-muted: #18181b;
+  --color-muted-foreground: #71717a;
+  --color-ring: #3f3f46;
 }
 
 html {
@@ -45,4 +52,20 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
   background: #3f3f46;
+}
+
+/* Carousel caption entrance */
+@keyframes cf-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.cf-fade-in {
+  animation: cf-fade-in 0.3s ease-out;
 }

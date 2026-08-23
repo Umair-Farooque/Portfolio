@@ -1,68 +1,77 @@
-const projects = [
+import { CoverflowCarousel, type CoverflowSlide } from './ui/coverflow-carousel';
+
+type ProjectSlide = CoverflowSlide & { href: string };
+
+const projects: ProjectSlide[] = [
     {
+        src: '/projects/agentic-healthcare.svg',
+        alt: 'Wireframe diagram of connected decision nodes representing an agentic workflow',
         title: 'Agentic Healthcare Workflow',
-        description:
-            'Built and deployed an agentic AI system that processes unstructured healthcare data (text, PDFs, scanned documents) using LLMs and OCR, validates information completeness, and executes decision-based workflows with full audit logging.',
-        tech: ['Python', 'LLMs', 'OCR', 'FastAPI', 'Workflow Automation'],
-        link: 'https://agentic-healthcare-system-01.onrender.com/'
+        subtitle: 'LLM agents processing unstructured medical data end-to-end with audit logging',
+        meta: [
+            { label: 'Stack', value: 'Python · FastAPI' },
+            { label: 'Features', value: 'OCR · Validation' },
+            { label: 'Type', value: 'Agentic system' }
+        ],
+        href: 'https://agentic-healthcare-system-01.onrender.com/'
     },
     {
-        title: 'Mednix – AI-Powered Drug Info Assistant',
-        description:
-            'Developed a FastAPI-based RAG system integrating OpenAI and medical databases to deliver accurate, context-aware drug information with intelligent retrieval and response generation.',
-        tech: ['FastAPI', 'RAG', 'OpenAI', 'LangChain'],
-        link: 'https://mednix.onrender.com/'
+        src: '/projects/mednix.svg',
+        alt: 'Wireframe medical cross above a heartbeat pulse line',
+        title: 'Mednix — Drug Info Assistant',
+        subtitle: 'FastAPI-based RAG system for accurate, context-aware drug information',
+        meta: [
+            { label: 'Stack', value: 'FastAPI · RAG' },
+            { label: 'Retrieval', value: 'OpenAI · Vector DB' },
+            { label: 'Type', value: 'RAG application' }
+        ],
+        href: 'https://mednix.onrender.com/'
     },
     {
+        src: '/projects/legal-ai.svg',
+        alt: 'Wireframe document with text lines beside a magnifying glass',
         title: 'Legal AI Assistant',
-        description:
-            'Created a hybrid BM25 + FAISS retrieval engine with LLM summarization for intelligent legal document search and reasoning, enabling efficient case law analysis.',
-        tech: ['FAISS', 'BM25', 'LLM', 'Summarization'],
-        link: 'https://legal-reasoning-agent.onrender.com/'
+        subtitle: 'Hybrid BM25 + FAISS retrieval with LLM summarization for case-law analysis',
+        meta: [
+            { label: 'Stack', value: 'BM25 · FAISS' },
+            { label: 'Features', value: 'Search · Summary' },
+            { label: 'Type', value: 'Retrieval engine' }
+        ],
+        href: 'https://legal-reasoning-agent.onrender.com/'
     },
     {
-        title: 'Neuro-Flex – EMG-Based Hand Movement',
-        description:
-            'Designed a deep learning pipeline using LSTM models to classify EMG signals and control a 3D prosthetic hand in real-time with high accuracy.',
-        tech: ['LSTM', 'PyTorch', 'Signal Processing', 'Deep Learning'],
-        link: 'https://github.com/Umair-Farooque/Neuro_Flex-EMG-Signals-Based-Hand-Movements-Predictor.git'
+        src: '/projects/neuro-flex.svg',
+        alt: 'Amber EMG signal waveform between two sensor nodes',
+        title: 'Neuro-Flex — EMG Hand Movement',
+        subtitle: 'LSTM pipeline classifying EMG signals to control a 3D prosthetic hand',
+        meta: [
+            { label: 'Stack', value: 'PyTorch · LSTM' },
+            { label: 'Domain', value: 'Signal processing' },
+            { label: 'Type', value: 'Deep learning' }
+        ],
+        href: 'https://github.com/Umair-Farooque/Neuro_Flex-EMG-Signals-Based-Hand-Movements-Predictor.git'
     }
 ];
 
 const Projects = () => {
     return (
-        <section id="projects-section" className="py-24 scroll-mt-20">
-            <div className="max-w-3xl mx-auto px-6">
-                <h2 className="text-2xl font-semibold tracking-tight text-zinc-50 mb-10">Projects</h2>
+        <section id="projects-section" className="scroll-mt-20 py-24">
+            <div className="mx-auto max-w-3xl px-6">
+                <h2 className="mb-2 text-2xl font-semibold tracking-tight text-zinc-50">Projects</h2>
+                <p className="font-mono text-xs text-zinc-500">
+                    Drag, flick or use the arrow keys — Fig. 01–04.
+                </p>
+            </div>
 
-                <div className="border-b border-zinc-800">
-                    {projects.map((project) => (
-                        <a
-                            key={project.title}
-                            href={project.link}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="group block border-t border-zinc-800 py-7"
-                        >
-                            <div className="flex items-start justify-between gap-4">
-                                <h3 className="font-medium text-zinc-50 transition-colors group-hover:text-zinc-300">
-                                    {project.title}
-                                </h3>
-                                <span className="shrink-0 font-mono text-sm text-zinc-600 transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-zinc-50">
-                                    ↗
-                                </span>
-                            </div>
-
-                            <p className="mt-2 max-w-2xl text-sm leading-relaxed text-zinc-400">
-                                {project.description}
-                            </p>
-
-                            <p className="mt-3 font-mono text-[11px] text-zinc-500">
-                                {project.tech.join('  ·  ')}
-                            </p>
-                        </a>
-                    ))}
-                </div>
+            <div className="mt-6">
+                <CoverflowCarousel
+                    slides={projects}
+                    showCaption
+                    showPagination
+                    showNavigation
+                    label="Projects coverflow carousel"
+                    cardWidth="clamp(200px, 34vw, 300px)"
+                />
             </div>
         </section>
     );
