@@ -77,8 +77,8 @@ class TextScramble {
 const roles = ['Machine Learning Engineer', 'AI Solutions Architect', 'RAG & LLM Specialist'];
 
 const overviewRows = [
-    { label: 'Role', value: 'ML Engineer @ ArcSirius' },
-    { label: 'Focus', value: 'RAG · LLMs · Agentic Systems' },
+    { label: 'Role', value: 'AI Engineer @ ArcSirius' },
+    { label: 'Focus', value: 'Agentic Systems · LLMs · RAG' },
     { label: 'Location', value: 'Islamabad, Pakistan' }
 ];
 
@@ -156,9 +156,6 @@ const Hero = () => {
                     </div>
                 </dl>
 
-                <p className="mt-16 font-mono text-xs text-zinc-600">
-                    Fig. 1. Muhammad Umair Farooq — machine learning engineer crafting retrieval and agentic systems.
-                </p>
             </div>
         </section>
     );
