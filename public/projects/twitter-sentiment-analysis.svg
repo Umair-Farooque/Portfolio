@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="800" viewBox="0 0 800 800">
+  <rect width="800" height="800" fill="#0b0b0d"/>
+  <g stroke="#17171b" stroke-width="1">
+    <path d="M80 0V800 M160 0V800 M240 0V800 M320 0V800 M400 0V800 M480 0V800 M560 0V800 M640 0V800 M720 0V800"/>
+    <path d="M0 80H800 M0 160H800 M0 240H800 M0 320H800 M0 400H800 M0 480H800 M0 560H800 M0 640H800 M0 720H800"/>
+  </g>
+  <g stroke="#ec4899" fill="none" stroke-width="1.5">
+    <path d="M100 400 C180 300 300 350 400 300 C500 250 620 350 700 400" stroke="#ec4899" stroke-width="2" fill="none"/>
+    <circle cx="180" cy="380" r="20" fill="#ec4899" fill-opacity="0.2" stroke="#ec4899"/>
+    <text x="180" y="385" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, monospace" font-size="14" fill="#ec4899" font-weight="600">😊</text>
+    <circle cx="400" cy="280" r="25" fill="#f97316" fill-opacity="0.2" stroke="#f97316"/>
+    <text x="400" y="285" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, monospace" font-size="16" fill="#f97316" font-weight="600">😐</text>
+    <circle cx="620" cy="380" r="20" fill="#ef4444" fill-opacity="0.2" stroke="#ef4444"/>
+    <text x="620" y="385" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, monospace" font-size="14" fill="#ef4444" font-weight="600">😞</text>
+    <path d="M200 550 Q300 480 400 550 Q500 480 600 550" stroke="#6366f1" stroke-width="2" fill="none"/>
+    <circle cx="200" cy="550" r="6" fill="#6366f1"/>
+    <circle cx="400" cy="550" r="6" fill="#6366f1"/>
+    <circle cx="600" cy="550" r="6" fill="#6366f1"/>
+    <path d="M200 550 L200 580" stroke="#6366f1" stroke-width="1" stroke-dasharray="4 4"/>
+    <path d="M400 550 L400 580" stroke="#6366f1" stroke-width="1" stroke-dasharray="4 4"/>
+    <path d="M600 550 L600 580" stroke="#6366f1" stroke-width="1" stroke-dasharray="4 4"/>
+    <text x="200" y="595" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, monospace" font-size="10" fill="#6366f1">Uni</text>
+    <text x="400" y="595" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, monospace" font-size="10" fill="#6366f1">Bi</text>
+    <text x="600" y="595" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, monospace" font-size="10" fill="#6366f1">Tri</text>
+    <rect x="150" y="620" width="500" height="60" rx="8" fill="#17171b" stroke="#27272a" stroke-width="1"/>
+    <text x="400" y="645" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, monospace" font-size="12" fill="#a1a1aa">P(w|context) = count(w,context) + α / count(context) + αV</text>
+    <text x="400" y="665" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, monospace" font-size="10" fill="#71717a">Laplace smoothing · Back-off strategy · Perplexity evaluation</text>
+  </g>
+  <text x="56" y="672" font-family="ui-monospace, SFMono-Regular, monospace" font-size="34" font-weight="600" fill="#f4f4f5">Twitter Sentiment Analysis</text>
+  <text x="56" y="716" font-family="ui-monospace, SFMono-Regular, monospace" font-size="34" font-weight="600" fill="#f4f4f5">& N-gram Text Generator</text>
+  <text x="56" y="752" font-family="ui-monospace, SFMono-Regular, monospace" font-size="16" fill="#ec4899">NLP · NLTK · N-GRAM · LAPLACE SMOOTHING</text>
+  <text x="744" y="56" text-anchor="end" font-family="ui-monospace, SFMono-Regular, monospace" font-size="14" fill="#52525b">FIG. 08</text>
+</svg>
