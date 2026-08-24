@@ -108,7 +108,7 @@ const Hero = () => {
                 <div className="flex items-center gap-4">
                     <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-full border border-zinc-700">
                         <img
-                            src="/profile.jpg"
+                            src="/profile_optimized.jpg"
                             alt="Muhammad Umair Farooq"
                             className="h-full w-full object-cover object-center"
                             style={{ objectPosition: 'center 20%', transform: 'scale(1.15)' }}
