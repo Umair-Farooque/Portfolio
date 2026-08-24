@@ -105,8 +105,8 @@ const Projects = () => {
     return (
         <section id="projects-section" className="scroll-mt-20 py-24">
             <div className="mx-auto max-w-3xl px-6">
-                <h2 className="mb-2 text-2xl font-semibold tracking-tight text-zinc-50">Projects</h2>
-                <p className="font-mono text-xs text-zinc-500">
+                <h2 className="mb-2 text-2xl font-semibold tracking-tight text-primary">Projects</h2>
+                <p className="font-mono text-xs text-muted">
                     Drag, flick or use the arrow keys — Fig. 01–08.
                 </p>
             </div>

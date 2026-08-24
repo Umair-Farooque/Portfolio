@@ -57,16 +57,16 @@ const ChatBot = () => {
     };
 
     return (
-        <div className="fixed bottom-5 right-5 z-50 flex flex-col items-end">
+        <div className="fixed bottom-4 right-4 z-50 flex flex-col items-end">
             {isOpen && (
                 <div className="mb-3 flex w-[22rem] max-w-[calc(100vw-2.5rem)] flex-col overflow-hidden rounded-2xl border border-zinc-800 bg-[#111113] shadow-2xl shadow-black/50">
                     {/* Header */}
                     <div className="flex items-center justify-between border-b border-zinc-800 p-3">
-                        <h3 className="text-sm font-medium text-zinc-100">Ask about Umair</h3>
+                        <h3 className="text-sm font-medium text-primary">Ask about Umair</h3>
                         <button
                             onClick={() => setIsOpen(false)}
                             aria-label="Close chat"
-                            className="flex h-7 w-7 items-center justify-center rounded-full text-zinc-500 transition-colors hover:bg-zinc-800 hover:text-zinc-300"
+                            className="btn-ghost flex h-7 w-7 items-center justify-center rounded-full p-0"
                         >
                             <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" d="M6 18L18 6M6 6l12 12" />
@@ -92,9 +92,9 @@ const ChatBot = () => {
                         {isLoading && (
                             <div className="flex justify-start">
                                 <div className="flex gap-1 rounded-2xl rounded-bl-md border border-zinc-800 bg-zinc-900 px-3.5 py-2.5">
-                                    <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-zinc-600" />
-                                    <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-zinc-600 [animation-delay:100ms]" />
-                                    <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-zinc-600 [animation-delay:200ms]" />
+                                    <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-subtle" />
+                                    <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-subtle [animation-delay:100ms]" />
+                                    <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-subtle [animation-delay:200ms]" />
                                 </div>
                             </div>
                         )}
@@ -108,13 +108,13 @@ const ChatBot = () => {
                             value={input}
                             onChange={(e) => setInput(e.target.value)}
                             placeholder="Ask about my skills..."
-                            className="flex-1 rounded-full border border-zinc-800 bg-zinc-900/60 px-3.5 py-2 text-sm text-zinc-100 placeholder:text-zinc-600 focus:border-zinc-600 focus:outline-none"
+                            className="flex-1 rounded-full border border-zinc-700 bg-zinc-900/80 px-3.5 py-2 text-sm text-zinc-100 placeholder-text-subtle focus:border-zinc-500 focus:outline-none"
                         />
                         <button
                             type="submit"
                             disabled={isLoading}
                             aria-label="Send message"
-                            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-zinc-100 text-zinc-900 transition-all hover:bg-white disabled:opacity-40"
+                            className="btn-icon flex h-9 w-9 shrink-0 items-center justify-center rounded-full"
                         >
                             <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 19V5m0 0l-6 6m6-6l6 6" />
@@ -128,7 +128,7 @@ const ChatBot = () => {
             <button
                 onClick={() => setIsOpen(!isOpen)}
                 aria-label={isOpen ? 'Close chat' : 'Open chat'}
-                className="flex h-12 w-12 items-center justify-center rounded-full bg-zinc-100 text-zinc-900 shadow-lg shadow-black/40 transition-transform hover:scale-105 active:scale-95"
+                className="btn-icon flex h-12 w-12 items-center justify-center rounded-full shadow-lg shadow-black/40"
             >
                 {isOpen ? (
                     <svg className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">

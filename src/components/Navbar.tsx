@@ -49,11 +49,7 @@ const Navbar = () => {
                         <button
                             key={link.id}
                             onClick={() => scrollToSection(link.id)}
-                            className={`text-[13px] transition-colors ${
-                                activeSection === link.id
-                                    ? 'font-medium text-zinc-50'
-                                    : 'text-zinc-500 hover:text-zinc-200'
-                            }`}
+                            className={`text-[13px] btn-nav ${activeSection === link.id ? 'active' : ''}`}
                         >
                             {link.label}
                         </button>
@@ -89,9 +85,7 @@ const Navbar = () => {
                         <button
                             key={link.id}
                             onClick={() => scrollToSection(link.id)}
-                            className={`block w-full py-2.5 text-left text-sm ${
-                                activeSection === link.id ? 'font-medium text-zinc-50' : 'text-zinc-500'
-                            }`}
+                            className={`block w-full py-2.5 text-left text-sm btn-nav ${activeSection === link.id ? 'active' : ''}`}
                         >
                             {link.label}
                         </button>

@@ -1,8 +1,6 @@
 import * as React from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
-import { cn } from "@/lib/utils";
-
 const useIsoLayoutEffect =
   typeof window !== "undefined" ? React.useLayoutEffect : React.useEffect;
 
@@ -324,7 +322,7 @@ export function CoverflowCarousel({
               type="button"
               aria-label="Previous slide"
               onClick={() => nudge(-1)}
-              className="absolute left-3 top-1/2 z-[200] -translate-y-1/2 rounded-full bg-background/70 p-2 text-foreground backdrop-blur transition hover:bg-background"
+              className="btn-carousel absolute left-0 top-1/2 z-[200] -translate-x-full -translate-y-1/2 rounded-full p-2 md:-translate-x-0 md:left-3"
             >
               <ChevronLeft className="size-5" />
             </button>
@@ -332,7 +330,7 @@ export function CoverflowCarousel({
               type="button"
               aria-label="Next slide"
               onClick={() => nudge(1)}
-              className="absolute right-3 top-1/2 z-[200] -translate-y-1/2 rounded-full bg-background/70 p-2 text-foreground backdrop-blur transition hover:bg-background"
+              className="btn-carousel absolute right-0 top-1/2 z-[200] translate-x-full -translate-y-1/2 rounded-full p-2 md:translate-x-0 md:right-3"
             >
               <ChevronRight className="size-5" />
             </button>
@@ -345,11 +343,11 @@ export function CoverflowCarousel({
           key={selected}
           className="cf-fade-in mt-2 flex flex-col items-center px-6"
         >
-          <p className="text-[15px] font-semibold tracking-tight text-foreground">
+          <p className="text-[15px] font-semibold tracking-tight text-primary">
             {active.title}
           </p>
           {active.subtitle && (
-            <p className="mt-1 text-[13px] text-muted-foreground">
+            <p className="mt-1 text-[13px] text-tertiary">
               {active.subtitle}
             </p>
           )}
@@ -357,8 +355,8 @@ export function CoverflowCarousel({
             <dl className="mt-8 w-full max-w-[230px] text-[12px]">
               {active.meta.map((row) => (
                 <div key={row.label} className="flex justify-between py-[5px]">
-                  <dt className="text-muted-foreground">{row.label}</dt>
-                  <dd className="font-medium text-foreground">{row.value}</dd>
+                  <dt className="text-muted">{row.label}</dt>
+                  <dd className="font-medium text-primary">{row.value}</dd>
                 </div>
               ))}
             </dl>
@@ -368,7 +366,7 @@ export function CoverflowCarousel({
               href={active.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-6 inline-flex items-center gap-1.5 rounded-full border border-zinc-800 px-4 py-1.5 font-mono text-xs text-zinc-400 transition-colors hover:border-zinc-600 hover:text-zinc-100"
+              className="btn-ghost mt-6 inline-flex items-center gap-1.5 rounded-full px-4 py-1.5 font-mono text-xs"
             >
               View Project ↗
             </a>
@@ -385,10 +383,9 @@ export function CoverflowCarousel({
               aria-label={`Go to slide ${index + 1}`}
               aria-current={index === selected}
               onClick={() => goTo(index)}
-              className={cn(
-                "size-2 rounded-full bg-foreground transition-opacity",
-                index === selected ? "opacity-100" : "opacity-30",
-              )}
+              className={`size-2 rounded-full transition-opacity ${
+                index === selected ? 'bg-primary opacity-100' : 'bg-primary/30 opacity-100'
+              }`}
             />
           ))}
         </div>

@@ -116,19 +116,19 @@ const Hero = () => {
                         />
                     </div>
                     <div>
-                        <p className="font-medium text-zinc-50">Muhammad Umair Farooq</p>
-                        <p className="text-sm text-zinc-500">Islamabad, Pakistan</p>
+                        <p className="font-medium text-primary">Muhammad Umair Farooq</p>
+                        <p className="text-sm text-muted">Islamabad, Pakistan</p>
                     </div>
                 </div>
 
                 {/* Headline */}
-                <h1 className="mt-12 text-4xl font-semibold leading-[1.12] tracking-tight text-white md:text-5xl">
+                <h1 className="mt-12 text-4xl font-semibold leading-[1.12] tracking-tight text-primary md:text-5xl">
                     Building with AI.
                     <br />
-                    <span className="text-zinc-500">Small details matter.</span>
+                    <span className="text-muted">Small details matter.</span>
                 </h1>
 
-                <p ref={roleRef} className="mt-6 min-h-5 font-mono text-sm text-zinc-400">
+                <p ref={roleRef} className="mt-6 min-h-5 font-mono text-base text-secondary">
                     Machine Learning Engineer
                 </p>
 
@@ -136,25 +136,25 @@ const Hero = () => {
                 <dl className="mt-12 divide-y divide-zinc-800/70 border-y border-zinc-800/70">
                     {overviewRows.map((row) => (
                         <div key={row.label} className="flex items-center justify-between py-3.5 text-sm">
-                            <dt className="text-zinc-500">{row.label}</dt>
-                            <dd className="text-zinc-200">{row.value}</dd>
+                            <dt className="text-muted">{row.label}</dt>
+                            <dd className="text-tertiary">{row.value}</dd>
                         </div>
                     ))}
                     <div className="flex items-center justify-between gap-4 py-3.5 text-sm">
-                        <dt className="text-zinc-500">Links</dt>
+                        <dt className="text-muted">Links</dt>
                         <dd className="flex items-center gap-5">
                             <a
                                 href="https://github.com/Umair-Farooque"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="text-zinc-300 underline-offset-4 transition-colors hover:text-zinc-500 hover:underline"
+                                className="text-link underline-offset-4 transition-colors hover:text-link-hover hover:underline"
                             >
                                 GitHub ↗
                             </a>
                             <a
                                 href="/resume.pdf"
                                 download
-                                className="rounded-full bg-zinc-100 px-4 py-1.5 text-[13px] font-medium text-zinc-900 transition-colors hover:bg-white"
+                                className="btn-primary rounded-full px-4 py-1.5 text-[13px] font-medium"
                             >
                                 Download Resume ↓
                             </a>

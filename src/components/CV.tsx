@@ -58,17 +58,17 @@ const CV = () => {
     };
 
     const inputClass =
-        'w-full rounded-lg border border-zinc-800 bg-zinc-900/60 px-3.5 py-2.5 text-sm text-zinc-100 placeholder:text-zinc-600 transition-colors focus:border-zinc-600 focus:outline-none focus:ring-2 focus:ring-white/5';
+        'w-full rounded-lg border border-zinc-700 bg-zinc-900/80 px-3.5 py-2.5 text-sm text-zinc-100 placeholder:text-zinc-500 transition-colors focus:border-zinc-500 focus:outline-none focus:ring-2 focus:ring-white/10';
 
     return (
         <section id="cv-section" className="scroll-mt-20 py-24">
             <div className="mx-auto max-w-3xl px-6">
-                <h2 className="mb-10 text-2xl font-semibold tracking-tight">Contact</h2>
+                <h2 className="mb-10 text-2xl font-semibold tracking-tight text-primary">Contact</h2>
 
                 <div className="grid grid-cols-1 gap-12 lg:grid-cols-2">
                     {/* Info column */}
                     <div>
-                        <p className="text-sm leading-relaxed text-zinc-400">
+                        <p className="text-sm leading-relaxed text-tertiary">
                             Have a project in mind or just want to say hi? My inbox is always open —
                             whether it's about RAG systems, LLM applications, or a full-time opportunity.
                         </p>
@@ -76,8 +76,8 @@ const CV = () => {
                         <dl className="mt-8 divide-y divide-zinc-800/70 border-y border-zinc-800/70">
                             {contactInfo.map((info) => (
                                 <div key={info.label} className="flex items-center justify-between py-3.5 text-sm">
-                                    <dt className="text-zinc-500">{info.label}</dt>
-                                    <dd>{info.value}</dd>
+                                    <dt className="text-muted">{info.label}</dt>
+                                    <dd className="text-tertiary">{info.value}</dd>
                                 </div>
                             ))}
                         </dl>
@@ -135,10 +135,8 @@ const CV = () => {
                         <button
                             type="submit"
                             disabled={status === 'submitting'}
-                            className={`w-full rounded-full py-3 text-sm font-medium transition-all ${
-                                status === 'submitting'
-                                    ? 'cursor-not-allowed bg-zinc-800 text-zinc-500'
-                                    : 'bg-zinc-100 text-zinc-900 hover:bg-white active:scale-[0.99]'
+                            className={`w-full rounded-full py-3 text-sm font-medium btn-primary ${
+                                status === 'submitting' ? 'cursor-not-allowed opacity-50' : ''
                             }`}
                         >
                             {status === 'submitting' ? (
@@ -161,13 +159,13 @@ const CV = () => {
                         </button>
 
                         {status === 'success' && (
-                            <p className="text-center font-mono text-xs text-emerald-400">
+                            <p className="text-center font-mono text-xs text-accent">
                                 Thanks! I'll get back to you as soon as possible.
                             </p>
                         )}
 
                         {status === 'error' && (
-                            <p className="text-center font-mono text-xs text-red-400">
+                            <p className="text-center font-mono text-xs text-error">
                                 Something went wrong. Please try again later.
                             </p>
                         )}
