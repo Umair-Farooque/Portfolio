@@ -280,29 +280,41 @@ export function CoverflowCarousel({
               transformStyle: "preserve-3d",
             }}
           >
-            {slides.map((slide, index) => (
-              <div
-                key={index}
-                ref={(node) => {
-                  cardRefs.current[index] = node;
-                }}
-                role="group"
-                aria-roledescription="slide"
-                aria-label={`${index + 1} of ${count}`}
-                className={cn(
-                  "absolute left-1/2 top-0 aspect-square overflow-hidden rounded-2xl bg-muted shadow-xl shadow-black/50 will-change-transform",
-                  cardClassName,
-                )}
-                style={{ width: "var(--cf-card)" }}
-              >
-                <img
-                  src={slide.src}
-                  alt={slide.alt}
-                  draggable={false}
-                  className="h-full w-full select-none object-cover"
-                />
-              </div>
-            ))}
+            {slides.map((slide, index) => {
+              // Only render center card + 1 on each side (3 cards total)
+              // Calculate circular distance from selected
+              let offset = index - selected;
+              if (loop) {
+                offset = ((offset % count) + count) % count;
+                if (offset > count / 2) offset -= count;
+              }
+              const distance = Math.abs(offset);
+              if (distance > 1) return null;
+
+              return (
+                <div
+                  key={index}
+                  ref={(node) => {
+                    cardRefs.current[index] = node;
+                  }}
+                  role="group"
+                  aria-roledescription="slide"
+                  aria-label={`${index + 1} of ${count}`}
+                  className={cn(
+                    "absolute left-1/2 top-0 aspect-square overflow-hidden rounded-2xl bg-muted shadow-xl shadow-black/50 will-change-transform",
+                    cardClassName,
+                  )}
+                  style={{ width: "var(--cf-card)" }}
+                >
+                  <img
+                    src={slide.src}
+                    alt={slide.alt}
+                    draggable={false}
+                    className="h-full w-full select-none object-cover"
+                  />
+                </div>
+              );
+            })}
           </div>
         </div>
 
