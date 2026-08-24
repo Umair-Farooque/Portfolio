@@ -5,12 +5,12 @@ import Projects from './components/Projects';
 import Navbar from './components/Navbar';
 import Skills from './components/Skills';
 import Experience from './components/Experience';
-import GlowingParticles from './components/GlowingParticles';
+import { HolographicWall } from './components/ui/holographic-wall';
 
 function App() {
     return (
         <div className="min-h-screen relative">
-            <GlowingParticles />
+            <HolographicWall />
             <Navbar />
             <main>
                 <Hero />
