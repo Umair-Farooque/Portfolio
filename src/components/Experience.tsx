@@ -2,51 +2,29 @@ const experiences = [
     {
         title: 'AI Engineer',
         company: 'ArcSirius',
-        location: 'Islamabad, Pakistan · On-site',
-        type: 'Full-time',
-        period: 'Feb 2025 — Present',
+        period: 'May 2025 – Present',
         highlights: [
-            'Spearheading the development of Mednix – an AI-powered Drugs Information Assistant, leveraging RAG and LLMs for accurate medical data retrieval.',
-            'Architecting the Legal AI Assistant, a high-performance retrieval and reasoning system for automated legal document analysis.',
-            'Developing an Agentic Healthcare Workflow System to automate processing of unstructured medical data with LLM-based validation and decision-making.'
-        ],
-        tech: ['Python', 'RAG', 'LLMs', 'LangChain', 'FastAPI']
+            'Designed and deployed Credit Enrich System, an AI-driven pipeline using OCR, regex, and LLM-based validation for automating creditworthiness evaluation, improving data extraction accuracy by 35% and reducing manual processing time by 50%',
+            'Built scalable backend services using FastAPI and integrated vector databases (FAISS, Pinecone) for efficient retrieval-augmented generation and context-aware AI responses',
+            'Developed production-grade agentic AI systems with modular architecture, real-time performance optimization, and reliable tool-using agent workflows'
+        ]
     },
     {
         title: 'Machine Learning Intern',
-        company: 'ZAA Soft',
-        location: 'Islamabad, Pakistan · On-site',
-        type: 'Internship',
-        period: 'Jun 2024 — Aug 2024',
+        company: 'ZAASoft and Technologies',
+        period: 'Jun 2024 – Aug 2024',
         highlights: [
-            'Built LLM-powered applications using OpenAI and Hugging Face models.',
-            'Implemented FAISS and Pinecone databases for efficient retrieval and search.',
-            'Contributed to end-to-end deployment of internal AI prototypes.'
-        ],
-        tech: ['OpenAI', 'Hugging Face', 'FAISS', 'Pinecone']
+            'Developed LLM-powered applications using OpenAI GPT-4 and Hugging Face Transformers (BERT, Sentence-Transformers) for NLU and text generation tasks',
+            'Built and deployed RAG systems with FAISS and Pinecone vector search, integrated with LLMs via FastAPI and containerized microservices for scalable AI APIs'
+        ]
     },
     {
-        title: 'Backend Developer',
+        title: 'AI Backend Developer',
         company: '128 Technologies',
-        location: 'Islamabad, Pakistan · On-site',
-        type: 'Internship',
-        period: 'Jul 2023 — Aug 2023',
+        period: 'Jul 2023 – Aug 2023',
         highlights: [
-            'Created a management system for hospitals for doctor scheduling and patient appointments.',
-            'Gained hands-on experience in Python, problem-solving, and project management.'
-        ],
-        tech: ['Python', 'REST APIs', 'SQL']
-    },
-    {
-        title: 'Machine Learning Intern',
-        company: 'Air University',
-        location: 'Islamabad, Pakistan · On-site',
-        type: 'Internship',
-        period: 'Jul 2023 — Sept 2023',
-        highlights: [
-            'Completed an enriching internship in the Department of Creative Technologies, honing Machine Learning skills.'
-        ],
-        tech: ['Machine Learning', 'Research']
+            'Developed a hospital management system with RESTful APIs in Python for scheduling, patient records, and data processing with MySQL databases'
+        ]
     }
 ];
 
@@ -63,7 +41,7 @@ const Experience = () => {
                                 <div>
                                     <h3 className="font-medium text-zinc-50">{exp.title}</h3>
                                     <p className="mt-0.5 text-sm text-zinc-500">
-                                        {exp.company} · {exp.location}
+                                        {exp.company}
                                     </p>
                                 </div>
                                 <span className="font-mono text-xs text-zinc-500">{exp.period}</span>
@@ -79,14 +57,7 @@ const Experience = () => {
                             </ul>
 
                             <div className="mt-5 flex flex-wrap gap-1.5">
-                                {exp.tech.map((t) => (
-                                    <span
-                                        key={t}
-                                        className="rounded-md border border-zinc-800 px-1.5 py-0.5 font-mono text-[11px] text-zinc-400"
-                                    >
-                                        {t}
-                                    </span>
-                                ))}
+                                {/* Tech tags removed - new experience entries focus on highlights only */}
                             </div>
                         </article>
                     ))}
