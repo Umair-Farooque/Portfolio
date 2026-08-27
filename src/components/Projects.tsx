@@ -1,20 +1,9 @@
-import { useState, useRef } from 'react';
-import { ExternalLink } from 'lucide-react';
+import { ElasticGallery, ElasticItemProps } from './ui/elastic-gallery';
 
-interface Project {
-    src: string;
-    src2?: string;
-    alt: string;
-    title: string;
-    subtitle: string;
-    stack: string[];
-    bullets: string[];
-    href: string;
-    objectPosition?: string;
-}
-
-const projects: Project[] = [
+const projects: ElasticItemProps[] = [
     {
+        id: '01',
+        category: 'Conversational AI',
         src: '/projects/invinci-ai-voice-agent.png',
         alt: 'Invinci AI Voice Agent live UI screenshot',
         title: 'Invinci AI Voice Agent',
@@ -29,6 +18,8 @@ const projects: Project[] = [
         objectPosition: 'top',
     },
     {
+        id: '02',
+        category: 'Speech Agents',
         src: '/projects/ai-voice-intake-agent.png',
         alt: 'AI Voice Intake Agent UI screenshot',
         title: 'AI Voice Intake Agent',
@@ -43,6 +34,8 @@ const projects: Project[] = [
         objectPosition: 'top',
     },
     {
+        id: '03',
+        category: 'Agentic AI',
         src: '/projects/agentic-healthcare.svg',
         alt: 'Agentic Healthcare Workflow system diagram',
         title: 'Agentic Healthcare Workflow',
@@ -56,6 +49,8 @@ const projects: Project[] = [
         href: 'https://agentic-healthcare-system-01.onrender.com/',
     },
     {
+        id: '04',
+        category: 'RAG Systems',
         src: '/projects/mednix1.png',
         src2: '/projects/mednix2.png',
         alt: 'Mednix drug information assistant UI screenshot',
@@ -71,6 +66,8 @@ const projects: Project[] = [
         objectPosition: 'top',
     },
     {
+        id: '05',
+        category: 'Search & RAG',
         src: '/projects/legal_ai.png',
         alt: 'Legal AI Assistant search interface screenshot',
         title: 'Legal AI Assistant',
@@ -85,6 +82,8 @@ const projects: Project[] = [
         objectPosition: 'top',
     },
     {
+        id: '06',
+        category: 'Computer Vision',
         src: '/projects/lane-line-detection.svg',
         alt: 'Lane line detection computer vision pipeline diagram',
         title: 'Lane Line Detection',
@@ -98,6 +97,8 @@ const projects: Project[] = [
         href: 'https://github.com/Umair-Farooque/Finding_Lane_Lines_on_the_Road.git',
     },
     {
+        id: '07',
+        category: 'NLP & Text Gen',
         src: '/projects/twitter-sentiment-analysis.svg',
         alt: 'Twitter sentiment analysis NLP pipeline diagram',
         title: 'Twitter Sentiment & N-gram',
@@ -111,9 +112,11 @@ const projects: Project[] = [
         href: 'https://github.com/Umair-Farooque/Sentiment-Analysis-and-Text-Generator-Using-Twitter-data.git',
     },
     {
+        id: '08',
+        category: 'Deep Learning',
         src: '/projects/neuro-flex.svg',
         alt: 'Neuro-Flex EMG signal waveform diagram',
-        title: 'Neuro-Flex — EMG Hand Control',
+        title: 'Neuro-Flex — EMG Control',
         subtitle: 'LSTM pipeline classifying raw EMG signals to control a 3D-printed prosthetic hand in real time.',
         stack: ['PyTorch', 'LSTM', 'Signal Processing'],
         bullets: [
@@ -125,127 +128,30 @@ const projects: Project[] = [
     },
 ];
 
-function ProjectCard({ project, index }: { project: Project; index: number }) {
-    const [expanded, setExpanded] = useState(false);
-    const hoverTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-    const handleMouseEnter = () => {
-        hoverTimeout.current = setTimeout(() => setExpanded(true), 80);
-    };
-    const handleMouseLeave = () => {
-        if (hoverTimeout.current) clearTimeout(hoverTimeout.current);
-        setExpanded(false);
-    };
-    const handleClick = () => setExpanded((v) => !v);
-
-    const hasTwoImages = !!project.src2;
-
-    return (
-        <div
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
-            onClick={handleClick}
-            className={[
-                'group relative flex cursor-pointer overflow-hidden rounded-2xl border bg-zinc-950',
-                'transition-all duration-500 ease-in-out hover:shadow-xl hover:shadow-black/60',
-                expanded ? 'border-zinc-600' : 'border-zinc-800 hover:border-zinc-700',
-            ].join(' ')}
-            style={{ height: expanded ? '270px' : '190px' }}
-        >
-            {/* Thumbnail pane */}
-            <div
-                className="relative shrink-0 overflow-hidden transition-all duration-500 ease-in-out"
-                style={{ width: expanded ? '44%' : '100%' }}
-            >
-                <span className="absolute left-3 top-3 z-10 select-none font-mono text-[10px] text-zinc-600">
-                    {'FIG.' + String(index + 1).padStart(2, '0')}
-                </span>
-
-                {hasTwoImages ? (
-                    <div className="flex h-full w-full flex-col gap-px">
-                        <img src={project.src} alt={project.alt} draggable={false}
-                            className="h-1/2 w-full select-none object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]" />
-                        <img src={project.src2} alt={project.alt} draggable={false}
-                            className="h-1/2 w-full select-none object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]" />
-                    </div>
-                ) : (
-                    <img
-                        src={project.src} alt={project.alt} draggable={false}
-                        className="h-full w-full select-none object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-                        style={{ objectPosition: project.objectPosition ?? 'center' }}
-                    />
-                )}
-
-                <div className={[
-                    'pointer-events-none absolute inset-y-0 right-0 w-12',
-                    'bg-gradient-to-r from-transparent to-zinc-950 transition-opacity duration-500',
-                    expanded ? 'opacity-100' : 'opacity-0',
-                ].join(' ')} />
-            </div>
-
-
-            {/* Detail panel */}
-            <div
-                className={[
-                    'flex min-w-0 flex-col justify-between overflow-hidden px-4 py-4',
-                    'transition-all duration-500 ease-in-out',
-                    expanded ? 'opacity-100 delay-100' : 'w-0 opacity-0',
-                ].join(' ')}
-                style={{ flex: expanded ? '1 1 0%' : '0 0 0%' }}
-            >
-                <div>
-                    <p className="mb-1 text-[13px] font-semibold leading-snug text-primary line-clamp-1">
-                        {project.title}
-                    </p>
-                    <p className="text-[11px] leading-relaxed text-muted line-clamp-2">
-                        {project.subtitle}
-                    </p>
-                </div>
-
-                <ul className="mt-2 space-y-1">
-                    {project.bullets.map((b) => (
-                        <li key={b} className="flex items-start gap-1 text-[10px] leading-snug text-zinc-300">
-                            <span className="mt-px shrink-0 text-zinc-600">—</span>
-                            <span className="line-clamp-2">{b}</span>
-                        </li>
-                    ))}
-                </ul>
-
-                <div className="mt-2.5 flex flex-wrap gap-1">
-                    {project.stack.map((tag) => (
-                        <span key={tag} className="rounded border border-zinc-800 px-1.5 py-0.5 font-mono text-[9px] text-zinc-400">
-                            {tag}
-                        </span>
-                    ))}
-                </div>
-
-                <a
-                    href={project.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={(e) => e.stopPropagation()}
-                    className="btn-ghost mt-3 inline-flex w-fit items-center gap-1 rounded-full px-3 py-1 font-mono text-[10px]"
-                >
-                    View Project
-                    <ExternalLink className="size-2.5" />
-                </a>
-            </div>
-        </div>
-    );
-}
-
 const Projects = () => {
+    const row1 = projects.slice(0, 4);
+    const row2 = projects.slice(4, 8);
+
     return (
         <section id="projects-section" className="scroll-mt-20 py-24">
             <div className="mx-auto max-w-3xl px-6">
                 <h2 className="mb-2 text-2xl font-semibold tracking-tight text-primary">Projects</h2>
                 <p className="mb-8 font-mono text-xs text-muted">
-                    Hover or tap a card to expand — Fig. 01–08.
+                    Hover or tap a card to expand details — Group I &amp; II.
                 </p>
-                <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4">
-                    {projects.map((project, index) => (
-                        <ProjectCard key={project.title} project={project} index={index} />
-                    ))}
+                <div className="space-y-12">
+                    <div>
+                        <h3 className="mb-4 font-mono text-[10px] uppercase tracking-widest text-[#5ca8ff]/90">
+                            I. Voice &amp; Agentic Systems
+                        </h3>
+                        <ElasticGallery items={row1} />
+                    </div>
+                    <div>
+                        <h3 className="mb-4 font-mono text-[10px] uppercase tracking-widest text-[#5ca8ff]/90">
+                            II. Retrieval, CV &amp; Neural Nets
+                        </h3>
+                        <ElasticGallery items={row2} />
+                    </div>
                 </div>
             </div>
         </section>
@@ -253,4 +159,3 @@ const Projects = () => {
 };
 
 export default Projects;
-
