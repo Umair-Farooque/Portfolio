@@ -6,19 +6,22 @@ import Navbar from './components/Navbar';
 import Skills from './components/Skills';
 import Experience from './components/Experience';
 import { HolographicWall } from './components/ui/holographic-wall';
+import { ScrollStackingLayout } from './components/ui/scroll-stacking-layout';
 
 function App() {
+    const sections = [
+        <Hero key="hero" />,
+        <Experience key="experience" />,
+        <Projects key="projects" />,
+        <Skills key="skills" />,
+        <CV key="cv" />,
+    ];
+
     return (
         <div className="min-h-screen relative">
             <HolographicWall />
             <Navbar />
-            <main>
-                <Hero />
-                <Experience />
-                <Projects />
-                <Skills />
-                <CV />
-            </main>
+            <ScrollStackingLayout sections={sections} />
             <footer className="border-t border-[#003d00]">
                 <div className="mx-auto flex max-w-3xl flex-col items-center justify-between gap-4 px-6 py-8 sm:flex-row">
                     <p className="font-mono text-sm text-[#008f11]">© 2026 Muhammad Umair Farooq</p>
@@ -73,3 +76,4 @@ function App() {
 }
 
 export default App;
+
