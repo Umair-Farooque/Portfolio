@@ -1,23 +1,28 @@
 const stackGroups = [
     {
         num: '01',
-        category: 'Languages & Core ML',
-        items: ['Python', 'PyTorch', 'Pandas', 'NumPy']
+        category: 'AI & Generative AI',
+        items: ['GPT-4', 'OpenAI API', 'RAG', 'Agentic AI', 'Prompt Engineering', 'LangChain', 'LangGraph', 'Transformers', 'Tool-Using Agents']
     },
     {
         num: '02',
-        category: 'AI Engineering',
-        items: ['LLMs', 'RAG Systems', 'LangChain', 'Transformers', 'NLP']
+        category: 'ML & Deep Learning',
+        items: ['PyTorch', 'TensorFlow', 'Scikit-learn', 'NLP', 'Computer Vision', 'Speech Processing', 'Model Fine-tuning']
     },
     {
         num: '03',
-        category: 'Vector Search',
-        items: ['FAISS', 'Pinecone', 'Embeddings', 'BM25']
+        category: 'Backend & Systems',
+        items: ['FastAPI', 'REST APIs', 'WebSockets', 'Microservices', 'Docker', 'Git', 'Linux', 'CI/CD']
     },
     {
         num: '04',
-        category: 'Backend & Deployment',
-        items: ['FastAPI', 'Docker', 'OCR Pipelines', 'Workflow Automation']
+        category: 'Databases & Retrieval',
+        items: ['FAISS', 'Pinecone', 'ChromaDB', 'MySQL', 'PostgreSQL', 'Semantic Search', 'BM25 + Vector']
+    },
+    {
+        num: '05',
+        category: 'Languages',
+        items: ['Python', 'C++', 'C', 'SQL']
     }
 ];
 
