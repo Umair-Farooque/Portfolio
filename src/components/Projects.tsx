@@ -129,30 +129,14 @@ const projects: ElasticItemProps[] = [
 ];
 
 const Projects = () => {
-    const row1 = projects.slice(0, 4);
-    const row2 = projects.slice(4, 8);
-
     return (
         <section id="projects-section" className="scroll-mt-20 py-24">
             <div className="mx-auto max-w-3xl px-6">
                 <h2 className="mb-2 text-2xl font-semibold tracking-tight text-primary">Projects</h2>
                 <p className="mb-8 font-mono text-xs text-muted">
-                    Hover or tap a card to expand details — Group I &amp; II.
+                    Hover or tap a card to expand details.
                 </p>
-                <div className="space-y-12">
-                    <div>
-                        <h3 className="mb-4 font-mono text-[10px] uppercase tracking-widest text-[#5ca8ff]/90">
-                            I. Voice &amp; Agentic Systems
-                        </h3>
-                        <ElasticGallery items={row1} />
-                    </div>
-                    <div>
-                        <h3 className="mb-4 font-mono text-[10px] uppercase tracking-widest text-[#5ca8ff]/90">
-                            II. Retrieval, CV &amp; Neural Nets
-                        </h3>
-                        <ElasticGallery items={row2} />
-                    </div>
-                </div>
+                <ElasticGallery items={projects} />
             </div>
         </section>
     );
