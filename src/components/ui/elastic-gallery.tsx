@@ -21,19 +21,33 @@ interface ElasticGalleryProps {
 
 export function ElasticGallery({ items }: ElasticGalleryProps) {
   const [selectedProject, setSelectedProject] = useState<ElasticItemProps | null>(null);
+  const [hoveredId, setHoveredId] = useState<string | null>(null);
+
+  const handleCardInteraction = (itemId: string) => {
+    setHoveredId(itemId);
+  };
+
+  const handleCardLeave = () => {
+    setHoveredId(null);
+  };
 
   return (
     <>
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {items.map((item) => {
           const hasTwoImages = !!item.src2;
+          const isHovered = hoveredId === item.id;
 
           return (
             <div
               key={item.id}
+              onMouseEnter={() => handleCardInteraction(item.id)}
+              onMouseLeave={handleCardLeave}
+              onTouchStart={() => handleCardInteraction(item.id)}
               onClick={() => setSelectedProject(item)}
-              className="group relative h-64 cursor-pointer overflow-hidden rounded-2xl border border-[#003d00] bg-black transition-all duration-500 hover:scale-105"
+              className="group relative h-64 cursor-pointer overflow-hidden rounded-2xl border border-[#003d00] bg-black transition-all duration-500"
               style={{
+                transform: isHovered ? "scale(1.05)" : "scale(1)",
                 boxShadow: "0 0 10px rgba(0, 255, 64, 0.2), inset 0 0 10px rgba(0, 255, 64, 0.05)",
               }}
             >
@@ -43,25 +57,41 @@ export function ElasticGallery({ items }: ElasticGalleryProps) {
                     <img
                       src={item.src}
                       alt={item.alt}
-                      className="h-1/2 w-full object-cover transition-transform duration-700 group-hover:scale-110"
-                      style={{ objectPosition: item.objectPosition ?? "top" }}
+                      className="h-1/2 w-full object-cover transition-transform duration-700"
+                      style={{
+                        objectPosition: item.objectPosition ?? "top",
+                        transform: isHovered ? "scale(1.1)" : "scale(1)",
+                      }}
                     />
                     <img
                       src={item.src2}
                       alt={item.alt}
-                      className="h-1/2 w-full object-cover transition-transform duration-700 group-hover:scale-110"
-                      style={{ objectPosition: item.objectPosition ?? "top" }}
+                      className="h-1/2 w-full object-cover transition-transform duration-700"
+                      style={{
+                        objectPosition: item.objectPosition ?? "top",
+                        transform: isHovered ? "scale(1.1)" : "scale(1)",
+                      }}
                     />
                   </div>
                 ) : (
                   <img
                     src={item.src}
                     alt={item.alt}
-                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
-                    style={{ objectPosition: item.objectPosition ?? "center" }}
+                    className="h-full w-full object-cover transition-transform duration-700"
+                    style={{
+                      objectPosition: item.objectPosition ?? "center",
+                      transform: isHovered ? "scale(1.1)" : "scale(1)",
+                    }}
                   />
                 )}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/60 to-black/10 transition-opacity duration-500 group-hover:from-black/98" />
+                <div
+                  className="absolute inset-0 bg-gradient-to-t transition-all duration-500"
+                  style={{
+                    backgroundImage: isHovered
+                      ? "linear-gradient(to top, rgba(0, 0, 0, 0.98), rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.1))"
+                      : "linear-gradient(to top, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.1))",
+                  }}
+                />
               </div>
 
               <div className="absolute inset-0 flex flex-col justify-end p-4">
