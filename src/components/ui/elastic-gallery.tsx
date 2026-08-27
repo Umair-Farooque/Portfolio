@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { ArrowUpRight } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { ArrowUpRight, X } from "lucide-react";
 
 export interface ElasticItemProps {
   id: string;
@@ -19,146 +18,167 @@ export interface ElasticItemProps {
 interface ElasticGalleryProps {
   items: ElasticItemProps[];
 }
+
 export function ElasticGallery({ items }: ElasticGalleryProps) {
-  const [activeId, setActiveId] = useState<string | null>(items[0]?.id || null);
+  const [selectedProject, setSelectedProject] = useState<ElasticItemProps | null>(null);
 
   return (
-    <div className="w-full">
-      <div className="flex h-[550px] w-full flex-col gap-2.5 md:h-[480px] md:flex-row md:gap-3.5">
-        {items.map((item) => {
-          const hasTwoImages = !!item.src2;
-          return (
-            <div
-              key={item.id}
-              onMouseEnter={() => setActiveId(item.id)}
-              onClick={() => setActiveId(item.id)}
-              className={cn(
-                "relative cursor-pointer overflow-hidden rounded-2xl border border-zinc-800/80 bg-zinc-950",
-                "transition-[flex,filter] duration-700 ease-[cubic-bezier(0.25,1,0.5,1)]",
-                activeId === item.id ? "flex-[4.5]" : "flex-[1]",
-                activeId === item.id
-                  ? "brightness-100"
-                  : "brightness-40 hover:brightness-60"
-              )}
+    <>
+      {/* Project Grid */}
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {items.map((item) => (
+          <button
+            key={item.id}
+            onClick={() => setSelectedProject(item)}
+            className="group relative h-48 w-full overflow-hidden rounded-2xl border border-[#003d00] bg-black transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[#00ff40] focus:ring-offset-2 focus:ring-offset-black"
+            style={{
+              boxShadow: "0 0 10px rgba(0, 255, 64, 0.2), inset 0 0 10px rgba(0, 255, 64, 0.05)",
+            }}
+          >
+            {/* Background Image */}
+            <div className="absolute inset-0 h-full w-full">
+              <img
+                src={item.src}
+                alt={item.alt}
+                className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+                style={{ objectPosition: item.objectPosition ?? "center" }}
+              />
+              {/* Gradient Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-black/20 transition-opacity duration-300 group-hover:from-black/95" />
+            </div>
+
+            {/* Project Name */}
+            <div className="absolute inset-0 flex items-end justify-start p-5">
+              <h3 className="text-2xl font-black uppercase leading-tight text-[#00ff40] drop-shadow-lg">
+                {item.title}
+              </h3>
+            </div>
+          </button>
+        ))}
+      </div>
+
+      {/* Modal Popup */}
+      {selectedProject && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm"
+          onClick={() => setSelectedProject(null)}
+        >
+          <div
+            className="relative w-full max-w-4xl max-h-[90vh] overflow-hidden rounded-3xl border border-[#003d00] bg-black"
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              boxShadow:
+                "0 0 30px rgba(0, 255, 64, 0.3), 0 0 60px rgba(0, 255, 64, 0.15), inset 0 0 20px rgba(0, 255, 64, 0.1)",
+            }}
+          >
+            {/* Close Button */}
+            <button
+              onClick={() => setSelectedProject(null)}
+              className="absolute top-6 right-6 z-10 rounded-full border border-[#003d00] bg-black/80 p-2 text-[#00ff40] transition-all hover:bg-[#00ff40] hover:text-black focus:outline-none"
+              style={{
+                boxShadow: "0 0 10px rgba(0, 255, 64, 0.2)",
+              }}
             >
-              {/* Background Image Layer */}
-              <div className="absolute inset-0 h-full w-full">
-                {hasTwoImages ? (
-                  <div className="flex h-full w-full flex-col gap-px bg-zinc-900">
-                    <img
-                      src={item.src}
-                      alt={item.alt}
-                      className={cn(
-                        "h-1/2 w-full object-cover transition-transform duration-1000",
-                        activeId === item.id ? "scale-100" : "scale-105"
-                      )}
-                      style={{ objectPosition: item.objectPosition ?? 'top' }}
-                    />
-                    <img
-                      src={item.src2}
-                      alt={item.alt}
-                      className={cn(
-                        "h-1/2 w-full object-cover transition-transform duration-1000",
-                        activeId === item.id ? "scale-100" : "scale-105"
-                      )}
-                      style={{ objectPosition: item.objectPosition ?? 'top' }}
-                    />
-                  </div>
-                ) : (
-                  <img
-                    src={item.src}
-                    alt={item.alt}
-                    className={cn(
-                      "h-full w-full object-cover transition-transform duration-1000",
-                      activeId === item.id ? "scale-100" : "scale-105"
-                    )}
-                    style={{ objectPosition: item.objectPosition ?? 'center' }}
-                  />
-                )}
-                {/* Gradient Overlay */}
-                <div
-                  className={cn(
-                    "absolute inset-0 bg-gradient-to-t from-black/95 via-black/60 to-black/10 transition-opacity duration-500",
-                    activeId === item.id ? "opacity-100" : "opacity-80"
-                  )}
+              <X className="h-6 w-6" />
+            </button>
+
+            {/* Modal Content */}
+            <div className="overflow-y-auto max-h-[90vh]">
+              {/* Project Images */}
+              <div className="grid h-72 w-full grid-cols-2 gap-px bg-[#003d00]">
+                <img
+                  src={selectedProject.src}
+                  alt={selectedProject.alt}
+                  className="h-full w-full object-cover"
+                  style={{ objectPosition: selectedProject.objectPosition ?? "center" }}
+                />
+                <img
+                  src={selectedProject.src2 || selectedProject.src}
+                  alt={selectedProject.alt}
+                  className="h-full w-full object-cover"
+                  style={{ objectPosition: selectedProject.objectPosition ?? "center" }}
                 />
               </div>
 
-              {/* Content Container */}
-              <div className="absolute inset-0 flex flex-col justify-end p-4 md:p-5">
-                <div
-                  className={cn(
-                    "flex flex-col gap-1.5 transition-all duration-500",
-                    activeId === item.id
-                      ? "translate-y-0 opacity-100 delay-150"
-                      : "translate-y-12 opacity-0 pointer-events-none"
-                  )}
-                >
-                  <div className="flex items-center gap-2">
-                    <span className="rounded-full border border-white/20 bg-white/5 px-2 py-0.5 text-[8.5px] font-mono uppercase tracking-wider text-zinc-300 backdrop-blur-md">
-                      {item.category}
-                    </span>
-                  </div>
-
-                  <h3 className="text-xl font-black uppercase leading-tight text-white md:text-2xl">
-                    {item.title}
-                  </h3>
-
-                  <p className="text-[10px] leading-relaxed text-zinc-300 line-clamp-2">
-                    {item.subtitle}
+              {/* Project Details */}
+              <div className="space-y-6 p-8">
+                {/* Header */}
+                <div>
+                  <span className="inline-block rounded-full border border-[#003d00] bg-black px-4 py-1.5 font-mono text-sm uppercase tracking-wider text-[#008f11]">
+                    {selectedProject.category}
+                  </span>
+                  <h2 className="mt-4 text-4xl font-black uppercase text-[#00ff40]">
+                    {selectedProject.title}
+                  </h2>
+                  <p className="mt-3 text-lg text-[#d4c8e8]">
+                    {selectedProject.subtitle}
                   </p>
+                </div>
 
-                  <ul className="mt-1 space-y-1">
-                    {item.bullets.map((b) => (
-                      <li key={b} className="flex items-start gap-1.5 text-xs leading-snug text-zinc-200">
-                        <span className="mt-0.5 shrink-0 text-zinc-500">—</span>
-                        <span className="line-clamp-2">{b}</span>
+                {/* Description/Bullets */}
+                <div>
+                  <h3 className="mb-4 text-xl font-bold uppercase text-[#00ff40]">
+                    Key Features
+                  </h3>
+                  <ul className="space-y-2.5">
+                    {selectedProject.bullets.map((bullet) => (
+                      <li key={bullet} className="flex gap-3 text-base text-[#d4c8e8]">
+                        <span className="shrink-0 text-[#00ff40]">▪</span>
+                        <span>{bullet}</span>
                       </li>
                     ))}
                   </ul>
+                </div>
 
-                  <div className="mt-1 flex flex-wrap gap-1">
-                    {item.stack.map((tag) => (
-                      <span key={tag} className="rounded border border-zinc-700 bg-zinc-900/50 px-1 py-0.5 font-mono text-[8px] text-zinc-300">
-                        {tag}
+                {/* Tech Stack */}
+                <div>
+                  <h3 className="mb-4 text-xl font-bold uppercase text-[#00ff40]">
+                    Tech Stack
+                  </h3>
+                  <div className="flex flex-wrap gap-2">
+                    {selectedProject.stack.map((tech) => (
+                      <span
+                        key={tech}
+                        className="rounded-lg border border-[#003d00] bg-black/50 px-3 py-1.5 font-mono text-sm text-[#00ff40]"
+                        style={{
+                          boxShadow: "0 0 8px rgba(0, 255, 64, 0.15)",
+                        }}
+                      >
+                        {tech}
                       </span>
                     ))}
                   </div>
-
-                  <a
-                    href={item.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={(e) => e.stopPropagation()}
-                    className="mt-2 inline-flex items-center gap-1 text-xs font-bold uppercase tracking-widest text-[#00ff40] hover:text-[#33ff66] transition-colors"
-                  >
-                    View Project <ArrowUpRight className="h-2.5 w-2.5" />
-                  </a>
                 </div>
 
-                {/* Vertical label for inactive desktop state / Short label for mobile */}
-                <div
-                  className={cn(
-                    "absolute transition-all duration-500",
-                    "bottom-4 left-1/2 -translate-x-1/2 md:bottom-5",
-                    activeId === item.id
-                      ? "opacity-0 scale-50 pointer-events-none"
-                      : "opacity-100 delay-250"
-                  )}
-                >
-                  <span className="hidden whitespace-nowrap text-[11px] font-bold uppercase tracking-widest text-zinc-400 [writing-mode:vertical-rl] md:block rotate-180">
-                    {item.title}
-                  </span>
-                  <span className="block text-xs font-bold text-zinc-400 md:hidden whitespace-nowrap">
-                    {item.title.split(' ')[0]}
-                  </span>
+                {/* Action Buttons */}
+                <div className="flex gap-4 pt-4">
+                  <a
+                    href={selectedProject.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 rounded-full border border-[#00ff40] bg-[#00ff40] px-6 py-3 font-bold uppercase text-black transition-all hover:bg-[#33ff66] focus:outline-none focus:ring-2 focus:ring-[#00ff40] focus:ring-offset-2 focus:ring-offset-black"
+                    style={{
+                      boxShadow: "0 0 15px rgba(0, 255, 64, 0.4)",
+                    }}
+                  >
+                    View Project <ArrowUpRight className="h-5 w-5" />
+                  </a>
+                  <button
+                    onClick={() => setSelectedProject(null)}
+                    className="rounded-full border border-[#003d00] bg-black px-6 py-3 font-bold uppercase text-[#00ff40] transition-all hover:bg-[#003d00] focus:outline-none focus:ring-2 focus:ring-[#00ff40] focus:ring-offset-2 focus:ring-offset-black"
+                    style={{
+                      boxShadow: "0 0 10px rgba(0, 255, 64, 0.2)",
+                    }}
+                  >
+                    Close
+                  </button>
                 </div>
               </div>
             </div>
-          );
-        })}
-      </div>
-    </div>
+          </div>
+        </div>
+      )}
+    </>
   );
 }
 
