@@ -39,7 +39,7 @@ const Navbar = () => {
             <nav className="mx-auto flex h-14 max-w-3xl items-center justify-between px-6">
                 <button
                     onClick={() => scrollToSection('hero')}
-                    className="text-sm font-semibold tracking-tight"
+                    className="text-base font-semibold tracking-tight"
                 >
                     Umair Farooq
                 </button>
@@ -85,7 +85,7 @@ const Navbar = () => {
                         <button
                             key={link.id}
                             onClick={() => scrollToSection(link.id)}
-                            className={`block w-full py-2.5 text-left text-sm btn-nav ${activeSection === link.id ? 'active' : ''}`}
+                            className={`block w-full py-2.5 text-left text-base btn-nav ${activeSection === link.id ? 'active' : ''}`}
                         >
                             {link.label}
                         </button>

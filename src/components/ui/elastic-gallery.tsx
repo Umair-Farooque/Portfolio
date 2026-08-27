@@ -100,7 +100,7 @@ export function ElasticGallery({ items }: ElasticGalleryProps) {
                     </span>
                   </div>
 
-                  <h3 className="text-base font-black uppercase leading-tight text-white md:text-xl">
+                  <h3 className="text-xl font-black uppercase leading-tight text-white md:text-2xl">
                     {item.title}
                   </h3>
 
@@ -110,7 +110,7 @@ export function ElasticGallery({ items }: ElasticGalleryProps) {
 
                   <ul className="mt-1 space-y-1">
                     {item.bullets.map((b) => (
-                      <li key={b} className="flex items-start gap-1.5 text-[9px] leading-snug text-zinc-200">
+                      <li key={b} className="flex items-start gap-1.5 text-xs leading-snug text-zinc-200">
                         <span className="mt-0.5 shrink-0 text-zinc-500">—</span>
                         <span className="line-clamp-2">{b}</span>
                       </li>
@@ -130,7 +130,7 @@ export function ElasticGallery({ items }: ElasticGalleryProps) {
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={(e) => e.stopPropagation()}
-                    className="mt-2 inline-flex items-center gap-1 text-[9px] font-bold uppercase tracking-widest text-[#00ff40] hover:text-[#33ff66] transition-colors"
+                    className="mt-2 inline-flex items-center gap-1 text-xs font-bold uppercase tracking-widest text-[#00ff40] hover:text-[#33ff66] transition-colors"
                   >
                     View Project <ArrowUpRight className="h-2.5 w-2.5" />
                   </a>
@@ -149,7 +149,7 @@ export function ElasticGallery({ items }: ElasticGalleryProps) {
                   <span className="hidden whitespace-nowrap text-[11px] font-bold uppercase tracking-widest text-zinc-400 [writing-mode:vertical-rl] md:block rotate-180">
                     {item.title}
                   </span>
-                  <span className="block text-[9px] font-bold text-zinc-400 md:hidden whitespace-nowrap">
+                  <span className="block text-xs font-bold text-zinc-400 md:hidden whitespace-nowrap">
                     {item.title.split(' ')[0]}
                   </span>
                 </div>

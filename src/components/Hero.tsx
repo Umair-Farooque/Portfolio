@@ -117,7 +117,7 @@ const Hero = () => {
                     </div>
                     <div>
                         <p className="font-medium text-primary">Muhammad Umair Farooq</p>
-                        <p className="text-sm text-muted">Islamabad, Pakistan</p>
+                        <p className="text-base text-muted">Islamabad, Pakistan</p>
                     </div>
                 </div>
 
@@ -135,12 +135,12 @@ const Hero = () => {
                 {/* Overview */}
                 <dl className="mt-12 divide-y divide-zinc-800/70 border-y border-zinc-800/70">
                     {overviewRows.map((row) => (
-                        <div key={row.label} className="flex items-center justify-between py-3.5 text-sm">
+                        <div key={row.label} className="flex items-center justify-between py-3.5 text-base">
                             <dt className="text-muted">{row.label}</dt>
                             <dd className="text-tertiary">{row.value}</dd>
                         </div>
                     ))}
-                    <div className="flex items-center justify-between gap-4 py-3.5 text-sm">
+                    <div className="flex items-center justify-between gap-4 py-3.5 text-base">
                         <dt className="text-muted">Links</dt>
                         <dd className="flex items-center gap-5">
                             <a

@@ -85,12 +85,12 @@ export const CV = () => {
     return (
         <section id="cv-section" className="scroll-mt-20 py-24">
             <div className="mx-auto max-w-3xl px-6">
-                <h2 className="mb-10 text-2xl font-semibold tracking-tight text-primary">Contact</h2>
+                <h2 className="mb-10 text-4xl font-semibold tracking-tight text-primary">Contact</h2>
 
                 <div className="grid grid-cols-1 gap-12 lg:grid-cols-2">
                     {/* Info column */}
                     <div>
-                        <p className="text-sm leading-relaxed text-tertiary">
+                        <p className="text-lg leading-relaxed text-tertiary">
                             Have a project in mind or just want to say hi? Feel free to reach out via the form, or connect with me through any of the channels below.
                         </p>
 
@@ -107,10 +107,10 @@ export const CV = () => {
                                         {link.icon}
                                     </div>
                                     <div className="min-w-0">
-                                        <p className="font-mono text-[9px] uppercase tracking-wider text-muted group-hover:text-tertiary">
+                                        <p className="font-mono text-xs uppercase tracking-wider text-muted group-hover:text-tertiary">
                                             {link.name}
                                         </p>
-                                        <p className="truncate text-xs font-semibold text-zinc-300 group-hover:text-primary">
+                                        <p className="truncate text-sm font-semibold text-zinc-300 group-hover:text-primary">
                                             {link.value}
                                         </p>
                                     </div>
@@ -187,13 +187,13 @@ export const CV = () => {
                         </button>
 
                         {status === 'success' && (
-                            <p className="text-center font-mono text-xs text-accent">
+                            <p className="text-center font-mono text-sm text-accent">
                                 Thanks! I'll get back to you as soon as possible.
                             </p>
                         )}
 
                         {status === 'error' && (
-                            <p className="text-center font-mono text-xs text-error">
+                            <p className="text-center font-mono text-sm text-error">
                                 Something went wrong. Please try again later.
                             </p>
                         )}

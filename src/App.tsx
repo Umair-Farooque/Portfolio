@@ -21,8 +21,8 @@ function App() {
             </main>
             <footer className="border-t border-[#003d00]">
                 <div className="mx-auto flex max-w-3xl flex-col items-center justify-between gap-4 px-6 py-8 sm:flex-row">
-                    <p className="font-mono text-xs text-[#008f11]">© 2026 Muhammad Umair Farooq</p>
-                    <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5 font-mono text-xs text-[#008f11]">
+                    <p className="font-mono text-sm text-[#008f11]">© 2026 Muhammad Umair Farooq</p>
+                    <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5 font-mono text-sm text-[#008f11]">
                         <a
                             href="/resume.pdf"
                             download

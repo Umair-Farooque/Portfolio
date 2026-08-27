@@ -367,7 +367,7 @@ export function CoverflowCarousel({
               href={active.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-ghost mt-6 inline-flex items-center gap-1.5 rounded-full px-4 py-1.5 font-mono text-xs"
+              className="btn-ghost mt-6 inline-flex items-center gap-1.5 rounded-full px-4 py-1.5 font-mono text-sm"
             >
               View Project ↗
             </a>

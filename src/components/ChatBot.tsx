@@ -62,7 +62,7 @@ const ChatBot = () => {
                 <div className="mb-3 flex w-[22rem] max-w-[calc(100vw-2.5rem)] flex-col overflow-hidden rounded-2xl border border-zinc-800 bg-[#111113] shadow-2xl shadow-black/50">
                     {/* Header */}
                     <div className="flex items-center justify-between border-b border-zinc-800 p-3">
-                        <h3 className="text-sm font-medium text-primary">Ask about Umair</h3>
+                        <h3 className="text-base font-medium text-primary">Ask about Umair</h3>
                         <button
                             onClick={() => setIsOpen(false)}
                             aria-label="Close chat"
@@ -79,7 +79,7 @@ const ChatBot = () => {
                         {messages.map((msg, i) => (
                             <div key={i} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                                 <div
-                                    className={`max-w-[85%] px-3.5 py-2 text-sm leading-relaxed ${
+                                    className={`max-w-[85%] px-3.5 py-2 text-base leading-relaxed ${
                                         msg.role === 'user'
                                             ? 'rounded-2xl rounded-br-md bg-zinc-100 text-zinc-900'
                                             : 'rounded-2xl rounded-bl-md border border-zinc-800 bg-zinc-900 text-zinc-300'
@@ -108,7 +108,7 @@ const ChatBot = () => {
                             value={input}
                             onChange={(e) => setInput(e.target.value)}
                             placeholder="Ask about my skills..."
-                            className="flex-1 rounded-full border border-zinc-700 bg-zinc-900/80 px-3.5 py-2 text-sm text-zinc-100 placeholder-text-subtle focus:border-zinc-500 focus:outline-none"
+                            className="flex-1 rounded-full border border-zinc-700 bg-zinc-900/80 px-3.5 py-2 text-base text-zinc-100 placeholder-text-subtle focus:border-zinc-500 focus:outline-none"
                         />
                         <button
                             type="submit"
