@@ -19,14 +19,14 @@ function App() {
                 <Skills />
                 <CV />
             </main>
-            <footer className="border-t border-zinc-800">
+            <footer className="border-t border-[#003d00]">
                 <div className="mx-auto flex max-w-3xl flex-col items-center justify-between gap-4 px-6 py-8 sm:flex-row">
-                    <p className="font-mono text-xs text-zinc-400">© 2026 Muhammad Umair Farooq</p>
-                    <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5 font-mono text-xs text-zinc-400">
+                    <p className="font-mono text-xs text-[#008f11]">© 2026 Muhammad Umair Farooq</p>
+                    <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5 font-mono text-xs text-[#008f11]">
                         <a
                             href="/resume.pdf"
                             download
-                            className="transition-colors hover:text-zinc-200"
+                            className="transition-colors hover:text-[#00ff40] hover:text-shadow-glow"
                         >
                             Resume
                         </a>
@@ -35,7 +35,7 @@ function App() {
                             href="https://github.com/Umair-Farooque"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="transition-colors hover:text-zinc-200"
+                            className="transition-colors hover:text-[#00ff40] hover:text-shadow-glow"
                         >
                             GitHub
                         </a>
@@ -44,7 +44,7 @@ function App() {
                             href="https://www.linkedin.com/in/umairfaroq/"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="transition-colors hover:text-zinc-200"
+                            className="transition-colors hover:text-[#00ff40] hover:text-shadow-glow"
                         >
                             LinkedIn
                         </a>
@@ -53,14 +53,14 @@ function App() {
                             href="https://wa.me/923084624629"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="transition-colors hover:text-zinc-200"
+                            className="transition-colors hover:text-[#00ff40] hover:text-shadow-glow"
                         >
                             WhatsApp
                         </a>
                         <span>·</span>
                         <a
                             href="mailto:farooq.intellecta@gmail.com"
-                            className="transition-colors hover:text-zinc-200"
+                            className="transition-colors hover:text-[#00ff40] hover:text-shadow-glow"
                         >
                             Email
                         </a>

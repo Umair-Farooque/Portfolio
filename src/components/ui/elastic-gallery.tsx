@@ -130,7 +130,7 @@ export function ElasticGallery({ items }: ElasticGalleryProps) {
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={(e) => e.stopPropagation()}
-                    className="mt-2 inline-flex items-center gap-1 text-[9px] font-bold uppercase tracking-widest text-[#5ca8ff] hover:text-[#9bc7ff] transition-colors"
+                    className="mt-2 inline-flex items-center gap-1 text-[9px] font-bold uppercase tracking-widest text-[#00ff40] hover:text-[#33ff66] transition-colors"
                   >
                     View Project <ArrowUpRight className="h-2.5 w-2.5" />
                   </a>

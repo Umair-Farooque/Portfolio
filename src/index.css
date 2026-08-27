@@ -1,52 +1,52 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
-  --font-mono: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-sans: "VT323", "Courier New", monospace;
+  --font-serif: "Georgia", serif;
+  --font-mono: "VT323", "Courier New", monospace;
 
-  /* shadcn-compatible tokens */
-  --color-background: #0a0a0b;
-  --color-foreground: #f4f4f5;
-  --color-muted: #18181b;
-  --color-muted-foreground: #71717a;
-  --color-ring: #3f3f46;
-  --color-border: #27272a;
+  /* Cyberpunk Neon Green Theme */
+  --color-background: #000000;
+  --color-foreground: #00ff40;
+  --color-muted: #001a00;
+  --color-muted-foreground: #008f11;
+  --color-ring: #00FF41;
+  --color-border: #003d00;
 
-  /* Consolidated semantic color palette (reduces 48+ colors to ~12) */
-  --color-text-primary: #f4f4f5;      /* zinc-50 - main headings, high emphasis */
-  --color-text-secondary: #d4d4d8;    /* zinc-300 - subheadings, roles */
-  --color-text-tertiary: #a1a1aa;     /* zinc-400 - body text, descriptions */
-  --color-text-muted: #71717a;        /* zinc-500 - labels, meta, placeholders */
-  --color-text-subtle: #52525b;       /* zinc-600 - disabled, dividers, low emphasis */
-  --color-text-inverse: #0a0a0b;      /* zinc-950 - on light backgrounds */
-  --color-text-accent: #34d399;       /* emerald-400 - success states */
-  --color-text-error: #f87171;        /* red-400 - error states */
-  --color-text-link: #d4d4d8;         /* zinc-300 - links */
-  --color-text-link-hover: #f4f4f5;   /* zinc-50 - link hover */
+  /* Consolidated semantic color palette - Neon Green */
+  --color-text-primary: #00ff40;
+  --color-text-secondary: #00ff40;
+  --color-text-tertiary: #008f11;
+  --color-text-muted: #008f11;
+  --color-text-subtle: #003d00;
+  --color-text-inverse: #000000;
+  --color-text-accent: #00ff40;
+  --color-text-error: #ff0055;
+  --color-text-link: #00ff40;
+  --color-text-link-hover: #00ff40;
 
-  /* Consolidated button variants (reduces 7 styles to 4) */
-  --btn-primary-bg: #f4f4f5;          /* zinc-100 */
-  --btn-primary-text: #0a0a0b;        /* zinc-950 */
-  --btn-primary-hover: #ffffff;       /* white */
-  --btn-primary-disabled-bg: #27272a; /* zinc-800 */
-  --btn-primary-disabled-text: #71717a; /* zinc-500 */
+  --btn-primary-bg: #00ff40;
+  --btn-primary-text: #000000;
+  --btn-primary-hover: #00ff40;
+  --btn-primary-disabled-bg: #001a00;
+  --btn-primary-disabled-text: #008f11;
 
-  --btn-ghost-border: #27272a;        /* zinc-800 */
-  --btn-ghost-text: #a1a1aa;          /* zinc-400 */
-  --btn-ghost-hover-border: #3f3f46;  /* zinc-700 */
-  --btn-ghost-hover-text: #f4f4f5;    /* zinc-50 */
+  --btn-ghost-border: #003d00;
+  --btn-ghost-text: #008f11;
+  --btn-ghost-hover-border: #00ff40;
+  --btn-ghost-hover-text: #00ff40;
 
-  --btn-icon-bg: #f4f4f5;             /* zinc-100 */
-  --btn-icon-text: #0a0a0b;           /* zinc-950 */
-  --btn-icon-hover: #ffffff;          /* white */
-  --btn-icon-disabled: #71717a;       /* zinc-500 */
+  --btn-icon-bg: #00ff40;
+  --btn-icon-text: #000000;
+  --btn-icon-hover: #00ff40;
+  --btn-icon-disabled: #008f11;
 
-  --btn-nav-text: #71717a;            /* zinc-500 */
-  --btn-nav-text-active: #f4f4f5;     /* zinc-50 */
-  --btn-nav-hover: #d4d4d8;           /* zinc-300 */
+  --btn-nav-text: #008f11;
+  --btn-nav-text-active: #00ff40;
+  --btn-nav-hover: #00ff40;
 
-  --btn-carousel-bg: rgba(10,10,11,0.7);  /* background/70 */
-  --btn-carousel-text: #f4f4f5;       /* foreground */
+  --btn-carousel-bg: rgba(0, 0, 0, 0.8);
+  --btn-carousel-text: #00ff40;
 }
 
 html {
@@ -55,21 +55,21 @@ html {
 
 body {
   margin: 0;
-  background-color: #0a0a0b;
-  color: #f4f4f5;
+  background-color: #000000;
+  color: #00ff40;
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 ::selection {
-  background-color: #f4f4f5;
-  color: #0a0a0b;
+  background-color: #00ff40;
+  color: #000000;
 }
 
 /* Scrambled characters during text animation */
 .dud {
-  color: #52525b;
+  color: #003d00;
 }
 
 /* Thin, subtle scrollbar */
@@ -83,12 +83,14 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #27272a;
+  background: #003d00;
   border-radius: 999px;
+  box-shadow: 0 0 10px #00ff40;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #3f3f46;
+  background: #00ff40;
+  box-shadow: 0 0 15px #00ff40;
 }
 
 /* Carousel caption entrance */
@@ -126,51 +128,77 @@ body {
 .btn-primary {
   background-color: var(--btn-primary-bg);
   color: var(--btn-primary-text);
-  transition: background-color 0.15s ease, transform 0.05s ease;
+  transition: background-color 0.15s ease, transform 0.05s ease, box-shadow 0.15s ease;
+  box-shadow: 0 0 10px rgba(0, 255, 64, 0.3);
 }
-.btn-primary:hover { background-color: var(--btn-primary-hover); }
+.btn-primary:hover {
+  background-color: var(--btn-primary-hover);
+  box-shadow: 0 0 20px rgba(0, 255, 64, 0.6);
+}
 .btn-primary:active { transform: scale(0.99); }
 .btn-primary:disabled {
   background-color: var(--btn-primary-disabled-bg);
   color: var(--btn-primary-disabled-text);
   cursor: not-allowed;
   transform: none;
+  box-shadow: none;
 }
 
 .btn-ghost {
   border: 1px solid var(--btn-ghost-border);
   color: var(--btn-ghost-text);
-  transition: border-color 0.15s ease, color 0.15s ease;
+  transition: border-color 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
 }
 .btn-ghost:hover {
   border-color: var(--btn-ghost-hover-border);
   color: var(--btn-ghost-hover-text);
+  box-shadow: 0 0 10px rgba(0, 255, 64, 0.4);
 }
 
 .btn-icon {
   background-color: var(--btn-icon-bg);
   color: var(--btn-icon-text);
-  transition: background-color 0.15s ease, transform 0.05s ease;
+  transition: background-color 0.15s ease, transform 0.05s ease, box-shadow 0.15s ease;
+  box-shadow: 0 0 10px rgba(0, 255, 64, 0.3);
 }
-.btn-icon:hover { background-color: var(--btn-icon-hover); }
+.btn-icon:hover {
+  background-color: var(--btn-icon-hover);
+  box-shadow: 0 0 20px rgba(0, 255, 64, 0.6);
+}
 .btn-icon:active { transform: scale(0.95); }
 .btn-icon:disabled {
   opacity: 0.4;
   cursor: not-allowed;
   transform: none;
+  box-shadow: none;
 }
 
 .btn-nav {
   color: var(--btn-nav-text);
-  transition: color 0.15s ease;
+  transition: color 0.15s ease, text-shadow 0.15s ease;
 }
-.btn-nav:hover { color: var(--btn-nav-hover); }
-.btn-nav.active { color: var(--btn-nav-text-active); font-weight: 500; }
+.btn-nav:hover {
+  color: var(--btn-nav-hover);
+  text-shadow: 0 0 8px rgba(0, 255, 64, 0.6);
+}
+.btn-nav.active {
+  color: var(--btn-nav-text-active);
+  font-weight: 500;
+  text-shadow: 0 0 10px rgba(0, 255, 64, 0.8);
+}
 
 .btn-carousel {
   background-color: var(--btn-carousel-bg);
   color: var(--btn-carousel-text);
   backdrop-filter: blur(4px);
-  transition: background-color 0.15s ease;
+  transition: background-color 0.15s ease, box-shadow 0.15s ease;
+  box-shadow: 0 0 10px rgba(0, 255, 64, 0.2);
 }
-.btn-carousel:hover { background-color: var(--color-background); }
+.btn-carousel:hover {
+  background-color: var(--color-background);
+  box-shadow: 0 0 15px rgba(0, 255, 64, 0.4);
+.text-shadow-glow {
+  text-shadow: 0 0 8px rgba(0, 255, 64, 0.6);
+}
+
+}

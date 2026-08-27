@@ -118,8 +118,8 @@ export function HolographicWall({
                 scale: mousePosition && distance < radius ? 1.3 : 1,
                 color:
                   mousePosition && distance < radius
-                    ? `rgba(255, 215, 0, ${0.3 + letterIntensity})`
-                    : "rgba(200, 200, 200, 0.15)",
+                    ? `rgba(0, 255, 64, ${0.3 + letterIntensity})`
+                    : "rgba(0, 255, 64, 0.1)",
               }}
               transition={{
                 type: "spring",
@@ -132,7 +132,7 @@ export function HolographicWall({
                 top: letter.y,
                 textShadow:
                   mousePosition && distance < radius
-                    ? `0 0 ${letterIntensity * 25}px rgba(255, 215, 0, ${letterIntensity})`
+                    ? `0 0 ${letterIntensity * 25}px rgba(0, 255, 64, ${letterIntensity})`
                     : "none",
               }}
             >
@@ -161,7 +161,7 @@ export function HolographicWall({
               height: `${radius * 2}px`,
               transform: "translate(-50%, -50%)",
               background:
-                "radial-gradient(circle, rgba(255, 215, 0, 0.6) 0%, rgba(255, 215, 0, 0.3) 30%, transparent 70%)",
+                "radial-gradient(circle, rgba(0, 255, 64, 0.6) 0%, rgba(0, 255, 64, 0.3) 30%, transparent 70%)",
               filter: "blur(40px)",
             }}
           />
