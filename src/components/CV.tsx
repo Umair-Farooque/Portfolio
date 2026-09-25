@@ -90,11 +90,7 @@ export const CV = () => {
                 <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:items-start">
                     {/* Info column */}
                     <div className="flex flex-col justify-center">
-                        <p className="text-lg leading-relaxed text-tertiary">
-                            Have a project in mind or just want to say hi? Feel free to reach out via the form, or connect with me through any of the channels below.
-                        </p>
-
-                        <div className="mt-8 space-y-3.5">
+                        <div className="space-y-3.5">
                             {socialLinks.map((link) => (
                                 <a
                                     key={link.name}
