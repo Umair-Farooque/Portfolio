@@ -26,7 +26,7 @@ const cn = (...classes: (string | undefined | boolean)[]) => {
 };
 
 export function ElasticGallery({ items }: ElasticGalleryProps) {
-  const [activeId, setActiveId] = useState<string | null>(items[2]?.id || items[0]?.id);
+  const [activeId, setActiveId] = useState<string | null>(null);
   const [selectedProject, setSelectedProject] = useState<ElasticItemProps | null>(null);
   const modalRef = useRef<HTMLDivElement>(null);
 
