@@ -87,7 +87,7 @@ export const CV = () => {
             <div className="mx-auto max-w-3xl px-6">
                 <h2 className="mb-10 text-4xl font-semibold tracking-tight text-primary">Contact</h2>
 
-                <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:items-center">
+                <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:items-start">
                     {/* Info column */}
                     <div className="flex flex-col justify-center">
                         <p className="text-lg leading-relaxed text-tertiary">
@@ -120,7 +120,7 @@ export const CV = () => {
                     </div>
 
                     {/* Form column */}
-                    <form onSubmit={handleSubmit} className="space-y-4">
+                    <form onSubmit={handleSubmit} className="space-y-4 flex flex-col lg:self-center">
                         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                             <input
                                 type="text"
