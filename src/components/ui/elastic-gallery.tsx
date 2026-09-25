@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from "react";
 import { ArrowUpRight, X, Zap } from "lucide-react";
-import { motion } from "framer-motion";
 
 export interface ElasticItemProps {
   id: string;
@@ -21,47 +20,24 @@ interface ElasticGalleryProps {
   items: ElasticItemProps[];
 }
 
-// Animated glow effect component
-const GlitchGlowBorder = ({ isHovered }: { isHovered: boolean }) => {
-  return (
-    <>
-      <div
-        className="absolute inset-0 rounded-2xl pointer-events-none"
-        style={{
-          background: isHovered
-            ? "linear-gradient(45deg, #00ff40, #00ff40, transparent)"
-            : "transparent",
-          opacity: isHovered ? 0.3 : 0,
-          transition: "opacity 300ms ease",
-          maskImage: "linear-gradient(90deg, transparent, black, transparent)",
-        }}
-      />
-      <div
-        className="absolute inset-0 rounded-2xl pointer-events-none"
-        style={{
-          background: isHovered
-            ? "linear-gradient(-45deg, #00ff40, #00ff40, transparent)"
-            : "transparent",
-          opacity: isHovered ? 0.2 : 0,
-          transition: "opacity 300ms ease",
-          maskImage: "linear-gradient(90deg, transparent, black, transparent)",
-        }}
-      />
-    </>
-  );
+// Utility function to merge classnames
+const cn = (...classes: (string | undefined | boolean)[]) => {
+  return classes.filter(Boolean).join(" ");
 };
 
 export function ElasticGallery({ items }: ElasticGalleryProps) {
+  const [activeId, setActiveId] = useState<string | null>(items[2]?.id || items[0]?.id);
   const [selectedProject, setSelectedProject] = useState<ElasticItemProps | null>(null);
-  const [hoveredId, setHoveredId] = useState<string | null>(null);
   const modalRef = useRef<HTMLDivElement>(null);
-  const triggerRef = useRef<HTMLDivElement>(null);
 
   // Handle keyboard navigation
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape" && selectedProject) {
         setSelectedProject(null);
+      }
+      if (e.key === "Escape" && activeId) {
+        setActiveId(null);
       }
     };
 
@@ -74,7 +50,7 @@ export function ElasticGallery({ items }: ElasticGalleryProps) {
       document.removeEventListener("keydown", handleKeyDown);
       document.body.style.overflow = "auto";
     };
-  }, [selectedProject]);
+  }, [selectedProject, activeId]);
 
   // Focus management
   useEffect(() => {
@@ -84,173 +60,177 @@ export function ElasticGallery({ items }: ElasticGalleryProps) {
     }
   }, [selectedProject]);
 
-  const handleCardKeyDown = (e: React.KeyboardEvent<HTMLDivElement>, item: ElasticItemProps) => {
+  const handleCardKeyDown = (e: React.KeyboardEvent<HTMLDivElement>, itemId: string) => {
     if (e.key === "Enter" || e.key === " ") {
       e.preventDefault();
-      setSelectedProject(item);
+      setActiveId(itemId);
     }
   };
 
-  const handleCardInteraction = (itemId: string) => {
-    setHoveredId(itemId);
-  };
-
-  const handleCardLeave = () => {
-    setHoveredId(null);
+  const openModal = (item: ElasticItemProps) => {
+    setSelectedProject(item);
   };
 
   return (
     <>
-      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {items.map((item, index) => {
-          const hasTwoImages = !!item.src2;
-          const isHovered = hoveredId === item.id;
-
-          return (
-            <motion.div
+      {/* Accordion Gallery */}
+      <div className="w-full py-12 dark:bg-black md:py-24">
+        {/* Container: Fixed height with horizontal flex layout */}
+        <div className="mx-auto flex h-[500px] w-full max-w-7xl flex-row gap-3 px-4 md:h-[700px] md:gap-4">
+          {items.map((item) => (
+            <div
               key={item.id}
-              ref={triggerRef}
               role="button"
               tabIndex={0}
-              onMouseEnter={() => handleCardInteraction(item.id)}
-              onMouseLeave={handleCardLeave}
-              onTouchStart={() => handleCardInteraction(item.id)}
-              onClick={() => setSelectedProject(item)}
-              onKeyDown={(e) => handleCardKeyDown(e, item)}
-              aria-label={`View ${item.title} project details`}
-              aria-expanded={selectedProject?.id === item.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1, duration: 0.5 }}
-              whileHover={{ y: -8 }}
-              className="group relative h-72 cursor-pointer overflow-hidden rounded-xl border border-[#003d00] bg-black focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+              onMouseEnter={() => setActiveId(item.id)}
+              onClick={() => setActiveId(item.id)}
+              onKeyDown={(e) => handleCardKeyDown(e, item.id)}
+              aria-label={`View ${item.title} project`}
+              aria-expanded={activeId === item.id}
+              className={cn(
+                "relative cursor-pointer overflow-hidden rounded-xl border border-[#003d00] bg-black",
+                // Layout & Flex Transition with smooth easing
+                "transition-[flex,filter] duration-700 ease-[cubic-bezier(0.25,1,0.5,1)]",
+                // Flex Logic: Active takes more space, inactive compressed
+                activeId === item.id ? "flex-[4]" : "flex-[1]",
+                // Brightness for visual feedback
+                activeId === item.id
+                  ? "brightness-100"
+                  : "brightness-50 hover:brightness-75",
+                // Focus indicator
+                "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+              )}
               style={{
-                boxShadow: isHovered
+                // Cyberpunk glow effect
+                boxShadow: activeId === item.id
                   ? "0 0 30px rgba(0, 255, 64, 0.4), 0 0 60px rgba(0, 255, 64, 0.2), inset 0 0 20px rgba(0, 255, 64, 0.1)"
                   : "0 0 15px rgba(0, 255, 64, 0.15), inset 0 0 10px rgba(0, 255, 64, 0.05)",
-                transition: "box-shadow 400ms cubic-bezier(0.23, 1, 0.320, 1)",
+                transition: "box-shadow 700ms ease-[cubic-bezier(0.25,1,0.5,1)]",
               }}
             >
-              <div className="absolute inset-0">
-                {hasTwoImages ? (
-                  <div className="flex h-full w-full flex-col gap-px bg-[#001a00]">
-                    <img
-                      src={item.src}
-                      alt={item.alt}
-                      className="h-1/2 w-full object-cover transition-transform duration-700"
-                      style={{
-                        objectPosition: item.objectPosition ?? "top",
-                        transform: isHovered ? "scale(1.1)" : "scale(1)",
-                      }}
-                    />
-                    <img
-                      src={item.src2}
-                      alt={item.alt2 || item.alt}
-                      className="h-1/2 w-full object-cover transition-transform duration-700"
-                      style={{
-                        objectPosition: item.objectPosition ?? "top",
-                        transform: isHovered ? "scale(1.1)" : "scale(1)",
-                      }}
-                    />
-                  </div>
-                ) : (
-                  <img
-                    src={item.src}
-                    alt={item.alt}
-                    className="h-full w-full object-cover transition-transform duration-700"
-                    style={{
-                      objectPosition: item.objectPosition ?? "center",
-                      transform: isHovered ? "scale(1.1)" : "scale(1)",
-                    }}
-                  />
-                )}
+              {/* Background Image Layer */}
+              <div className="absolute inset-0 h-full w-full overflow-hidden">
+                <img
+                  src={item.src}
+                  alt={item.alt}
+                  className={cn(
+                    "h-full w-full object-cover transition-transform duration-1000",
+                    // Subtle zoom on active
+                    activeId === item.id ? "scale-100" : "scale-110"
+                  )}
+                  style={{ objectPosition: item.objectPosition ?? "center" }}
+                />
+                {/* Gradient Overlay for Text Readability - appears on active */}
                 <div
-                  className="absolute inset-0 bg-gradient-to-t transition-all duration-500"
-                  style={{
-                    backgroundImage: isHovered
-                      ? "linear-gradient(to top, rgba(0, 0, 0, 0.98), rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.1))"
-                      : "linear-gradient(to top, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.1))",
-                  }}
+                  className={cn(
+                    "absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent transition-opacity duration-500",
+                    activeId === item.id ? "opacity-100" : "opacity-0"
+                  )}
                 />
               </div>
 
-              {/* Animated glow borders */}
-              <GlitchGlowBorder isHovered={isHovered} />
-
-              {/* Category badge with animation */}
-              <motion.div
-                className="absolute top-3 left-3 z-10"
-                initial={{ opacity: 0, x: -20 }}
-                animate={isHovered ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
-                transition={{ duration: 0.3 }}
-              >
-                <span className="inline-block rounded-full border border-[#003d00] bg-black/80 px-3 py-1 font-mono text-xs uppercase tracking-wider text-tertiary backdrop-blur-sm"
-                  style={{
-                    boxShadow: "0 0 10px rgba(0, 255, 64, 0.2)",
-                  }}>
-                  {item.category}
-                </span>
-              </motion.div>
-
-              {/* Tech stack preview on hover */}
-              <motion.div
-                className="absolute top-3 right-3 z-10"
-                initial={{ opacity: 0, x: 20 }}
-                animate={isHovered ? { opacity: 1, x: 0 } : { opacity: 0, x: 20 }}
-                transition={{ duration: 0.3 }}
-              >
-                <div className="flex gap-1">
-                  {item.stack.slice(0, 3).map((tech, idx) => (
-                    <div
-                      key={idx}
-                      className="h-6 w-6 rounded-full border border-[#003d00] bg-black/80 flex items-center justify-center text-[10px] font-bold text-primary"
-                      title={tech}
-                      style={{
-                        boxShadow: "0 0 8px rgba(0, 255, 64, 0.2)",
-                      }}
-                    >
-                      {tech.charAt(0)}
-                    </div>
-                  ))}
-                </div>
-              </motion.div>
-
-              {/* Main content with enhanced styling */}
-              <div className="absolute inset-0 flex flex-col justify-between p-4">
-                {/* Title at bottom */}
-                <div className="flex-1" />
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.1 }}
+              {/* Content Container */}
+              <div className="absolute bottom-0 left-0 right-0 flex h-full flex-col justify-end p-4 md:p-8">
+                {/* Active Content: Category, Title & Buttons */}
+                <div
+                  className={cn(
+                    "flex flex-col gap-2 transition-all duration-500",
+                    activeId === item.id
+                      ? "translate-y-0 opacity-100 delay-200"
+                      : "translate-y-12 opacity-0"
+                  )}
                 >
-                  <h3 className="text-xl font-black uppercase text-primary drop-shadow-lg line-clamp-2">
+                  {/* Category Tag with Cyberpunk Style */}
+                  <div className="flex items-center gap-2">
+                    <span className="rounded-full border border-[#00ff40]/30 bg-black/50 px-2 py-1 text-[10px] font-medium uppercase tracking-wider text-tertiary backdrop-blur-md md:px-3 md:text-xs"
+                      style={{
+                        boxShadow: "0 0 10px rgba(0, 255, 64, 0.2)",
+                      }}>
+                      {item.category}
+                    </span>
+                    {/* Tech stack badges */}
+                    <div className="flex gap-1">
+                      {item.stack.slice(0, 2).map((tech, idx) => (
+                        <span
+                          key={idx}
+                          className="text-[8px] font-bold uppercase tracking-wider text-[#00ff40]/70 md:text-[9px]"
+                          title={tech}
+                        >
+                          {tech.split(" ")[0]}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Title */}
+                  <h3 className="text-2xl font-black uppercase leading-tight text-primary drop-shadow-lg md:text-5xl line-clamp-3">
                     {item.title}
                   </h3>
-                  <motion.p
-                    className="text-xs text-muted mt-1 line-clamp-1"
-                    initial={{ opacity: 0 }}
-                    animate={isHovered ? { opacity: 1 } : { opacity: 0 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    {item.subtitle.substring(0, 40)}...
-                  </motion.p>
-                </motion.div>
+
+                  {/* Subtitle */}
+                  <p className="text-xs text-secondary/80 line-clamp-2 md:text-sm md:line-clamp-3">
+                    {item.subtitle}
+                  </p>
+
+                  {/* Call to Action Buttons */}
+                  <div className="mt-2 flex flex-wrap gap-2 md:mt-4">
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        openModal(item);
+                      }}
+                      className="btn-primary flex items-center gap-2 rounded-full px-4 py-2 font-bold uppercase text-sm md:text-base"
+                    >
+                      View Details <ArrowUpRight className="h-4 w-4" />
+                    </button>
+                    <a
+                      href={item.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={(e) => e.stopPropagation()}
+                      className="btn-ghost flex items-center gap-2 rounded-full px-4 py-2 font-bold uppercase text-sm md:text-base"
+                    >
+                      Live Project <ArrowUpRight className="h-4 w-4" />
+                    </a>
+                  </div>
+                </div>
+
+                {/* Inactive Content: Vertical Text (Desktop) / ID (Mobile) */}
+                <div
+                  className={cn(
+                    "absolute transition-all duration-500",
+                    "bottom-4 left-1/2 -translate-x-1/2 md:bottom-8",
+                    activeId === item.id
+                      ? "opacity-0 scale-50"
+                      : "opacity-100 delay-500"
+                  )}
+                >
+                  {/* Desktop: Vertical Text */}
+                  <span className="hidden whitespace-nowrap text-lg font-bold uppercase tracking-widest text-primary/40 [writing-mode:vertical-rl] md:block drop-shadow-lg">
+                    {item.title}
+                  </span>
+
+                  {/* Mobile: ID Badge */}
+                  <span className="block text-sm font-bold text-primary/60 md:hidden drop-shadow-lg">
+                    {item.id}
+                  </span>
+                </div>
               </div>
 
-              {/* Interactive hover indicator */}
-              <motion.div
-                className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-[#00ff40] via-[#00ff40] to-transparent"
-                initial={{ scaleX: 0 }}
-                animate={isHovered ? { scaleX: 1 } : { scaleX: 0 }}
-                transition={{ duration: 0.4 }}
+              {/* Bottom accent line when active */}
+              <div
+                className={cn(
+                  "absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-[#00ff40] via-[#00ff40] to-transparent transition-all duration-700",
+                  activeId === item.id ? "opacity-100 scale-x-100" : "opacity-0 scale-x-0"
+                )}
                 style={{ transformOrigin: "left" }}
               />
-            </motion.div>
-          );
-        })}
+            </div>
+          ))}
+        </div>
       </div>
 
+      {/* Modal for full project details */}
       {selectedProject && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm"
