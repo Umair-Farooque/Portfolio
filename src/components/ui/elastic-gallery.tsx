@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { ArrowUpRight, X, Zap } from "lucide-react";
+import { motion } from "framer-motion";
 
 export interface ElasticItemProps {
   id: string;
@@ -19,6 +20,36 @@ export interface ElasticItemProps {
 interface ElasticGalleryProps {
   items: ElasticItemProps[];
 }
+
+// Animated glow effect component
+const GlitchGlowBorder = ({ isHovered }: { isHovered: boolean }) => {
+  return (
+    <>
+      <div
+        className="absolute inset-0 rounded-2xl pointer-events-none"
+        style={{
+          background: isHovered
+            ? "linear-gradient(45deg, #00ff40, #00ff40, transparent)"
+            : "transparent",
+          opacity: isHovered ? 0.3 : 0,
+          transition: "opacity 300ms ease",
+          maskImage: "linear-gradient(90deg, transparent, black, transparent)",
+        }}
+      />
+      <div
+        className="absolute inset-0 rounded-2xl pointer-events-none"
+        style={{
+          background: isHovered
+            ? "linear-gradient(-45deg, #00ff40, #00ff40, transparent)"
+            : "transparent",
+          opacity: isHovered ? 0.2 : 0,
+          transition: "opacity 300ms ease",
+          maskImage: "linear-gradient(90deg, transparent, black, transparent)",
+        }}
+      />
+    </>
+  );
+};
 
 export function ElasticGallery({ items }: ElasticGalleryProps) {
   const [selectedProject, setSelectedProject] = useState<ElasticItemProps | null>(null);
@@ -70,13 +101,13 @@ export function ElasticGallery({ items }: ElasticGalleryProps) {
 
   return (
     <>
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {items.map((item) => {
+      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {items.map((item, index) => {
           const hasTwoImages = !!item.src2;
           const isHovered = hoveredId === item.id;
 
           return (
-            <div
+            <motion.div
               key={item.id}
               ref={triggerRef}
               role="button"
@@ -88,10 +119,16 @@ export function ElasticGallery({ items }: ElasticGalleryProps) {
               onKeyDown={(e) => handleCardKeyDown(e, item)}
               aria-label={`View ${item.title} project details`}
               aria-expanded={selectedProject?.id === item.id}
-              className="group relative h-64 cursor-pointer overflow-hidden rounded-2xl border border-[#003d00] bg-black transition-all duration-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.1, duration: 0.5 }}
+              whileHover={{ y: -8 }}
+              className="group relative h-72 cursor-pointer overflow-hidden rounded-xl border border-[#003d00] bg-black focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
               style={{
-                transform: isHovered ? "scale(1.05)" : "scale(1)",
-                boxShadow: "0 0 10px rgba(0, 255, 64, 0.2), inset 0 0 10px rgba(0, 255, 64, 0.05)",
+                boxShadow: isHovered
+                  ? "0 0 30px rgba(0, 255, 64, 0.4), 0 0 60px rgba(0, 255, 64, 0.2), inset 0 0 20px rgba(0, 255, 64, 0.1)"
+                  : "0 0 15px rgba(0, 255, 64, 0.15), inset 0 0 10px rgba(0, 255, 64, 0.05)",
+                transition: "box-shadow 400ms cubic-bezier(0.23, 1, 0.320, 1)",
               }}
             >
               <div className="absolute inset-0">
@@ -137,12 +174,79 @@ export function ElasticGallery({ items }: ElasticGalleryProps) {
                 />
               </div>
 
-              <div className="absolute inset-0 flex flex-col justify-end p-4">
-                <h3 className="text-xl font-black uppercase text-primary drop-shadow-lg">
-                  {item.title}
-                </h3>
+              {/* Animated glow borders */}
+              <GlitchGlowBorder isHovered={isHovered} />
+
+              {/* Category badge with animation */}
+              <motion.div
+                className="absolute top-3 left-3 z-10"
+                initial={{ opacity: 0, x: -20 }}
+                animate={isHovered ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
+                transition={{ duration: 0.3 }}
+              >
+                <span className="inline-block rounded-full border border-[#003d00] bg-black/80 px-3 py-1 font-mono text-xs uppercase tracking-wider text-tertiary backdrop-blur-sm"
+                  style={{
+                    boxShadow: "0 0 10px rgba(0, 255, 64, 0.2)",
+                  }}>
+                  {item.category}
+                </span>
+              </motion.div>
+
+              {/* Tech stack preview on hover */}
+              <motion.div
+                className="absolute top-3 right-3 z-10"
+                initial={{ opacity: 0, x: 20 }}
+                animate={isHovered ? { opacity: 1, x: 0 } : { opacity: 0, x: 20 }}
+                transition={{ duration: 0.3 }}
+              >
+                <div className="flex gap-1">
+                  {item.stack.slice(0, 3).map((tech, idx) => (
+                    <div
+                      key={idx}
+                      className="h-6 w-6 rounded-full border border-[#003d00] bg-black/80 flex items-center justify-center text-[10px] font-bold text-primary"
+                      title={tech}
+                      style={{
+                        boxShadow: "0 0 8px rgba(0, 255, 64, 0.2)",
+                      }}
+                    >
+                      {tech.charAt(0)}
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+
+              {/* Main content with enhanced styling */}
+              <div className="absolute inset-0 flex flex-col justify-between p-4">
+                {/* Title at bottom */}
+                <div className="flex-1" />
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.1 }}
+                >
+                  <h3 className="text-xl font-black uppercase text-primary drop-shadow-lg line-clamp-2">
+                    {item.title}
+                  </h3>
+                  <motion.p
+                    className="text-xs text-muted mt-1 line-clamp-1"
+                    initial={{ opacity: 0 }}
+                    animate={isHovered ? { opacity: 1 } : { opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    {item.subtitle.substring(0, 40)}...
+                  </motion.p>
+                </motion.div>
               </div>
-            </div>
+
+              {/* Interactive hover indicator */}
+              <motion.div
+                className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-[#00ff40] via-[#00ff40] to-transparent"
+                initial={{ scaleX: 0 }}
+                animate={isHovered ? { scaleX: 1 } : { scaleX: 0 }}
+                transition={{ duration: 0.4 }}
+                style={{ transformOrigin: "left" }}
+              />
+            </motion.div>
           );
         })}
       </div>
