@@ -128,7 +128,7 @@ const Hero = () => {
                     <span className="text-muted">Small details matter.</span>
                 </h1>
 
-                <p ref={roleRef} className="mt-6 min-h-5 font-mono text-lg text-secondary">
+                <p ref={roleRef} className="mt-6 min-h-5 font-mono text-lg text-primary">
                     Machine Learning Engineer
                 </p>
 

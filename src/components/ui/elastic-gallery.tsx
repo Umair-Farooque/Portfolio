@@ -145,7 +145,7 @@ export function ElasticGallery({ items }: ElasticGalleryProps) {
                 >
                   {/* Category Tag with Cyberpunk Style */}
                   <div className="flex items-center gap-2">
-                    <span className="rounded-full border border-[#00ff40]/30 bg-black/50 px-2 py-1 text-xs font-medium uppercase tracking-wider text-tertiary backdrop-blur-md md:px-3 md:text-sm"
+                    <span className="rounded-full border border-[#00ff40]/30 bg-black/50 px-2 py-1 text-xs font-medium tracking-wider text-tertiary backdrop-blur-md md:px-3 md:text-sm"
                       style={{
                         boxShadow: "0 0 10px rgba(0, 255, 64, 0.2)",
                       }}>
@@ -166,12 +166,12 @@ export function ElasticGallery({ items }: ElasticGalleryProps) {
                   </div>
 
                   {/* Title */}
-                  <h3 className="text-2xl font-black uppercase leading-tight text-primary drop-shadow-lg md:text-5xl line-clamp-3">
+                  <h3 className="text-2xl font-black leading-tight text-primary drop-shadow-lg md:text-5xl line-clamp-3">
                     {item.title}
                   </h3>
 
                   {/* Subtitle */}
-                  <p className="text-sm text-secondary/80 line-clamp-2 md:text-base md:line-clamp-3">
+                  <p className="text-sm text-primary/80 line-clamp-2 md:text-base md:line-clamp-3">
                     {item.subtitle}
                   </p>
 
@@ -182,7 +182,7 @@ export function ElasticGallery({ items }: ElasticGalleryProps) {
                         e.stopPropagation();
                         openModal(item);
                       }}
-                      className="btn-primary flex items-center gap-2 rounded-full px-4 py-2 font-bold uppercase text-sm md:text-base"
+                      className="btn-primary flex items-center gap-2 rounded-full px-4 py-2 font-bold text-sm md:text-base"
                     >
                       View Details <ArrowUpRight className="h-4 w-4" />
                     </button>
@@ -191,7 +191,7 @@ export function ElasticGallery({ items }: ElasticGalleryProps) {
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={(e) => e.stopPropagation()}
-                      className="btn-ghost flex items-center gap-2 rounded-full px-4 py-2 font-bold uppercase text-sm md:text-base"
+                      className="btn-ghost flex items-center gap-2 rounded-full px-4 py-2 font-bold text-sm md:text-base"
                     >
                       Live Project <ArrowUpRight className="h-4 w-4" />
                     </a>
@@ -207,7 +207,7 @@ export function ElasticGallery({ items }: ElasticGalleryProps) {
                       : "opacity-100"
                   )}
                 >
-                  <h4 className="text-xl font-bold uppercase tracking-widest text-primary/60 drop-shadow-lg line-clamp-2">
+                  <h4 className="text-xl font-bold tracking-widest text-primary/60 drop-shadow-lg line-clamp-2">
                     {item.title}
                   </h4>
                   <p className="text-sm text-muted/60 mt-1 line-clamp-1">{item.category}</p>
@@ -283,7 +283,7 @@ export function ElasticGallery({ items }: ElasticGalleryProps) {
                   <h2 id="modal-title" className="mt-4 text-4xl font-black uppercase text-primary">
                     {selectedProject.title}
                   </h2>
-                  <p className="mt-3 text-lg text-secondary">
+                  <p className="mt-3 text-lg text-primary">
                     {selectedProject.subtitle}
                   </p>
                 </div>
@@ -294,7 +294,7 @@ export function ElasticGallery({ items }: ElasticGalleryProps) {
                   </h3>
                   <ul className="space-y-2.5">
                     {selectedProject.bullets.map((bullet) => (
-                      <li key={bullet} className="flex gap-3 text-base text-secondary">
+                      <li key={bullet} className="flex gap-3 text-base text-primary">
                         <Zap className="h-5 w-5 shrink-0 text-primary" aria-hidden="true" />
                         <span>{bullet}</span>
                       </li>
@@ -326,13 +326,13 @@ export function ElasticGallery({ items }: ElasticGalleryProps) {
                     href={selectedProject.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="btn-primary flex items-center gap-2 rounded-full px-6 py-3 font-bold uppercase"
+                    className="btn-primary flex items-center gap-2 rounded-full px-6 py-3 font-bold"
                   >
                     View Project <ArrowUpRight className="h-5 w-5" />
                   </a>
                   <button
                     onClick={() => setSelectedProject(null)}
-                    className="btn-ghost rounded-full px-6 py-3 font-bold uppercase"
+                    className="btn-ghost rounded-full px-6 py-3 font-bold"
                   >
                     Close
                   </button>
