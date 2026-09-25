@@ -4,8 +4,10 @@ const experiences = [
         company: 'Developers Den',
         period: 'Sept 2026 – Present',
         highlights: [
-            'Building intelligent AI systems and solutions for enterprise applications',
-            'Developing and optimizing machine learning models and LLM integrations'
+            'Architecting and developing SaaS Voice Agent systems leveraging advanced LLM models for intelligent conversational AI and natural language understanding',
+            'Building LLM-powered applications with production-grade vector databases and RAG pipelines for context-aware, retrieval-augmented responses',
+            'Designing scalable backend infrastructure using FastAPI and microservices to support enterprise-level AI solutions with real-time performance optimization',
+            'Implementing agentic AI workflows with tool-using capabilities and autonomous decision-making systems for complex business automation'
         ]
     },
     {
