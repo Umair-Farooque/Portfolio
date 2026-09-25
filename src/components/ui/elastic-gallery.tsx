@@ -76,7 +76,10 @@ export function ElasticGallery({ items }: ElasticGalleryProps) {
       {/* Accordion Gallery */}
       <div className="w-full py-12 dark:bg-black md:py-24">
         {/* Container: Vertical stack layout */}
-        <div className="mx-auto flex w-full max-w-7xl flex-col gap-4 px-4">
+        <div
+          className="mx-auto flex w-full max-w-7xl flex-col gap-4 px-4"
+          onMouseLeave={() => setActiveId(null)}
+        >
           {items.map((item) => (
             <div
               key={item.id}
