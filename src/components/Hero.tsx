@@ -78,7 +78,7 @@ const roles = ['Machine Learning Engineer', 'AI Solutions Architect', 'RAG & LLM
 
 const overviewRows = [
     { label: 'Role', value: 'Associate AI Engineer @ Developers Den' },
-    { label: 'Focus', value: 'Agentic Systems · LLMs · RAG' },
+    { label: 'Focus', value: 'Voice Agents · Agentic Systems · LLMs · RAG' },
     { label: 'Location', value: 'Islamabad, Pakistan' }
 ];
 
