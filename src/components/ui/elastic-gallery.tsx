@@ -75,8 +75,8 @@ export function ElasticGallery({ items }: ElasticGalleryProps) {
     <>
       {/* Accordion Gallery */}
       <div className="w-full py-12 dark:bg-black md:py-24">
-        {/* Container: Fixed height with horizontal flex layout */}
-        <div className="mx-auto flex h-[500px] w-full max-w-7xl flex-row gap-3 px-4 md:h-[700px] md:gap-4">
+        {/* Container: Vertical stack layout */}
+        <div className="mx-auto flex w-full max-w-7xl flex-col gap-4 px-4">
           {items.map((item) => (
             <div
               key={item.id}
@@ -89,10 +89,10 @@ export function ElasticGallery({ items }: ElasticGalleryProps) {
               aria-expanded={activeId === item.id}
               className={cn(
                 "relative cursor-pointer overflow-hidden rounded-xl border border-[#003d00] bg-black",
-                // Layout & Flex Transition with smooth easing
-                "transition-[flex,filter] duration-700 ease-[cubic-bezier(0.25,1,0.5,1)]",
-                // Flex Logic: Active takes more space, inactive compressed
-                activeId === item.id ? "flex-[4]" : "flex-[1]",
+                // Layout & Height Transition with smooth easing
+                "transition-[height,filter] duration-700 ease-[cubic-bezier(0.25,1,0.5,1)]",
+                // Height Logic: Active expanded, inactive compact
+                activeId === item.id ? "h-[500px] md:h-[600px]" : "h-32",
                 // Brightness for visual feedback
                 activeId === item.id
                   ? "brightness-100"
@@ -195,25 +195,19 @@ export function ElasticGallery({ items }: ElasticGalleryProps) {
                   </div>
                 </div>
 
-                {/* Inactive Content: Vertical Text (Desktop) / ID (Mobile) */}
+                {/* Inactive Content: Show title when collapsed */}
                 <div
                   className={cn(
-                    "absolute transition-all duration-500",
-                    "bottom-4 left-1/2 -translate-x-1/2 md:bottom-8",
+                    "absolute transition-all duration-500 left-4 top-1/2 -translate-y-1/2",
                     activeId === item.id
-                      ? "opacity-0 scale-50"
-                      : "opacity-100 delay-500"
+                      ? "opacity-0"
+                      : "opacity-100"
                   )}
                 >
-                  {/* Desktop: Vertical Text */}
-                  <span className="hidden whitespace-nowrap text-lg font-bold uppercase tracking-widest text-primary/40 [writing-mode:vertical-rl] md:block drop-shadow-lg">
+                  <h4 className="text-lg font-bold uppercase tracking-widest text-primary/60 drop-shadow-lg line-clamp-2">
                     {item.title}
-                  </span>
-
-                  {/* Mobile: ID Badge */}
-                  <span className="block text-sm font-bold text-primary/60 md:hidden drop-shadow-lg">
-                    {item.id}
-                  </span>
+                  </h4>
+                  <p className="text-xs text-muted/60 mt-1 line-clamp-1">{item.category}</p>
                 </div>
               </div>
 
