@@ -145,7 +145,7 @@ export function ElasticGallery({ items }: ElasticGalleryProps) {
                 >
                   {/* Category Tag with Cyberpunk Style */}
                   <div className="flex items-center gap-2">
-                    <span className="rounded-full border border-[#00ff40]/30 bg-black/50 px-2 py-1 text-[10px] font-medium uppercase tracking-wider text-tertiary backdrop-blur-md md:px-3 md:text-xs"
+                    <span className="rounded-full border border-[#00ff40]/30 bg-black/50 px-2 py-1 text-xs font-medium uppercase tracking-wider text-tertiary backdrop-blur-md md:px-3 md:text-sm"
                       style={{
                         boxShadow: "0 0 10px rgba(0, 255, 64, 0.2)",
                       }}>
@@ -171,7 +171,7 @@ export function ElasticGallery({ items }: ElasticGalleryProps) {
                   </h3>
 
                   {/* Subtitle */}
-                  <p className="text-xs text-secondary/80 line-clamp-2 md:text-sm md:line-clamp-3">
+                  <p className="text-sm text-secondary/80 line-clamp-2 md:text-base md:line-clamp-3">
                     {item.subtitle}
                   </p>
 
@@ -207,10 +207,10 @@ export function ElasticGallery({ items }: ElasticGalleryProps) {
                       : "opacity-100"
                   )}
                 >
-                  <h4 className="text-lg font-bold uppercase tracking-widest text-primary/60 drop-shadow-lg line-clamp-2">
+                  <h4 className="text-xl font-bold uppercase tracking-widest text-primary/60 drop-shadow-lg line-clamp-2">
                     {item.title}
                   </h4>
-                  <p className="text-xs text-muted/60 mt-1 line-clamp-1">{item.category}</p>
+                  <p className="text-sm text-muted/60 mt-1 line-clamp-1">{item.category}</p>
                 </div>
               </div>
 

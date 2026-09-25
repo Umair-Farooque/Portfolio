@@ -133,8 +133,8 @@ const Projects = () => {
     return (
         <section id="projects-section" className="scroll-mt-20 py-24">
             <div className="mx-auto max-w-3xl px-6">
-                <h2 className="mb-2 text-4xl font-semibold tracking-tight text-primary">Projects</h2>
-                <p className="mb-8 font-mono text-sm text-muted">
+                <h2 className="mb-2 text-5xl font-semibold tracking-tight text-primary">Projects</h2>
+                <p className="mb-8 font-mono text-base text-muted">
                     Hover or tap a card to expand details.
                 </p>
                 <ElasticGallery items={projects} />

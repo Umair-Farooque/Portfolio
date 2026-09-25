@@ -122,25 +122,25 @@ const Hero = () => {
                 </div>
 
                 {/* Headline */}
-                <h1 className="mt-12 text-4xl font-semibold leading-[1.12] tracking-tight text-primary md:text-5xl">
+                <h1 className="mt-12 text-5xl font-semibold leading-[1.12] tracking-tight text-primary md:text-6xl">
                     Building with AI.
                     <br />
                     <span className="text-muted">Small details matter.</span>
                 </h1>
 
-                <p ref={roleRef} className="mt-6 min-h-5 font-mono text-base text-secondary">
+                <p ref={roleRef} className="mt-6 min-h-5 font-mono text-lg text-secondary">
                     Machine Learning Engineer
                 </p>
 
                 {/* Overview */}
                 <dl className="mt-12 divide-y divide-zinc-800/70 border-y border-zinc-800/70">
                     {overviewRows.map((row) => (
-                        <div key={row.label} className="flex items-center justify-between py-3.5 text-base">
+                        <div key={row.label} className="flex items-center justify-between py-4 text-lg">
                             <dt className="text-muted">{row.label}</dt>
                             <dd className="text-tertiary">{row.value}</dd>
                         </div>
                     ))}
-                    <div className="flex items-center justify-between gap-4 py-3.5 text-base">
+                    <div className="flex items-center justify-between gap-4 py-4 text-lg">
                         <dt className="text-muted">Links</dt>
                         <dd className="flex items-center gap-5">
                             <a
@@ -154,7 +154,7 @@ const Hero = () => {
                             <a
                                 href="/resume.pdf"
                                 download
-                                className="btn-primary rounded-full px-4 py-1.5 text-[13px] font-medium"
+                                className="btn-primary rounded-full px-4 py-1.5 text-sm font-medium"
                             >
                                 Download Resume ↓
                             </a>

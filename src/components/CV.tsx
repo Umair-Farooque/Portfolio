@@ -80,14 +80,14 @@ export const CV = () => {
         }
     };
     const inputClass =
-        'w-full rounded-lg border border-zinc-700 bg-zinc-900/80 px-3.5 py-2.5 text-sm text-zinc-100 placeholder:text-zinc-500 transition-colors focus:border-zinc-500 focus:outline-none focus:ring-2 focus:ring-white/10';
+        'w-full rounded-lg border border-zinc-700 bg-zinc-900/80 px-3.5 py-2.5 text-base text-zinc-100 placeholder:text-zinc-500 transition-colors focus:border-zinc-500 focus:outline-none focus:ring-2 focus:ring-white/10';
 
     return (
         <section id="cv-section" className="scroll-mt-20 py-24">
             <div className="mx-auto max-w-3xl px-6">
-                <h2 className="mb-10 text-4xl font-semibold tracking-tight text-primary">Contact</h2>
+                <h2 className="mb-10 text-5xl font-semibold tracking-tight text-primary">Contact</h2>
 
-                <p className="mb-12 text-lg leading-relaxed text-tertiary">
+                <p className="mb-12 text-xl leading-relaxed text-tertiary">
                     Have a project in mind or just want to say hi? Feel free to reach out via the form, or connect with me through any of the channels below.
                 </p>
 
@@ -107,10 +107,10 @@ export const CV = () => {
                                         {link.icon}
                                     </div>
                                     <div className="min-w-0">
-                                        <p className="font-mono text-xs uppercase tracking-wider text-muted group-hover:text-tertiary">
+                                        <p className="font-mono text-sm uppercase tracking-wider text-muted group-hover:text-tertiary">
                                             {link.name}
                                         </p>
-                                        <p className="truncate text-sm font-semibold text-zinc-300 group-hover:text-primary">
+                                        <p className="truncate text-base font-semibold text-zinc-300 group-hover:text-primary">
                                             {link.display}
                                         </p>
                                     </div>
@@ -163,7 +163,7 @@ export const CV = () => {
                         <button
                             type="submit"
                             disabled={status === 'submitting'}
-                            className={`w-full rounded-full py-3 text-sm font-medium btn-primary ${
+                            className={`w-full rounded-full py-3 text-base font-medium btn-primary ${
                                 status === 'submitting' ? 'cursor-not-allowed opacity-50' : ''
                             }`}
                         >
@@ -187,13 +187,13 @@ export const CV = () => {
                         </button>
 
                         {status === 'success' && (
-                            <p className="text-center font-mono text-sm text-accent">
+                            <p className="text-center font-mono text-base text-accent">
                                 Thanks! I'll get back to you as soon as possible.
                             </p>
                         )}
 
                         {status === 'error' && (
-                            <p className="text-center font-mono text-sm text-error">
+                            <p className="text-center font-mono text-base text-error">
                                 Something went wrong. Please try again later.
                             </p>
                         )}

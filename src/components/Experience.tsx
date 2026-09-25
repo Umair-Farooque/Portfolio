@@ -43,24 +43,24 @@ const Experience = () => {
     return (
         <section id="experience-section" className="py-24 scroll-mt-20">
             <div className="max-w-3xl mx-auto px-6">
-                <h2 className="text-4xl font-semibold tracking-tight text-primary mb-10">Experience</h2>
+                <h2 className="text-5xl font-semibold tracking-tight text-primary mb-10">Experience</h2>
 
                 <div className="border-b border-zinc-800">
                     {experiences.map((exp, index) => (
                         <article key={index} className="border-t border-zinc-800 py-8">
                             <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
                                 <div className="flex flex-col gap-1">
-                                    <h3 className="font-medium text-primary">{exp.title}</h3>
-                                    <p className="text-base text-muted">
+                                    <h3 className="text-xl font-medium text-primary">{exp.title}</h3>
+                                    <p className="text-lg text-muted">
                                         {exp.company}
                                     </p>
-                                    <span className="font-mono text-sm text-muted">{exp.period}</span>
+                                    <span className="font-mono text-base text-muted">{exp.period}</span>
                                 </div>
                             </div>
 
                             <ul className="mt-5 space-y-2.5">
                                 {exp.highlights.map((highlight, hIndex) => (
-                                    <li key={hIndex} className="flex gap-3 text-base leading-relaxed text-tertiary">
+                                    <li key={hIndex} className="flex gap-3 text-lg leading-relaxed text-tertiary">
                                         <span className="mt-[7px] h-1 w-1 shrink-0 rounded-full bg-subtle" />
                                         <span>{highlight}</span>
                                     </li>
