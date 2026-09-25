@@ -90,6 +90,7 @@ export const CV = () => {
                 <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:items-start">
                     {/* Info column */}
                     <div className="flex flex-col justify-center">
+                        <h3 className="mb-6 text-xl font-semibold text-primary">Connect</h3>
                         <div className="space-y-3.5">
                             {socialLinks.map((link) => (
                                 <a
@@ -116,6 +117,8 @@ export const CV = () => {
                     </div>
 
                     {/* Form column */}
+                    <div className="flex flex-col">
+                        <h3 className="mb-6 text-xl font-semibold text-primary">Send a Message</h3>
                     <form onSubmit={handleSubmit} className="space-y-4 flex flex-col lg:self-center">
                         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                             <input
@@ -194,6 +197,7 @@ export const CV = () => {
                             </p>
                         )}
                     </form>
+                    </div>
                 </div>
             </div>
         </section>
