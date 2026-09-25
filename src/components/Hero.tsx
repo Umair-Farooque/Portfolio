@@ -77,7 +77,7 @@ class TextScramble {
 const roles = ['Machine Learning Engineer', 'AI Solutions Architect', 'RAG & LLM Specialist'];
 
 const overviewRows = [
-    { label: 'Role', value: 'AI Engineer @ ArcSirius' },
+    { label: 'Role', value: 'Associate AI Engineer @ Developers Den' },
     { label: 'Focus', value: 'Agentic Systems · LLMs · RAG' },
     { label: 'Location', value: 'Islamabad, Pakistan' }
 ];

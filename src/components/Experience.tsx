@@ -1,8 +1,17 @@
 const experiences = [
     {
+        title: 'Associate AI Engineer',
+        company: 'Developers Den',
+        period: 'Sept 2026 – Present',
+        highlights: [
+            'Building intelligent AI systems and solutions for enterprise applications',
+            'Developing and optimizing machine learning models and LLM integrations'
+        ]
+    },
+    {
         title: 'AI Engineer',
         company: 'ArcSirius',
-        period: 'May 2025 – Present',
+        period: 'May 2025 – Sept 2026',
         highlights: [
             'Designed and deployed Credit Enrich System, an AI-driven pipeline using OCR, regex, and LLM-based validation for automating creditworthiness evaluation, improving data extraction accuracy by 35% and reducing manual processing time by 50%',
             'Built scalable backend services using FastAPI and integrated vector databases (FAISS, Pinecone) for efficient retrieval-augmented generation and context-aware AI responses',
